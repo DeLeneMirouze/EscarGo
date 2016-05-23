@@ -8,19 +8,12 @@ using EscarGo.Repositories;
 
 namespace EscarGo.Controllers
 {
-    public class ConcurrentsController : Controller
+    public class ConcurrentsController : CustomController
     {
-        private EscarGoContext db = new EscarGoContext();
-
         // GET: Concurrents
         public ActionResult Index()
         {
-            var concurrents = db.Concurrents
-                .Include("Pari")
-                .OrderBy(c => c.Nom)
-                .ToList();
-
-            //double sommeParis = concurrents.Sum(c => c.Pari.Montants);
+            var concurrents = Builder.GetConcurrents();
 
             return View(concurrents);
         }
@@ -28,103 +21,23 @@ namespace EscarGo.Controllers
         // GET: Concurrents/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (id == null && id.Value == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Concurrent concurrent = db.Concurrents.Find(id);
+            Concurrent concurrent = Builder.GetConcurrentById(id.Value);
             if (concurrent == null)
             {
                 return HttpNotFound();
             }
             return View(concurrent);
-        }
-
-        // GET: Concurrents/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Concurrents/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdConcurrent,Nom,Victoires,Defaites,Entraineur")] Concurrent concurrent)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Concurrents.Add(concurrent);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(concurrent);
-        }
-
-        // GET: Concurrents/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Concurrent concurrent = db.Concurrents.Find(id);
-            if (concurrent == null)
-            {
-                return HttpNotFound();
-            }
-            return View(concurrent);
-        }
-
-        // POST: Concurrents/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdConcurrent,Nom,Victoires,Defaites,Entraineur")] Concurrent concurrent)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(concurrent).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(concurrent);
-        }
-
-        // GET: Concurrents/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Concurrent concurrent = db.Concurrents.Find(id);
-            if (concurrent == null)
-            {
-                return HttpNotFound();
-            }
-            return View(concurrent);
-        }
-
-        // POST: Concurrents/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Concurrent concurrent = db.Concurrents.Find(id);
-            db.Concurrents.Remove(concurrent);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                Repository.Dispose();
             }
             base.Dispose(disposing);
         }
