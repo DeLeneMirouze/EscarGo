@@ -15,9 +15,14 @@ namespace EscarGo.Controllers
         // GET: Concurrents
         public ActionResult Index()
         {
-            return View(db.Concurrents
+            var concurrents = db.Concurrents
+                .Include("Pari")
                 .OrderBy(c => c.Nom)
-                .ToList());
+                .ToList();
+
+            //double sommeParis = concurrents.Sum(c => c.Pari.Montants);
+
+            return View(concurrents);
         }
 
         // GET: Concurrents/Details/5

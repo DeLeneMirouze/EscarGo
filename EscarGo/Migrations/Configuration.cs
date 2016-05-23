@@ -17,9 +17,20 @@ namespace EscarGo.Migrations
         protected override void Seed(EscarGo.Repositories.EscarGoContext context)
         {
             //  This method will be called after migrating to the latest version.
+            BuildData();
+
+            context.Courses.AddOrUpdate(p => p.IdCourse, listeCourses.ToArray());
+            context.Concurrents.AddOrUpdate(p => p.IdConcurrent, concurrents);
+        }
+
+        #region BuildData 
+        Concurrent[] concurrents;
+        List<Course> listeCourses;
+        public void BuildData()
+        {
             Random rnd = new Random(DateTime.Now.Millisecond);
 
-            Concurrent[] concurrents = new Concurrent[]
+            concurrents = new Concurrent[]
             {
                     new Concurrent { Nom = "Speedy Jet Trophy", Victoires = 100, Defaites = 0, Entraineur = "Dr YaCommeUneMagouille",IdConcurrent=1 },
                 new Concurrent { Nom = "Spidi Gonzales", Victoires = 0, Defaites = 100, Entraineur = "Papy Emile",IdConcurrent=2 },
@@ -33,15 +44,13 @@ namespace EscarGo.Migrations
                     new Concurrent { Nom = "Doudou", Victoires = 2, Defaites = 3, Entraineur = "Paprika" ,IdConcurrent=10},
                          new Concurrent { Nom = "Pilou Pilou", Victoires = 3, Defaites = 8, Entraineur = "Patchouli" ,IdConcurrent=11}
             };
-
-            foreach (Concurrent item in concurrents)
+            foreach (Concurrent concurrent in concurrents)
             {
                 // les paris
                 Pari pari = new Pari();
                 pari.DateDernierPari = DateTime.Now;
-                pari.Montants = 1 + rnd.Next(50);
-                pari.NbParis = 1 + rnd.Next(6);
-                item.Pari = pari;
+                pari.NbParis = 1 + rnd.Next(10);
+                concurrent.Pari = pari;
             }
 
 
@@ -60,7 +69,7 @@ namespace EscarGo.Migrations
 
             int idCourse = 1;
             int[] myValues = Enumerable.Range(0, concurrents.Length).ToArray();
-            List<Course> listeCourses = new List<Course>();
+            listeCourses = new List<Course>();
             foreach (int year in years)
             {
                 foreach (Course course in courses)
@@ -71,16 +80,16 @@ namespace EscarGo.Migrations
                         continue;
                     }
 
-                    Course c = new Course();
-                    c.Concurrents = new List<Concurrent>();
-                    c.Label = course.Label;
-                    c.Pays = course.Pays;
-                    c.Ville = course.Ville;
-                    c.IdCourse = idCourse;
+                    Course currentCourse = new Course();
+                    currentCourse.Concurrents = new List<Concurrent>();
+                    currentCourse.Label = course.Label;
+                    currentCourse.Pays = course.Pays;
+                    currentCourse.Ville = course.Ville;
+                    currentCourse.IdCourse = idCourse;
                     idCourse++;
 
                     // quand a lieu la course cette année là?
-                    c.Date = new DateTime(year, 1 + rnd.Next(12), 1 + rnd.Next(28));
+                    currentCourse.Date = new DateTime(year, 1 + rnd.Next(12), 1 + rnd.Next(28));
 
                     // qui participait? Il en faut au moins 2
                     int nbParticipants = 2 + rnd.Next(concurrents.Length - 1);
@@ -88,17 +97,22 @@ namespace EscarGo.Migrations
                     for (int i = 0; i < threeRandom.Length; i++)
                     {
                         int valeur = threeRandom[i];
-                        c.Concurrents.Add(concurrents[valeur]);
-                        concurrents[valeur].Courses.Add(c);
+                        currentCourse.Concurrents.Add(concurrents[valeur]);
+                        concurrents[valeur].Courses.Add(currentCourse);
                     }
-         
 
-                    listeCourses.Add(c);
+                    // calcul de la cote
+                    int sommeTotal = currentCourse.Concurrents.Sum(co => co.Pari.NbParis);
+                    foreach (Concurrent concurrent in currentCourse.Concurrents)
+                    {
+                        concurrent.Pari.SC = (double)sommeTotal / concurrent.Pari.NbParis;
+                        concurrent.Pari.SC = Math.Round(10 * concurrent.Pari.SC) / 10;
+                    }
+
+                    listeCourses.Add(currentCourse);
                 }
             }
-
-            context.Courses.AddOrUpdate(p => p.IdCourse, listeCourses.ToArray());
-            context.Concurrents.AddOrUpdate(p => p.IdConcurrent, concurrents);
-        }
+        } 
+        #endregion
     }
 }

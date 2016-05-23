@@ -5,9 +5,14 @@ namespace EscarGo.Repositories
 {
     sealed class EscarGoContext : DbContext
     {
+        //public EscarGoContext()
+        //    : base("DefaultConnection")
+        //{
+        //}
+
         public EscarGoContext()
-            : base("DefaultConnection")
         {
+
         }
 
         public DbSet<Course> Courses { get; set; }
