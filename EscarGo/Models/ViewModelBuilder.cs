@@ -6,9 +6,9 @@ namespace EscarGo.Models
     public class ViewModelBuilder
     {
         #region Constructeur
-        private IDataRepository _repository;
+        private IConcurrentRepository _repository;
 
-        public ViewModelBuilder(IDataRepository repository)
+        public ViewModelBuilder(IConcurrentRepository repository)
         {
             _repository = repository;
         } 

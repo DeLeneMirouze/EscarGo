@@ -2,7 +2,7 @@
 
 namespace EscarGo.Repositories
 {
-    abstract class BaseDataRepository: IDisposable
+    public abstract class BaseDataRepository: IDisposable
     {
         protected BaseDataRepository(EscarGoContext context)
         {

@@ -3,7 +3,7 @@ using System.Data.Entity;
 
 namespace EscarGo.Repositories
 {
-    sealed class EscarGoContext : DbContext
+    public sealed class EscarGoContext : DbContext
     {
         //public EscarGoContext()
         //    : base("DefaultConnection")

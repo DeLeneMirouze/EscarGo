@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace EscarGo.Repositories
 {
-    class DataRepository: BaseDataRepository, IDataRepository
+    public class ConcurrentRepository: BaseDataRepository, IConcurrentRepository
     {
-        public DataRepository(EscarGoContext context):base(context)
+        public ConcurrentRepository(EscarGoContext context):base(context)
         {
 
         }
@@ -15,7 +15,7 @@ namespace EscarGo.Repositories
         public List<Concurrent> GetConcurrents()
         {
             var concurrents = Context.Concurrents
-          .Include("Pari")
+                .Include("Pari")
           .OrderBy(c => c.Nom)
           .ToList();
 

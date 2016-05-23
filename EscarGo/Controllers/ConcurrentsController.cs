@@ -32,14 +32,5 @@ namespace EscarGo.Controllers
             }
             return View(concurrent);
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                Repository.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

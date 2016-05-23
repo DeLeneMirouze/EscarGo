@@ -187,9 +187,11 @@
     <Compile Include="Models\ViewModelBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseDataRepository.cs" />
-    <Compile Include="Repositories\DataRepository.cs" />
+    <Compile Include="Repositories\ConcurrentRepository.cs" />
+    <Compile Include="Repositories\CourseRepository.cs" />
     <Compile Include="Repositories\EscarGoContext.cs" />
-    <Compile Include="Repositories\IDataRepository.cs" />
+    <Compile Include="Repositories\IConcurrentRepository.cs" />
+    <Compile Include="Repositories\ICourseRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace EscarGo.Repositories
 {
-    public interface IDataRepository: IDisposable
+    public interface ICourseRepository
     {
-        List<Concurrent> GetConcurrents();
-        Concurrent GetConcurrentById(int id);
+        List<Course> GetCourses();
+        Course GetCourseById(int id);
     }
 }
