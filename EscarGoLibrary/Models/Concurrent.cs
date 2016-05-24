@@ -17,7 +17,6 @@ namespace EscarGo.Models
         public int Victoires { get; set; }
         public int Defaites { get; set; }
         public string Entraineur { get; set; }
-        public Pari Pari { get; set; }
 
         public ICollection<Course> Courses { get; set; }
     }
