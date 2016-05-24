@@ -13,7 +13,7 @@ namespace EscarGo.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201605241332149_initial"; }
+            get { return "201605241933413_initial"; }
         }
         
         string IMigrationMetadata.Source

@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace EscarGo.Models
 {
-    [DebuggerDisplay("Nom")]
+    [DebuggerDisplay("{Nom}")]
     public class Concurrent
     {
         public Concurrent()

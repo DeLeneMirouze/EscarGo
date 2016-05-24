@@ -97,14 +97,6 @@ namespace EscarGo.Migrations
                         concurrents[valeur].Courses.Add(currentCourse);
                     }
 
-                    //// calcul de la cote
-                    //int sommeTotal = currentCourse.Concurrents.Sum(co => co.Pari.NbParis);
-                    //foreach (Concurrent concurrent in currentCourse.Concurrents)
-                    //{
-                    //    concurrent.Pari.SC = (double)sommeTotal / concurrent.Pari.NbParis;
-                    //    concurrent.Pari.SC = Math.Round(10 * concurrent.Pari.SC) / 10;
-                    //}
-
                     listeCourses.Add(currentCourse);
                 }
 
@@ -124,6 +116,18 @@ namespace EscarGo.Migrations
 
                         paris.Add(pari);
                     }
+                }
+
+                // calcul de la cote
+                foreach (Course course in listeCourses)
+                {
+                    var pariCourses = paris.Where(p => p.IdCourse == course.IdCourse).ToList();
+                    int total = pariCourses.Sum(p => p.NbParis);
+                    pariCourses.ForEach(p =>
+                    {
+                        p.SC = (double)total / p.NbParis;
+                        p.SC = Math.Round(10 * p.SC) / 10;
+                    });
                 }
             }
         }

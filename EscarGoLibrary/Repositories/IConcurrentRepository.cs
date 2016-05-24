@@ -1,9 +1,6 @@
 ﻿using EscarGo.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EscarGo.Repositories
 {
@@ -11,5 +8,8 @@ namespace EscarGo.Repositories
     {
         List<Concurrent> GetConcurrents();
         Concurrent GetConcurrentById(int id);
+        List<Course> GetCoursesByConcurrent(int id);
+        List<Pari> GetParisByConcurrent(int id);
+        void SetBet(int idCourse, int idConcurrent);
     }
 }

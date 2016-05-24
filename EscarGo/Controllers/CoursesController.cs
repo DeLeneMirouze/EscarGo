@@ -19,7 +19,7 @@ namespace EscarGo.Controllers
         // GET: Courses/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null && id.Value == 0)
+            if (id == null || id.Value == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }

@@ -40,6 +40,7 @@ namespace EscarGo.Migrations
                         NbParis = c.Int(nullable: false),
                         IdCourse = c.Int(nullable: false),
                         IdConcurrent = c.Int(nullable: false),
+                        SC = c.Double(nullable: false),
                     })
                 .PrimaryKey(t => t.IdPari)
                 .ForeignKey("dbo.Concurrents", t => t.IdConcurrent, cascadeDelete: true)
