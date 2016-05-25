@@ -16,6 +16,7 @@ namespace EscarGo.Repositories
         public List<Concurrent> GetConcurrents()
         {
             var concurrents = Context.Concurrents
+                .Include("Entraineur")
           .OrderBy(c => c.Nom)
           .ToList();
 
@@ -27,6 +28,7 @@ namespace EscarGo.Repositories
         public Concurrent GetConcurrentById(int id)
         {
             var concurrent = Context.Concurrents
+                    .Include("Entraineur")
           .FirstOrDefault(c => c.IdConcurrent == id);
 
             return concurrent;

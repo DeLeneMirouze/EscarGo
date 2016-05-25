@@ -85,15 +85,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201605241933413_initial.cs" />
-    <Compile Include="Migrations\201605241933413_initial.Designer.cs">
-      <DependentUpon>201605241933413_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201605252019551_Initialisation.cs" />
+    <Compile Include="Migrations\201605252019551_Initialisation.Designer.cs">
+      <DependentUpon>201605252019551_Initialisation.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Concurrent.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CustomController.cs" />
     <Compile Include="Models\DetailConcurrentViewModel.cs" />
+    <Compile Include="Models\Entraineur.cs" />
     <Compile Include="Models\Pari.cs" />
     <Compile Include="Models\ViewModelBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,8 +110,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605241933413_initial.resx">
-      <DependentUpon>201605241933413_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605252019551_Initialisation.resx">
+      <DependentUpon>201605252019551_Initialisation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

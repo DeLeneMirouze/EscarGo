@@ -3,7 +3,7 @@ namespace EscarGo.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initial : DbMigration
+    public partial class Initialisation : DbMigration
     {
         public override void Up()
         {
@@ -15,9 +15,11 @@ namespace EscarGo.Migrations
                         Nom = c.String(),
                         Victoires = c.Int(nullable: false),
                         Defaites = c.Int(nullable: false),
-                        Entraineur = c.String(),
+                        IdEntraineur = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.IdConcurrent);
+                .PrimaryKey(t => t.IdConcurrent)
+                .ForeignKey("dbo.Entraineurs", t => t.IdEntraineur, cascadeDelete: true)
+                .Index(t => t.IdEntraineur);
             
             CreateTable(
                 "dbo.Courses",
@@ -30,6 +32,15 @@ namespace EscarGo.Migrations
                         Ville = c.String(),
                     })
                 .PrimaryKey(t => t.IdCourse);
+            
+            CreateTable(
+                "dbo.Entraineurs",
+                c => new
+                    {
+                        IdEntraineur = c.Int(nullable: false, identity: true),
+                        Nom = c.String(),
+                    })
+                .PrimaryKey(t => t.IdEntraineur);
             
             CreateTable(
                 "dbo.Paris",
@@ -67,14 +78,17 @@ namespace EscarGo.Migrations
         {
             DropForeignKey("dbo.Paris", "IdCourse", "dbo.Courses");
             DropForeignKey("dbo.Paris", "IdConcurrent", "dbo.Concurrents");
+            DropForeignKey("dbo.Concurrents", "IdEntraineur", "dbo.Entraineurs");
             DropForeignKey("dbo.ConcurrentCourses", "Course_IdCourse", "dbo.Courses");
             DropForeignKey("dbo.ConcurrentCourses", "Concurrent_IdConcurrent", "dbo.Concurrents");
             DropIndex("dbo.ConcurrentCourses", new[] { "Course_IdCourse" });
             DropIndex("dbo.ConcurrentCourses", new[] { "Concurrent_IdConcurrent" });
             DropIndex("dbo.Paris", new[] { "IdConcurrent" });
             DropIndex("dbo.Paris", new[] { "IdCourse" });
+            DropIndex("dbo.Concurrents", new[] { "IdEntraineur" });
             DropTable("dbo.ConcurrentCourses");
             DropTable("dbo.Paris");
+            DropTable("dbo.Entraineurs");
             DropTable("dbo.Courses");
             DropTable("dbo.Concurrents");
         }

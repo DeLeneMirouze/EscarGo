@@ -7,13 +7,13 @@ namespace EscarGo.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class initial : IMigrationMetadata
+    public sealed partial class Initialisation : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initialisation));
         
         string IMigrationMetadata.Id
         {
-            get { return "201605241933413_initial"; }
+            get { return "201605252019551_Initialisation"; }
         }
         
         string IMigrationMetadata.Source

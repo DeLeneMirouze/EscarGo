@@ -1,4 +1,5 @@
 ﻿using EscarGo.Models;
+using EscarGoLibrary.Models;
 using System.Data.Entity;
 
 namespace EscarGo.Repositories
@@ -18,6 +19,7 @@ namespace EscarGo.Repositories
         public DbSet<Course> Courses { get; set; }
         public DbSet<Concurrent> Concurrents { get; set; }
         public DbSet<Pari> Paris { get; set; }
+        public DbSet<Entraineur> Entraineurs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -29,16 +31,6 @@ namespace EscarGo.Repositories
          .HasMany(s => s.Courses)
          .WithMany(c => c.Concurrents);
 
-
-
-
-//            modelBuilder.Entity<Pari>()
-//              .HasMany(s => s.Courses)
-//              .WithMany(c => c.Paris);
-
-//            modelBuilder.Entity<Course>()
-//.HasMany(s => s.Paris)
-//.WithMany(c => c.Courses);
         }
     }
 }

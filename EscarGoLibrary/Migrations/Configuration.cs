@@ -1,5 +1,6 @@
 namespace EscarGo.Migrations
 {
+    using EscarGoLibrary.Models;
     using Models;
     using System;
     using System.Collections.Generic;
@@ -22,31 +23,49 @@ namespace EscarGo.Migrations
             context.Courses.AddOrUpdate(p => p.IdCourse, listeCourses.ToArray());
             context.Concurrents.AddOrUpdate(p => p.IdConcurrent, concurrents);
             context.Paris.AddOrUpdate(p => p.IdPari, paris.ToArray());
+            context.Entraineurs.AddOrUpdate(p => p.IdEntraineur, entraineurs.ToArray());
         }
 
         #region BuildData 
         Concurrent[] concurrents;
         List<Course> listeCourses;
         List<Pari> paris;
+        List<Entraineur> entraineurs;
 
         public void BuildData()
         {
             Random rnd = new Random(DateTime.Now.Millisecond);
 
+            // liste des entraineurs
+            entraineurs = new List<Entraineur>();
+            Entraineur entraineur = new Entraineur() { IdEntraineur = 1, Nom = "Dr YaCommeUneMagouille" };
+            entraineurs.Add(entraineur);
+            entraineur = new Entraineur() { IdEntraineur = 2, Nom = "Papy Emile" };
+            entraineurs.Add(entraineur);
+            entraineur = new Entraineur() { IdEntraineur = 3, Nom = "Moumoune" };
+            entraineurs.Add(entraineur);
+            entraineur = new Entraineur() { IdEntraineur = 4, Nom = "Paprika" };
+            entraineurs.Add(entraineur);
+            entraineur = new Entraineur() { IdEntraineur =5, Nom = "La Carotte" };
+            entraineurs.Add(entraineur);
+            entraineur = new Entraineur() { IdEntraineur = 6, Nom = "Patchouli" };
+            entraineurs.Add(entraineur);
+  
+
             // liste des valeureux candidats
             concurrents = new Concurrent[]
             {
-                       new Concurrent { Nom = "Speedy Jet Trophy", Victoires = 100, Defaites = 0, Entraineur = "Dr YaCommeUneMagouille",IdConcurrent=1 },
-                   new Concurrent { Nom = "Spidi Gonzales", Victoires = 0, Defaites = 100, Entraineur = "Papy Emile",IdConcurrent=2 },
-                      new Concurrent { Nom = "La Foudre du Nord", Victoires = 2, Defaites = 8, Entraineur = "Moumoune",IdConcurrent=3 },
-                           new Concurrent { Nom = "Cool Man", Victoires = 50, Defaites = 2, Entraineur = "Paprika" ,IdConcurrent=4},
-                                new Concurrent { Nom = "Salade", Victoires = 5, Defaites = 6, Entraineur = "La Carotte",IdConcurrent=5 },
-                                     new Concurrent { Nom = "Super Gascon", Victoires = 3, Defaites = 3, Entraineur = "Patchouli" ,IdConcurrent=6},
-        new Concurrent { Nom = "Gros Baveux", Victoires = 45, Defaites = 5, Entraineur = "Paprika",IdConcurrent=7 },
-             new Concurrent { Nom = "Petit Baveux", Victoires = 160, Defaites = 55, Entraineur = "La Carotte" ,IdConcurrent=8},
-                  new Concurrent { Nom = "Persillade", Victoires = 2, Defaites = 5, Entraineur = "Paprika",IdConcurrent=9 },
-                       new Concurrent { Nom = "Doudou", Victoires = 2, Defaites = 3, Entraineur = "Paprika" ,IdConcurrent=10},
-                            new Concurrent { Nom = "Pilou Pilou", Victoires = 3, Defaites = 8, Entraineur = "Patchouli" ,IdConcurrent=11}
+                       new Concurrent { Nom = "Speedy Jet Trophy", Victoires = 100, Defaites = 0, IdEntraineur = 1,IdConcurrent=1 },
+                   new Concurrent { Nom = "Spidi Gonzales", Victoires = 0, Defaites = 100, IdEntraineur = 2,IdConcurrent=2 },
+                      new Concurrent { Nom = "La Foudre du Nord", Victoires = 2, Defaites = 8, IdEntraineur = 3,IdConcurrent=3 },
+                           new Concurrent { Nom = "Cool Man", Victoires = 50, Defaites = 2, IdEntraineur = 4 ,IdConcurrent=4},
+                                new Concurrent { Nom = "Salade", Victoires = 5, Defaites = 6, IdEntraineur = 5,IdConcurrent=5 },
+                                     new Concurrent { Nom = "Super Gascon", Victoires = 3, Defaites = 3, IdEntraineur = 6 ,IdConcurrent=6},
+        new Concurrent { Nom = "Gros Baveux", Victoires = 45, Defaites = 5, IdEntraineur = 4,IdConcurrent=7 },
+             new Concurrent { Nom = "Petit Baveux", Victoires = 160, Defaites = 55, IdEntraineur = 5 ,IdConcurrent=8},
+                  new Concurrent { Nom = "Persillade", Victoires = 2, Defaites = 5, IdEntraineur = 4,IdConcurrent=9 },
+                       new Concurrent { Nom = "Doudou", Victoires = 2, Defaites = 3, IdEntraineur = 4 ,IdConcurrent=10},
+                            new Concurrent { Nom = "Pilou Pilou", Victoires = 3, Defaites = 8, IdEntraineur = 6 ,IdConcurrent=11}
             };
 
             // liste des courses sur 2 ans
