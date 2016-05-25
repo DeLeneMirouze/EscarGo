@@ -1,5 +1,4 @@
-﻿using System.Data.Entity;
-using System.Net;
+﻿using System.Net;
 using System.Web.Mvc;
 using EscarGo.Models;
 using EscarGo.Repositories;
@@ -23,14 +22,23 @@ namespace EscarGo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = CourseRepository.GetCourseById(id.Value);
-            if (course == null)
+            var vm = Builder.GetDetailCourseViewModel(id.Value);
+            if (vm.Course == null)
             {
                 return HttpNotFound();
             }
-            return View(course);
+            return View(vm);
         }
-        
 
+        public ActionResult Bet(int idCourse, int idConcurrent)
+        {
+            if (idConcurrent == 0 || idConcurrent == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Builder.SetBet(idCourse, idConcurrent);
+            return Redirect("Details/" + idCourse.ToString());
+        }
     }
 }

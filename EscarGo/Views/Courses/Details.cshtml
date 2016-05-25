@@ -1,4 +1,4 @@
-﻿@model EscarGo.Models.Course
+﻿@model EscarGoLibrary.Models.DetailCourseViewModel
 
 @{
     ViewBag.Title = "Détails";
@@ -11,40 +11,73 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Label)
+            @Html.DisplayNameFor(model => model.Course.Label)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Label)
+            @Html.DisplayFor(model => model.Course.Label)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Date)
+            @Html.DisplayNameFor(model => model.Course.Date)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Date)
+            @Html.DisplayFor(model => model.Course.Date)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Pays)
+            @Html.DisplayNameFor(model => model.Course.Pays)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Pays)
+            @Html.DisplayFor(model => model.Course.Pays)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Ville)
+            @Html.DisplayNameFor(model => model.Course.Ville)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Ville)
+            @Html.DisplayFor(model => model.Course.Ville)
         </dd>
 
     </dl>
 </div>
 <p>
+
+
+    <h2>Les concurrents</h2>
+    <table class="table">
+        <tr>
+            <th>
+                Concurrent
+            </th>
+
+            <th>
+                Cote
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Concurrents)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nom)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.SC)/1
+                </td>
+                <td>
+
+                    @Html.ActionLink("Parier", "Bet", new { idCourse =Model.Course.IdCourse , idConcurrent = item.IdConcurrent })
+                </td>
+            </tr>
+        }
+
+    </table>
 
     @Html.ActionLink("Retour", "Index")
 </p>

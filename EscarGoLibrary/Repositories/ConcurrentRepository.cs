@@ -56,6 +56,16 @@ namespace EscarGo.Repositories
         }
         #endregion
 
+        #region GetParisByCourse
+        public List<Pari> GetParisByCourse(int idCourse)
+        {
+            var paris = Context.Paris
+                .Include("Course")
+                .Where(p => p.IdCourse == idCourse).ToList();
+            return paris;
+        }
+        #endregion
+
         #region SetBet
         public void SetBet(int idCourse, int idConcurrent)
         {

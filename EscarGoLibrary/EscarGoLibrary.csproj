@@ -94,6 +94,7 @@
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CustomController.cs" />
     <Compile Include="Models\DetailConcurrentViewModel.cs" />
+    <Compile Include="Models\DetailCourseViewModel.cs" />
     <Compile Include="Models\Entraineur.cs" />
     <Compile Include="Models\Pari.cs" />
     <Compile Include="Models\ViewModelBuilder.cs" />

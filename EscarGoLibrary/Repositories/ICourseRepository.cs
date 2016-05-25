@@ -11,5 +11,6 @@ namespace EscarGo.Repositories
     {
         List<Course> GetCourses();
         Course GetCourseById(int id);
+        List<Concurrent> GetConcurrentsByCourse(int idCourse);
     }
 }

@@ -11,5 +11,6 @@ namespace EscarGo.Repositories
         List<Course> GetCoursesByConcurrent(int id);
         List<Pari> GetParisByConcurrent(int id);
         void SetBet(int idCourse, int idConcurrent);
+        List<Pari> GetParisByCourse(int idCourse);
     }
 }

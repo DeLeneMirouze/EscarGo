@@ -8,12 +8,12 @@ namespace EscarGo.Models
         protected CustomController()
         {
             var context = new EscarGoContext();
-            ConcurrentReposiory = new ConcurrentRepository(context);
-            Builder = new ViewModelBuilder(ConcurrentReposiory);
+            ConcurrentRepository = new ConcurrentRepository(context);
             CourseRepository = new CourseRepository(context);
+            Builder = new ViewModelBuilder(ConcurrentRepository, CourseRepository);
         }
 
-        protected IConcurrentRepository ConcurrentReposiory { get; set; }
+        protected IConcurrentRepository ConcurrentRepository { get; set; }
         protected ViewModelBuilder Builder { get; set; }
         protected ICourseRepository CourseRepository { get; set; }
 
@@ -21,7 +21,7 @@ namespace EscarGo.Models
         {
             if (disposing)
             {
-                ConcurrentReposiory.Dispose();
+                ConcurrentRepository.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -33,5 +33,17 @@ namespace EscarGo.Repositories
             return course;
         }
         #endregion
+
+        #region GetConcurrentsByCourse
+        public List<Concurrent> GetConcurrentsByCourse(int idCourse)
+        {
+            var courses = Context.Courses
+                .Where(c => c.IdCourse == idCourse)
+                .SelectMany(c => c.Concurrents)
+                .OrderBy(c => c.Nom)
+                .ToList();
+            return courses;
+        }
+        #endregion
     }
 }
