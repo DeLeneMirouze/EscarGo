@@ -8,10 +8,10 @@ namespace EscarGo.Models
     public class ViewModelBuilder
     {
         #region Constructeur
-        readonly IConcurrentRepository _concurrentRepository;
+        readonly ICompetitorRepository _concurrentRepository;
         readonly ICourseRepository _courseRepository;
 
-        public ViewModelBuilder(IConcurrentRepository repository, ICourseRepository courseRepository)
+        public ViewModelBuilder(ICompetitorRepository repository, ICourseRepository courseRepository)
         {
             _concurrentRepository = repository;
             _courseRepository = courseRepository;
@@ -21,7 +21,7 @@ namespace EscarGo.Models
         #region GetConcurrents
         public List<Concurrent> GetConcurrents()
         {
-            return _concurrentRepository.GetConcurrents();
+            return _concurrentRepository.GetCompetitors();
         } 
         #endregion
 
@@ -29,9 +29,9 @@ namespace EscarGo.Models
         public DetailConcurrentViewModel GetDetailConcurrentViewModel(int idConcurrent)
         {
             DetailConcurrentViewModel vm = new DetailConcurrentViewModel();
-            vm.Concurrent = _concurrentRepository.GetConcurrentById(idConcurrent);
+            vm.Concurrent = _concurrentRepository.GetCompetitorById(idConcurrent);
 
-            var paris = _concurrentRepository.GetParisByConcurrent(idConcurrent);
+            var paris = _concurrentRepository.GetBetsByCompetitor(idConcurrent);
             vm.Courses = paris.OrderBy(p => p.Course.Date).Select(p => p.Course).ToList();
             foreach (var course in vm.Courses)
             {
@@ -57,7 +57,7 @@ namespace EscarGo.Models
 
             vm.Course = _courseRepository.GetCourseById(idCourse);
             vm.Concurrents = _courseRepository.GetConcurrentsByCourse(idCourse);
-            var paris = _concurrentRepository.GetParisByCourse(idCourse);
+            var paris = _concurrentRepository.GetBetsByRace(idCourse);
             foreach (Concurrent concurrent in vm.Concurrents)
             {
                 Pari currentBet = paris.Where(p => p.IdConcurrent == concurrent.IdConcurrent).First();

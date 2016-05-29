@@ -1,8 +1,5 @@
 ﻿using EscarGo.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EscarGo.Repositories
@@ -12,5 +9,9 @@ namespace EscarGo.Repositories
         List<Course> GetCourses();
         Course GetCourseById(int id);
         List<Concurrent> GetConcurrentsByCourse(int idCourse);
+
+        Task<List<Course>> GetCoursesAsync();
+        Task<Course> GetCourseByIdAsync(int id);
+        Task<List<Concurrent>> GetConcurrentsByCourseAsync(int idCourse);
     }
 }
