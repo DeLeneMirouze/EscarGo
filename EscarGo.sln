@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscarGoLibrary", "EscarGoLi
 EndProject
 Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Cloud", "Cloud\Cloud.ccproj", "{399DD09E-FC57-400C-9430-76EDB8BD108C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscarGoAsync", "EscarGoAsync\EscarGoAsync.csproj", "{3724A004-4AD4-4718-BF59-12681EE97D49}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{399DD09E-FC57-400C-9430-76EDB8BD108C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{399DD09E-FC57-400C-9430-76EDB8BD108C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{399DD09E-FC57-400C-9430-76EDB8BD108C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3724A004-4AD4-4718-BF59-12681EE97D49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3724A004-4AD4-4718-BF59-12681EE97D49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3724A004-4AD4-4718-BF59-12681EE97D49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3724A004-4AD4-4718-BF59-12681EE97D49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

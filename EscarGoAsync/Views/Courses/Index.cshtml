@@ -1,0 +1,49 @@
+﻿@model IEnumerable<EscarGo.Models.Course>
+
+@{
+    ViewBag.Title = "Courses";
+}
+
+<h2>Courses</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Label)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pays)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ville)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Label)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ville)
+        </td>
+        <td>
+
+            @Html.ActionLink("Détails", "Details", new { id=item.IdCourse }) 
+          
+        </td>
+    </tr>
+}
+
+</table>
