@@ -2,6 +2,7 @@
 using EscarGoLibrary.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace EscarGo.Models
 {
@@ -18,11 +19,16 @@ namespace EscarGo.Models
         }
         #endregion
 
-        #region GetConcurrents
-        public List<Concurrent> GetConcurrents()
+        #region GetCompetitors
+        public List<Concurrent> GetCompetitors()
         {
             return _concurrentRepository.GetCompetitors();
-        } 
+        }
+
+        public async Task<List<Concurrent>> GetCompetitorAsyncs()
+        {
+            return await _concurrentRepository.GetCompetitorsAsync();
+        }
         #endregion
 
         #region GetDetailConcurrentViewModel
@@ -41,12 +47,33 @@ namespace EscarGo.Models
 
             return vm;
         }
+
+        public async Task<DetailConcurrentViewModel> GetDetailConcurrentViewModelAsync(int idConcurrent)
+        {
+            DetailConcurrentViewModel vm = new DetailConcurrentViewModel();
+            vm.Concurrent =await  _concurrentRepository.GetCompetitorByIdAsync(idConcurrent);
+
+            var paris = await _concurrentRepository.GetBetsByCompetitorAsync(idConcurrent);
+            vm.Courses = paris.OrderBy(p => p.Course.Date).Select(p => p.Course).ToList();
+            foreach (var course in vm.Courses)
+            {
+                Pari currentBet = paris.Where(p => p.IdCourse == course.IdCourse).First();
+                course.SC = currentBet.SC;
+            }
+
+            return vm;
+        }
         #endregion
 
         #region SetBet
         public void SetBet(int idCourse, int idConcurrent)
         {
             _concurrentRepository.SetBet(idCourse, idConcurrent);
+        }
+
+        public async Task SetBetAsync(int idCourse, int idConcurrent)
+        {
+            await _concurrentRepository.SetBetAsync(idCourse, idConcurrent);
         }
         #endregion
 
@@ -58,6 +85,22 @@ namespace EscarGo.Models
             vm.Course = _courseRepository.GetCourseById(idCourse);
             vm.Concurrents = _courseRepository.GetConcurrentsByCourse(idCourse);
             var paris = _concurrentRepository.GetBetsByRace(idCourse);
+            foreach (Concurrent concurrent in vm.Concurrents)
+            {
+                Pari currentBet = paris.Where(p => p.IdConcurrent == concurrent.IdConcurrent).First();
+                concurrent.SC = currentBet.SC;
+            }
+
+            return vm;
+        }
+
+        public async Task<DetailCourseViewModel> GetDetailCourseViewModelAsync(int idCourse)
+        {
+            DetailCourseViewModel vm = new DetailCourseViewModel();
+
+            vm.Course = await _courseRepository.GetCourseByIdAsync(idCourse);
+            vm.Concurrents = await _courseRepository.GetConcurrentsByCourseAsync(idCourse);
+            var paris = await _concurrentRepository.GetBetsByRaceAsync(idCourse);
             foreach (Concurrent concurrent in vm.Concurrents)
             {
                 Pari currentBet = paris.Where(p => p.IdConcurrent == concurrent.IdConcurrent).First();

@@ -10,7 +10,7 @@ namespace EscarGo.Controllers
         // GET: Concurrents
         public ActionResult Index()
         {
-            var concurrents = Builder.GetConcurrents();
+            var concurrents = Builder.GetCompetitors();
 
             return View(concurrents);
         }
