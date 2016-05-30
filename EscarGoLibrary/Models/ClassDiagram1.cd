@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EscarGo.Models.Concurrent">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAEAAAgAAAAAAACCAAAAAAAAAAABAABAA=</HashCode>
+      <FileName>Models\Concurrent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EscarGo.Models.Course">
+    <Position X="4.25" Y="3" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAQAEAAAAAAAAAAAEAAgAAABAAAAAAAAAQA=</HashCode>
+      <FileName>Models\Course.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EscarGoLibrary.Models.Entraineur">
+    <Position X="2.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACCAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Entraineur.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EscarGo.Models.Pari">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAEAAAIIEAAAAAAAAgAAAAAAAAAAAAFAA=</HashCode>
+      <FileName>Models\Pari.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

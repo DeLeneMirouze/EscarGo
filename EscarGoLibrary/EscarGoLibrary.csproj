@@ -128,15 +128,18 @@
     <Compile Include="Models\Pari.cs" />
     <Compile Include="Models\ViewModelBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AzureTableRepository.cs" />
     <Compile Include="Repositories\BaseDataRepository.cs" />
     <Compile Include="Repositories\CompetitorRepository.cs" />
     <Compile Include="Repositories\CourseRepository.cs" />
     <Compile Include="Repositories\EscarGoContext.cs" />
+    <Compile Include="Repositories\IAzureTableRepository.cs" />
     <Compile Include="Repositories\ICompetitorRepository.cs" />
     <Compile Include="Repositories\ICourseRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Models\ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
