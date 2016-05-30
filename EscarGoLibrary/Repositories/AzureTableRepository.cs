@@ -28,6 +28,6 @@ namespace EscarGoLibrary.Repositories
 
 
         string _storageConnectionString = 
-            "DefaultEndpointsProtocol=https;AccountName=logisfrdev;AccountKey=3kyVPau3MShgsI35sIUPajjE9HtGmyQx3fIevTonN0xgEMyRIU4JUc2SOjrbfwfTNjzJmQpI1POWhCv33fcO1w==";
+            "";
     }
 }
