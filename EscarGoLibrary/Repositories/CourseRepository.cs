@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System;
 
 namespace EscarGo.Repositories
 {
     public class CourseRepository : BaseDataRepository, ICourseRepository
     {
-        public CourseRepository(EscarGoContext context):base(context)
+        #region Constructeur
+        public CourseRepository(EscarGoContext context) : base(context)
         {
 
-        }
+        } 
+        #endregion
 
         #region GetCourses
         public List<Course> GetCourses()
         {
             var courses = Context.Courses
+                .Where(c => c.Date >= DateTime.Now)
                 .OrderByDescending(c => c.Date)
                 .ThenBy(c => c.Pays)
                                 .ThenBy(c => c.Label)
@@ -28,6 +32,7 @@ namespace EscarGo.Repositories
         public async Task<List<Course>> GetCoursesAsync()
         {
             var courses = await Context.Courses
+                .Where(c => c.Date >= DateTime.Now)
                 .OrderByDescending(c => c.Date)
                 .ThenBy(c => c.Pays)
                                 .ThenBy(c => c.Label)
@@ -74,6 +79,20 @@ namespace EscarGo.Repositories
                 .OrderBy(c => c.Nom)
                 .ToListAsync();
             return courses;
+        }
+        #endregion
+
+        #region Create
+        public void Create(Course course)
+        {
+            Context.Courses.Add(course);
+            Context.SaveChanges();
+        }
+
+        public async Task CreateAsync(Course course)
+        {
+            Context.Courses.Add(course);
+            await Context.SaveChangesAsync();
         }
         #endregion
     }

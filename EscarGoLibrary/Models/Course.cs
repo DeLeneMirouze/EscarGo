@@ -16,6 +16,7 @@ namespace EscarGo.Models
         [Key]
         public int IdCourse { get; set; }
         public string Label { get; set; }
+        [DataType(DataType.Date)]
         public DateTime Date { get; set; }
         public string Pays { get; set; }
         public string Ville { get; set; }

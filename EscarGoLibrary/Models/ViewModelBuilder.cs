@@ -110,5 +110,12 @@ namespace EscarGo.Models
             return vm;
         }
         #endregion
+
+        #region Create
+        public void Create(Course course)
+        {
+            _courseRepository.Create(course);
+        }
+        #endregion
     }
 }
