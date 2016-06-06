@@ -9,12 +9,15 @@ namespace EscarGoAsync.Controllers
     {
         private EscarGoContext db = new EscarGoContext();
 
+        #region Index
         // GET: Courses
         public ActionResult Index()
         {
             return View(CourseRepository.GetCourses());
-        }
+        } 
+        #endregion
 
+        #region Details
         // GET: Courses/Details/5
         public ActionResult Details(int? id)
         {
@@ -28,8 +31,10 @@ namespace EscarGoAsync.Controllers
                 return HttpNotFound();
             }
             return View(vm);
-        }
+        } 
+        #endregion
 
+        #region Bet
         public ActionResult Bet(int idCourse, int idConcurrent)
         {
             if (idConcurrent == 0 || idConcurrent == 0)
@@ -40,5 +45,27 @@ namespace EscarGoAsync.Controllers
             Builder.SetBet(idCourse, idConcurrent);
             return Redirect("Details/" + idCourse.ToString());
         }
+        #endregion
+
+        #region Create
+        // GET: Default/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Default/Create
+        [HttpPost]
+        public ActionResult Create(Course course)
+        {
+            if (ModelState.IsValid)
+            {
+                Builder.Create(course);
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+        #endregion
     }
 }
