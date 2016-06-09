@@ -23,6 +23,8 @@ namespace EscarGo.Models
         [NotMapped]
         public double SC { get; set; }
 
+        public int Likes { get; set; }
+
         public ICollection<Concurrent> Concurrents { get; set; }
     }
 }

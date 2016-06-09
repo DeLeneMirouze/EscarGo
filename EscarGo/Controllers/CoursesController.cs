@@ -7,8 +7,6 @@ namespace EscarGo.Controllers
 {
     public class CoursesController : CustomController
     {
-        //private EscarGoContext db = new EscarGoContext();
-
         #region Index
         // GET: Courses
         public ActionResult Index()
@@ -34,7 +32,7 @@ namespace EscarGo.Controllers
         } 
         #endregion
 
-        #region Get
+        #region Bet
         public ActionResult Bet(int idCourse, int idConcurrent)
         {
             if (idConcurrent == 0 || idConcurrent == 0)
@@ -89,6 +87,15 @@ namespace EscarGo.Controllers
             }
 
             return View();
+        }
+        #endregion
+
+        #region Like
+        // GET: Default/Like/5
+        public ActionResult Like(int id)
+        {
+            CourseRepository.Like(id);
+            return View("Index", CourseRepository.GetCourses());
         }
         #endregion
     }

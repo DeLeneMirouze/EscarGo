@@ -114,9 +114,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201605252019551_Initialisation.cs" />
-    <Compile Include="Migrations\201605252019551_Initialisation.Designer.cs">
-      <DependentUpon>201605252019551_Initialisation.cs</DependentUpon>
+    <Compile Include="Migrations\201606092105453_init.cs" />
+    <Compile Include="Migrations\201606092105453_init.Designer.cs">
+      <DependentUpon>201606092105453_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AzureModel\Concurrent.cs" />
@@ -144,12 +144,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605252019551_Initialisation.resx">
-      <DependentUpon>201605252019551_Initialisation.cs</DependentUpon>
-    </EmbeddedResource>
+    <Content Include="TextFile1.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TextFile1.txt" />
+    <EmbeddedResource Include="Migrations\201606092105453_init.resx">
+      <DependentUpon>201606092105453_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,7 +3,7 @@ namespace EscarGo.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initialisation : DbMigration
+    public partial class init : DbMigration
     {
         public override void Up()
         {
@@ -30,6 +30,7 @@ namespace EscarGo.Migrations
                         Date = c.DateTime(nullable: false),
                         Pays = c.String(),
                         Ville = c.String(),
+                        Likes = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.IdCourse);
             

@@ -95,5 +95,23 @@ namespace EscarGo.Repositories
             await Context.SaveChangesAsync();
         }
         #endregion
+
+        #region Like
+        public void Like(int idCourse)
+        {
+            Course course = Context.Courses.FirstOrDefault(c => c.IdCourse == idCourse);
+            course.Likes++;
+
+            Context.SaveChanges();
+        }
+
+        public async Task LikeAsync(int idCourse)
+        {
+            Course course = await Context.Courses.FirstOrDefaultAsync(c => c.IdCourse == idCourse);
+            course.Likes++;
+
+            await Context.SaveChangesAsync();
+        } 
+        #endregion
     }
 }
