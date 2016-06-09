@@ -24,6 +24,7 @@ namespace EscarGo.Migrations
             context.Concurrents.AddOrUpdate(p => p.IdConcurrent, concurrents);
             context.Paris.AddOrUpdate(p => p.IdPari, paris.ToArray());
             context.Entraineurs.AddOrUpdate(p => p.IdEntraineur, entraineurs.ToArray());
+            context.Visiteurs.AddOrUpdate(p => p.Id, visiteurs.ToArray());
         }
 
         #region BuildData 
@@ -31,6 +32,7 @@ namespace EscarGo.Migrations
         List<Course> listeCourses;
         List<Pari> paris;
         List<Entraineur> entraineurs;
+        List<Visiteur> visiteurs;
 
         public void BuildData()
         {
@@ -150,6 +152,32 @@ namespace EscarGo.Migrations
                     });
                 }
             }
+
+
+            visiteurs = new List<Visiteur>();
+            Visiteur visiteur = new Visiteur() { Id = 1, Nom = "Batman" };
+            visiteurs.Add(visiteur);
+            visiteur = new Visiteur() { Id = 2, Nom = "Papy Emile" };
+            visiteurs.Add(visiteur);
+            visiteur = new Visiteur() { Id = 3, Nom = "Les compagnons de la salade" };
+            visiteurs.Add(visiteur);
+            visiteur = new Visiteur() { Id = 4, Nom = "Gaston Lagaffe" };
+            visiteurs.Add(visiteur);
+            visiteur = new Visiteur() { Id = 5, Nom = "Dr YaCommeUneMagouille" };
+            visiteurs.Add(visiteur);
+            visiteur = new Visiteur() { Id = 6, Nom = "La Carotte" };
+            visiteurs.Add(visiteur);
+            visiteur = new Visiteur() { Id = 7, Nom = "M. Potiron" };
+            visiteurs.Add(visiteur);
+            visiteur = new Visiteur() { Id = 8, Nom = "Mme Pirate" };
+            visiteurs.Add(visiteur);
+            visiteur = new Visiteur() { Id = 9, Nom = "Miss Ligulette" };
+            visiteurs.Add(visiteur);
+            visiteur = new Visiteur() { Id = 10, Nom = "Perle de lune" };
+            visiteurs.Add(visiteur);
+            visiteur = new Visiteur() { Id = 11, Nom = "M. Bond" };
+            visiteurs.Add(visiteur);
+
         }
         #endregion
     }

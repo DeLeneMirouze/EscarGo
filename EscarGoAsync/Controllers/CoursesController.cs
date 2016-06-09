@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using EscarGo.Models;
 using EscarGo.Repositories;
+using System.Threading.Tasks;
 
 namespace EscarGoAsync.Controllers
 {
@@ -65,6 +66,15 @@ namespace EscarGoAsync.Controllers
             }
 
             return View();
+        }
+        #endregion
+
+        #region Like
+        // GET: Default/Like/5
+        public async Task<ActionResult> Like(int id)
+        {
+            await CourseRepository.LikeAsync(id);
+            return View("Index", await CourseRepository.GetCoursesAsync());
         }
         #endregion
     }

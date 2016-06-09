@@ -61,6 +61,15 @@ namespace EscarGo.Migrations
                 .Index(t => t.IdConcurrent);
             
             CreateTable(
+                "dbo.Visiteurs",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Nom = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.ConcurrentCourses",
                 c => new
                     {
@@ -88,6 +97,7 @@ namespace EscarGo.Migrations
             DropIndex("dbo.Paris", new[] { "IdCourse" });
             DropIndex("dbo.Concurrents", new[] { "IdEntraineur" });
             DropTable("dbo.ConcurrentCourses");
+            DropTable("dbo.Visiteurs");
             DropTable("dbo.Paris");
             DropTable("dbo.Entraineurs");
             DropTable("dbo.Courses");

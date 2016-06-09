@@ -20,6 +20,7 @@ namespace EscarGo.Repositories
         public DbSet<Concurrent> Concurrents { get; set; }
         public DbSet<Pari> Paris { get; set; }
         public DbSet<Entraineur> Entraineurs { get; set; }
+        public DbSet<Visiteur> Visiteurs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
