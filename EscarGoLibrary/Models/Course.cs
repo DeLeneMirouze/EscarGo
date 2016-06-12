@@ -24,6 +24,7 @@ namespace EscarGo.Models
         public double SC { get; set; }
 
         public int Likes { get; set; }
+        public int NbTickets { get; set; }
 
         public ICollection<Concurrent> Concurrents { get; set; }
     }

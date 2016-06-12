@@ -114,12 +114,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201606092149318_init.cs" />
-    <Compile Include="Migrations\201606092149318_init.Designer.cs">
-      <DependentUpon>201606092149318_init.cs</DependentUpon>
+    <Compile Include="Migrations\201606121444539_init.cs" />
+    <Compile Include="Migrations\201606121444539_init.Designer.cs">
+      <DependentUpon>201606121444539_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AzureModel\Concurrent.cs" />
+    <Compile Include="Models\BuyTicketViewModel.cs" />
     <Compile Include="Models\Concurrent.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CustomController.cs" />
@@ -127,6 +128,8 @@
     <Compile Include="Models\DetailCourseViewModel.cs" />
     <Compile Include="Models\Entraineur.cs" />
     <Compile Include="Models\Pari.cs" />
+    <Compile Include="Models\Ticket.cs" />
+    <Compile Include="Models\TicketModelBuilder.cs" />
     <Compile Include="Models\ViewModelBuilder.cs" />
     <Compile Include="Models\Visiteur.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -138,6 +141,8 @@
     <Compile Include="Repositories\IAzureTableRepository.cs" />
     <Compile Include="Repositories\ICompetitorRepository.cs" />
     <Compile Include="Repositories\ICourseRepository.cs" />
+    <Compile Include="Repositories\ITicketRepository.cs" />
+    <Compile Include="Repositories\TicketRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -148,8 +153,8 @@
     <Content Include="TextFile1.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606092149318_init.resx">
-      <DependentUpon>201606092149318_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606121444539_init.resx">
+      <DependentUpon>201606121444539_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

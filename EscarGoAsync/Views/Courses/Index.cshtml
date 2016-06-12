@@ -54,7 +54,10 @@
                 @Html.ActionLink("Détails", "Details", new { id = item.IdCourse }) |
                 @Html.ActionLink("J'aime!", "Like", new { id = item.IdCourse })
 
-
+                @if (item.NbTickets > 0)
+                {
+                    Html.ActionLink("| S'inscrire!", "Buy", "Ticket", new { id = item.IdCourse });
+                }
 
             </td>
         </tr>

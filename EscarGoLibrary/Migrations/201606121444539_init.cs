@@ -31,6 +31,7 @@ namespace EscarGo.Migrations
                         Pays = c.String(),
                         Ville = c.String(),
                         Likes = c.Int(nullable: false),
+                        NbTickets = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.IdCourse);
             
@@ -61,6 +62,22 @@ namespace EscarGo.Migrations
                 .Index(t => t.IdConcurrent);
             
             CreateTable(
+                "dbo.Tickets",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        CourseId = c.Int(nullable: false),
+                        NbPlaces = c.Int(nullable: false),
+                        Acheteur_Id = c.Int(),
+                        Course_IdCourse = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Visiteurs", t => t.Acheteur_Id)
+                .ForeignKey("dbo.Courses", t => t.Course_IdCourse)
+                .Index(t => t.Acheteur_Id)
+                .Index(t => t.Course_IdCourse);
+            
+            CreateTable(
                 "dbo.Visiteurs",
                 c => new
                     {
@@ -86,6 +103,8 @@ namespace EscarGo.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.Tickets", "Course_IdCourse", "dbo.Courses");
+            DropForeignKey("dbo.Tickets", "Acheteur_Id", "dbo.Visiteurs");
             DropForeignKey("dbo.Paris", "IdCourse", "dbo.Courses");
             DropForeignKey("dbo.Paris", "IdConcurrent", "dbo.Concurrents");
             DropForeignKey("dbo.Concurrents", "IdEntraineur", "dbo.Entraineurs");
@@ -93,11 +112,14 @@ namespace EscarGo.Migrations
             DropForeignKey("dbo.ConcurrentCourses", "Concurrent_IdConcurrent", "dbo.Concurrents");
             DropIndex("dbo.ConcurrentCourses", new[] { "Course_IdCourse" });
             DropIndex("dbo.ConcurrentCourses", new[] { "Concurrent_IdConcurrent" });
+            DropIndex("dbo.Tickets", new[] { "Course_IdCourse" });
+            DropIndex("dbo.Tickets", new[] { "Acheteur_Id" });
             DropIndex("dbo.Paris", new[] { "IdConcurrent" });
             DropIndex("dbo.Paris", new[] { "IdCourse" });
             DropIndex("dbo.Concurrents", new[] { "IdEntraineur" });
             DropTable("dbo.ConcurrentCourses");
             DropTable("dbo.Visiteurs");
+            DropTable("dbo.Tickets");
             DropTable("dbo.Paris");
             DropTable("dbo.Entraineurs");
             DropTable("dbo.Courses");

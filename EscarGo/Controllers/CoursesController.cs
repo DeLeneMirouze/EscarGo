@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using System.Web.Mvc;
 using EscarGo.Models;
-using EscarGo.Repositories;
 
 namespace EscarGo.Controllers
 {
@@ -11,7 +10,8 @@ namespace EscarGo.Controllers
         // GET: Courses
         public ActionResult Index()
         {
-            return View(CourseRepository.GetCourses());
+            var vm = CourseRepository.GetCourses();
+            return View(vm);
         } 
         #endregion
 

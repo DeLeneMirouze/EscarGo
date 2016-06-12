@@ -50,11 +50,14 @@
         </td>
         <td>
 
-            @Html.ActionLink("Détails", "Details", new { id=item.IdCourse }) | 
+            @Html.ActionLink("Détails", "Details", new { id = item.IdCourse }) |
             @Html.ActionLink("J'aime!", "Like", new { id = item.IdCourse })
 
-            
-          
+            @if(item.NbTickets>0)
+            {
+                @Html.ActionLink("| Achetez vos billets!", "Buy", "Ticket", new { idCourse = item.IdCourse }, null);
+            }
+
         </td>
     </tr>
 }

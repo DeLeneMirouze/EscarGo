@@ -6,11 +6,6 @@ namespace EscarGo.Repositories
 {
     public sealed class EscarGoContext : DbContext
     {
-        //public EscarGoContext()
-        //    : base("DefaultConnection")
-        //{
-        //}
-
         public EscarGoContext()
         {
 
@@ -21,6 +16,7 @@ namespace EscarGo.Repositories
         public DbSet<Pari> Paris { get; set; }
         public DbSet<Entraineur> Entraineurs { get; set; }
         public DbSet<Visiteur> Visiteurs { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

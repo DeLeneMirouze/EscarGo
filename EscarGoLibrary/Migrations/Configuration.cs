@@ -104,6 +104,7 @@ namespace EscarGo.Migrations
                     currentCourse.Ville = course.Ville;
                     currentCourse.IdCourse = idCourse;
                     currentCourse.Likes = rnd.Next(500);
+                    currentCourse.NbTickets = rnd.Next(500, 2000);
                     idCourse++;
 
                     // quand a lieu la course cette année là?

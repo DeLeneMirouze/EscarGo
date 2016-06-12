@@ -6,11 +6,15 @@
 
 <h2>Courses</h2>
 
+<p>
+    @Html.ActionLink("Nouvelle course", "Create")
+
+</p>
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Label)
+            Nom
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Date)
@@ -21,29 +25,42 @@
         <th>
             @Html.DisplayNameFor(model => model.Ville)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Likes)
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Label)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pays)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ville)
-        </td>
-        <td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Label)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pays)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ville)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Likes)
+            </td>
+            <td>
 
-            @Html.ActionLink("Détails", "Details", new { id=item.IdCourse }) 
-          
-        </td>
-    </tr>
-}
+                @Html.ActionLink("Détails", "Details", new { id = item.IdCourse }) |
+                @Html.ActionLink("J'aime!", "Like", new { id = item.IdCourse })
+
+                @if (item.NbTickets > 0)
+                {
+                    Html.ActionLink("| S'inscrire!", "Buy", "Ticket", new { id = item.IdCourse });
+                }
+
+            </td>
+        </tr>
+    }
 
 </table>
