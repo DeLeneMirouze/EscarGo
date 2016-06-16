@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 
-namespace EscarGo.Models
+namespace EscarGoLibrary.Models
 {
     [DebuggerDisplay("{SC}")]
     public class Pari

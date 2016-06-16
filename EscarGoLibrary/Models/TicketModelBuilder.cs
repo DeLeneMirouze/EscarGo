@@ -1,5 +1,4 @@
-﻿using EscarGo.Repositories;
-using EscarGoLibrary.Repositories;
+﻿using EscarGoLibrary.Repositories;
 using System.Linq;
 using System.Web.Mvc;
 

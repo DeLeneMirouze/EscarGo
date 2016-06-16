@@ -1,8 +1,7 @@
-﻿using EscarGo.Models;
-using EscarGoLibrary.Models;
+﻿using EscarGoLibrary.Models;
 using System.Data.Entity;
 
-namespace EscarGo.Repositories
+namespace EscarGoLibrary.Repositories
 {
     public sealed class EscarGoContext : DbContext
     {

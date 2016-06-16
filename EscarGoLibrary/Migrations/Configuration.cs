@@ -1,21 +1,21 @@
-namespace EscarGo.Migrations
+namespace EscarGoLibrary.Migrations
 {
-    using EscarGoLibrary.Models;
     using Models;
+    using Repositories;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<EscarGo.Repositories.EscarGoContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<EscarGoContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(EscarGo.Repositories.EscarGoContext context)
+        protected override void Seed(EscarGoContext context)
         {
             //  This method will be called after migrating to the latest version.
             BuildData();

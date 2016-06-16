@@ -1,6 +1,4 @@
-﻿using EscarGo.Models;
-
-namespace EscarGoLibrary.Models
+﻿namespace EscarGoLibrary.Models
 {
     public class Ticket
     {

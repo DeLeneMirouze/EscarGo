@@ -1,7 +1,7 @@
-﻿using System.Net;
+﻿using EscarGoLibrary.Models;
+using EscarGoLibrary.Repositories;
+using System.Net;
 using System.Web.Mvc;
-using EscarGo.Models;
-using EscarGo.Repositories;
 
 namespace EscarGoCQRS.Controllers
 {

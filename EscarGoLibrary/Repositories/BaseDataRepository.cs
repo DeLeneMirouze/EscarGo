@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EscarGo.Repositories
+namespace EscarGoLibrary.Repositories
 {
     public abstract class BaseDataRepository: IDisposable
     {

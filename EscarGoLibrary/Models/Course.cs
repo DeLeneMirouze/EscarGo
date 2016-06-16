@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 
-namespace EscarGo.Models
+namespace EscarGoLibrary.Models
 {
     [DebuggerDisplay("{Label}")]
     public class Course

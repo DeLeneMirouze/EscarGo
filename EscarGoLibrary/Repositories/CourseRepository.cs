@@ -1,11 +1,12 @@
-﻿using EscarGo.Models;
+﻿
+using EscarGoLibrary.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Data.Entity;
-using System;
 
-namespace EscarGo.Repositories
+namespace EscarGoLibrary.Repositories
 {
     public class CourseRepository : BaseDataRepository, ICourseRepository
     {

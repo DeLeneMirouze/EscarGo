@@ -1,11 +1,11 @@
-﻿using EscarGo.Models;
+﻿using EscarGoLibrary.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 
-namespace EscarGo.Repositories
+namespace EscarGoLibrary.Repositories
 {
     public class CompetitorRepository : BaseDataRepository, ICompetitorRepository
     {

@@ -1,9 +1,8 @@
-﻿using EscarGo.Repositories;
-using EscarGoLibrary.Models;
+﻿using EscarGoLibrary.Models;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Data.Entity;
 
 namespace EscarGoLibrary.Repositories
 {

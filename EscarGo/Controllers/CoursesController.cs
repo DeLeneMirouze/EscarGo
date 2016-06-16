@@ -1,6 +1,6 @@
-﻿using System.Net;
+﻿using EscarGoLibrary.Models;
+using System.Net;
 using System.Web.Mvc;
-using EscarGo.Models;
 
 namespace EscarGo.Controllers
 {

@@ -1,10 +1,9 @@
-﻿using EscarGoLibrary.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 
-namespace EscarGo.Models
+namespace EscarGoLibrary.Models
 {
     [DebuggerDisplay("{Nom}")]
     public class Concurrent

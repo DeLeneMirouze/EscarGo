@@ -1,9 +1,7 @@
-﻿using EscarGo.Repositories;
-using EscarGoLibrary.Models;
-using EscarGoLibrary.Repositories;
+﻿using EscarGoLibrary.Repositories;
 using System.Web.Mvc;
 
-namespace EscarGo.Models
+namespace EscarGoLibrary.Models
 {
     public class CustomController : Controller
     {

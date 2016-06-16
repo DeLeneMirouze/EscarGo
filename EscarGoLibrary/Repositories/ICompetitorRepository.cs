@@ -1,9 +1,9 @@
-﻿using EscarGo.Models;
+﻿using EscarGoLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace EscarGo.Repositories
+namespace EscarGoLibrary.Repositories
 {
     public interface ICompetitorRepository: IDisposable
     {
