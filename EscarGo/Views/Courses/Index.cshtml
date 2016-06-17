@@ -7,11 +7,11 @@
 <h2>Courses</h2>
 
 <p>
-    @Html.ActionLink("Nouvelle course", "Create")
+    @Html.ActionLink("Nouvelle course", "Create",null, new { role = "button", @class = "btn btn-success" })
     
 </p>
 
-<table class="table">
+<table class="table table-bordered table-striped">
     <tr>
         <th>
             Nom
@@ -50,12 +50,12 @@
         </td>
         <td>
 
-            @Html.ActionLink("Détails", "Details", new { id = item.IdCourse }) |
-            @Html.ActionLink("J'aime!", "Like", new { id = item.IdCourse })
+            @Html.ActionLink("Détails", "Details", new { id = item.IdCourse }, new { role = "button", @class = "btn btn-primary" }) 
+            @Html.ActionLink("J'aime!", "Like", new { id = item.IdCourse }, new { role = "button", @class = "btn btn-primary" })
 
             @if(item.NbTickets>0)
             {
-                @Html.ActionLink("| Achetez vos billets!", "Buy", "Ticket", new { idCourse = item.IdCourse }, null);
+                @Html.ActionLink(" Achetez vos billets!", "Buy", "Ticket", new { idCourse = item.IdCourse }, new {role="button", @class="btn btn-danger" });
             }
 
         </td>

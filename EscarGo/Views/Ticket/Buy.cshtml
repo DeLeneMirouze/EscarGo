@@ -4,13 +4,13 @@
 <hr />
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Buy","Ticket"))
 {
     @Html.AntiForgeryToken()
     <h4>@Model.Course.Label</h4>
         <hr />
     <div class="form-horizontal">
-
+        @Html.HiddenFor(n=>n.Course.IdCourse)
         <div class="form-group">
             <div class="control-label col-md-2">Date</div>
             
@@ -30,7 +30,7 @@
             <div class="control-label col-md-2">Vous êtes qui?</div>
            
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Acheteurs, Model.Acheteurs);
+                @Html.DropDownListFor(m => m.Acheteurs, Model.Acheteurs, new { @class = "form-control" });
             </div>
         </div>
 
@@ -44,14 +44,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Valider" class="btn btn-default" />
+                <input type="submit" value="Valider" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Retour", "Index","Courses")
+    @Html.ActionLink("Retour", "Index","Courses",null, new { role = "button", @class = "btn btn-primary" })
 </div>
 
 @section Scripts {

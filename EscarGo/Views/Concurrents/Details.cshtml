@@ -47,7 +47,7 @@
 <p>
 
     <h2>Courses du concurrent valeureux</h2>
-    <table class="table">
+    <table class="table table-bordered table-striped">
         <tr>
             <th>
                 Course
@@ -77,12 +77,12 @@
                 </td>
                 <td>
 
-                    @Html.ActionLink("Parier", "Bet", new { idCourse = item.IdCourse, idConcurrent=Model.Concurrent.IdConcurrent })
+                    @Html.ActionLink("Parier", "Bet", new { idCourse = item.IdCourse, idConcurrent=Model.Concurrent.IdConcurrent }, new { role = "button", @class = "btn btn-danger" })
                 </td>
             </tr>
         }
 
     </table>
 
-    @Html.ActionLink("Retour", "Index")
+    @Html.ActionLink("Retour", "Index",null, new { role = "button", @class = "btn btn-primary" })
 </p>
