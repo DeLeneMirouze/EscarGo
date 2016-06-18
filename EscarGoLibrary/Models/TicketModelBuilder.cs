@@ -1,5 +1,5 @@
 ﻿using EscarGoLibrary.Repositories;
-using System.Linq;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace EscarGoLibrary.Models
@@ -22,8 +22,8 @@ namespace EscarGoLibrary.Models
         {
             BuyTicketViewModel vm = new BuyTicketViewModel();
 
-            var visiteurs = _ticketRepository.GetVisiteurs();
-            vm.Acheteurs = visiteurs.Select(v => new SelectListItem() { Text = v.Nom, Value = v.Id.ToString() });
+            List<Visiteur> visiteurs = _ticketRepository.GetVisiteurs();
+            vm.Acheteurs = new SelectList(visiteurs, "Id", "Nom");
             vm.Course = _courseRepository.GetCourseById(idCourse);
             vm.NbPlaces = 1;
 

@@ -17,7 +17,7 @@ namespace EscarGo.Controllers
         public ActionResult Buy(BuyTicketViewModel vm)
         {
             //var vm = TicketModelBuilder.Buy(idCourse);
-            return View(vm);
+            return RedirectToAction("Index", "Courses");
         }
     }
 }
