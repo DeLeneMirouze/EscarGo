@@ -1,28 +1,29 @@
 ﻿using EscarGoLibrary.Models;
 using EscarGoLibrary.ViewModel;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace EscarGoAsync.Controllers
 {
-    public class ConcurrentsController : CustomController
+    public class ConcurrentsController : CustomControllerAsync
     {
         // GET: Concurrents
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var concurrents = Builder.GetCompetitors();
+            var concurrents = await Builder.GetCompetitorsAsync();
 
             return View(concurrents);
         }
 
         // GET: Concurrents/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null || id.Value == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DetailConcurrentViewModel vm = Builder.GetDetailConcurrentViewModel(id.Value);
+            DetailConcurrentViewModel vm =await  Builder.GetDetailConcurrentViewModelAsync(id.Value);
             if (vm.Concurrent == null)
             {
                 return HttpNotFound();
@@ -30,15 +31,15 @@ namespace EscarGoAsync.Controllers
             return View(vm);
         }
 
-        public ActionResult Bet(int idCourse, int idConcurrent)
+        public async Task<ActionResult> Bet(int courseId, int concurrentId)
         {
-            if (idConcurrent == 0 || idConcurrent == 0)
+            if (concurrentId == 0 || concurrentId == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Builder.SetBet(idCourse, idConcurrent);
-            return Redirect("Details/" + idConcurrent.ToString());
+            await Builder.SetBetAsync(courseId, concurrentId);
+            return Redirect("Details/" + concurrentId.ToString());
         }
     }
 }

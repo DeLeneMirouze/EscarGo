@@ -1,50 +1,70 @@
 ﻿using EscarGoLibrary.Models;
-using EscarGoLibrary.Repositories;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace EscarGoAsync.Controllers
 {
-    public class CoursesController : CustomController
+    public class CoursesController : CustomControllerAsync
     {
-        private EscarGoContext db = new EscarGoContext();
-
         #region Index
         // GET: Courses
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(CourseRepository.GetCourses());
-        } 
+            var vm = await CourseRepository.GetCoursesAsync();
+            return View(vm);
+        }
         #endregion
 
         #region Details
         // GET: Courses/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null || id.Value == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var vm = Builder.GetDetailCourseViewModel(id.Value);
+            var vm = await Builder.GetDetailCourseViewModelAsync(id.Value);
             if (vm.Course == null)
             {
                 return HttpNotFound();
             }
             return View(vm);
-        } 
+        }
         #endregion
 
         #region Bet
-        public ActionResult Bet(int idCourse, int idConcurrent)
+        public async Task<ActionResult> Bet(int idCourse, int idConcurrent)
         {
             if (idConcurrent == 0 || idConcurrent == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Builder.SetBet(idCourse, idConcurrent);
+            await Builder.SetBetAsync(idCourse, idConcurrent);
             return Redirect("Details/" + idCourse.ToString());
+        }
+        #endregion
+
+        #region Edit
+        // GET: Default/Edit/5
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        // POST: Default/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
         #endregion
 
@@ -57,11 +77,11 @@ namespace EscarGoAsync.Controllers
 
         // POST: Default/Create
         [HttpPost]
-        public ActionResult Create(Course course)
+        public async Task<ActionResult> Create(Course course)
         {
             if (ModelState.IsValid)
             {
-                Builder.Create(course);
+                await Builder.CreateAsync(course);
                 return RedirectToAction("Index");
             }
 
@@ -74,7 +94,7 @@ namespace EscarGoAsync.Controllers
         public async Task<ActionResult> Like(int id)
         {
             await CourseRepository.LikeAsync(id);
-            return View("Index", await CourseRepository.GetCoursesAsync());
+            return  View("Index", await CourseRepository.GetCoursesAsync());
         }
         #endregion
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EscarGoLibrary.Repositories
 {
-    public class CompetitorRepository : BaseDataRepository, ICompetitorRepository
+    public class CompetitorRepository : BaseDataRepository, ICompetitorRepository, ICompetitorRepositoryAsync
     {
         public CompetitorRepository(EscarGoContext context) : base(context)
         {

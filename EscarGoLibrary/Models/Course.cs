@@ -28,6 +28,8 @@ namespace EscarGoLibrary.Models
 
         public int Likes { get; set; }
 
+        [Required]
+        [Display(Description = "Nombre de tickets")]
         public int NbTickets { get; set; }
 
         public ICollection<Concurrent> Concurrents { get; set; }

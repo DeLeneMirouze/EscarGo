@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EscarGoLibrary.Repositories
 {
-    public class CourseRepository : BaseDataRepository, ICourseRepository
+    public class CourseRepository : BaseDataRepository, ICourseRepository, ICourseRepositoryAsync
     {
         #region Constructeur
         public CourseRepository(EscarGoContext context) : base(context)

@@ -114,12 +114,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201606190908484_Initialiser.cs" />
-    <Compile Include="Migrations\201606190908484_Initialiser.Designer.cs">
-      <DependentUpon>201606190908484_Initialiser.cs</DependentUpon>
+    <Compile Include="Migrations\201606191519219_Initialiser.cs" />
+    <Compile Include="Migrations\201606191519219_Initialiser.Designer.cs">
+      <DependentUpon>201606191519219_Initialiser.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AzureModel\Concurrent.cs" />
+    <Compile Include="Models\CustomControllerAsync.cs" />
+    <Compile Include="Repositories\ICompetitorRepositoryAsync.cs" />
+    <Compile Include="Repositories\ICourseRepositoryAsync.cs" />
+    <Compile Include="Repositories\ITicketRepositoryAsync.cs" />
     <Compile Include="ViewModel\BuyTicketViewModel.cs" />
     <Compile Include="Models\Concurrent.cs" />
     <Compile Include="Models\Course.cs" />
@@ -130,6 +134,7 @@
     <Compile Include="Models\Pari.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="ViewModel\TicketModelBuilder.cs" />
+    <Compile Include="ViewModel\TicketModelBuilderAsync.cs" />
     <Compile Include="ViewModel\ViewModelBuilder.cs" />
     <Compile Include="Models\Visiteur.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -144,6 +149,7 @@
     <Compile Include="Repositories\ITicketRepository.cs" />
     <Compile Include="Repositories\TicketRepository.cs" />
     <Compile Include="ViewModel\ConfirmationAchatViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBuilderAsync.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -154,8 +160,8 @@
     <Content Include="TextFile1.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606190908484_Initialiser.resx">
-      <DependentUpon>201606190908484_Initialiser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606191519219_Initialiser.resx">
+      <DependentUpon>201606191519219_Initialiser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

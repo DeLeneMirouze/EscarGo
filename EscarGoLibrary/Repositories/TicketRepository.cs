@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EscarGoLibrary.Repositories
 {
-    public sealed class TicketRepository: BaseDataRepository, ITicketRepository
+    public sealed class TicketRepository: BaseDataRepository, ITicketRepository, ITicketRepositoryAsync
     {
         #region Constructeur
         public TicketRepository(EscarGoContext context) : base(context)

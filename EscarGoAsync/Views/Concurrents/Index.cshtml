@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EscarGo.Models.Concurrent>
+﻿@model IEnumerable<EscarGoLibrary.Models.Concurrent>
 
 @{
     ViewBag.Title = "Concurrents";
@@ -6,7 +6,7 @@
 
 <h2>Concurrents</h2>
 
-<table class="table">
+<table class="table table-bordered table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Nom)
@@ -39,7 +39,7 @@
         </td>
         <td>
    
-            @Html.ActionLink("Détails", "Details", new { id=item.IdConcurrent }) 
+            @Html.ActionLink("Détails", "Details", new { id=item.ConcurrentId }, new { role = "button", @class = "btn btn-primary" }) 
         </td>
     </tr>
 }
