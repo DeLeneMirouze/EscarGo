@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EscarGoLibrary.Models.AzureModel
+namespace EscarGoLibrary.ViewModel.AzureModel
 {
     public class Concurrent: TableEntity
     {

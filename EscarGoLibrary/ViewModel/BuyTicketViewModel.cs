@@ -1,8 +1,9 @@
 ﻿
+using EscarGoLibrary.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace EscarGoLibrary.Models
+namespace EscarGoLibrary.ViewModel
 {
     public class BuyTicketViewModel
     {

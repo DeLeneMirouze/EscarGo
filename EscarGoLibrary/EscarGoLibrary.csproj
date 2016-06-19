@@ -120,17 +120,17 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AzureModel\Concurrent.cs" />
-    <Compile Include="Models\BuyTicketViewModel.cs" />
+    <Compile Include="ViewModel\BuyTicketViewModel.cs" />
     <Compile Include="Models\Concurrent.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CustomController.cs" />
-    <Compile Include="Models\DetailConcurrentViewModel.cs" />
-    <Compile Include="Models\DetailCourseViewModel.cs" />
+    <Compile Include="ViewModel\DetailConcurrentViewModel.cs" />
+    <Compile Include="ViewModel\DetailCourseViewModel.cs" />
     <Compile Include="Models\Entraineur.cs" />
     <Compile Include="Models\Pari.cs" />
     <Compile Include="Models\Ticket.cs" />
-    <Compile Include="Models\TicketModelBuilder.cs" />
-    <Compile Include="Models\ViewModelBuilder.cs" />
+    <Compile Include="ViewModel\TicketModelBuilder.cs" />
+    <Compile Include="ViewModel\ViewModelBuilder.cs" />
     <Compile Include="Models\Visiteur.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AzureTableRepository.cs" />
@@ -143,6 +143,7 @@
     <Compile Include="Repositories\ICourseRepository.cs" />
     <Compile Include="Repositories\ITicketRepository.cs" />
     <Compile Include="Repositories\TicketRepository.cs" />
+    <Compile Include="ViewModel\ConfirmationAchatViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

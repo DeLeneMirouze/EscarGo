@@ -1,4 +1,5 @@
 ﻿using EscarGoLibrary.Repositories;
+using EscarGoLibrary.ViewModel;
 using System.Web.Mvc;
 
 namespace EscarGoLibrary.Models

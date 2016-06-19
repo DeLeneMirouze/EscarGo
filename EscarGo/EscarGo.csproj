@@ -274,6 +274,7 @@
     <Content Include="Views\Concurrents\Edit.cshtml" />
     <Content Include="Views\Concurrents\Index.cshtml" />
     <Content Include="Views\Tickets\Buy.cshtml" />
+    <Content Include="Views\Tickets\ConfirmationAchatViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

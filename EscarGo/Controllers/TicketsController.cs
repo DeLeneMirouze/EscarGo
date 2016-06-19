@@ -1,4 +1,5 @@
 ﻿using EscarGoLibrary.Models;
+using EscarGoLibrary.ViewModel;
 using System.Web.Mvc;
 
 namespace EscarGo.Controllers
@@ -16,8 +17,9 @@ namespace EscarGo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Buy(BuyTicketViewModel vm)
         {
-            TicketModelBuilder.PostTicket(vm);
-            return RedirectToAction("Index", "Courses");
+            ConfirmationAchatViewModel confirmationAchatViewModel = TicketModelBuilder.PostTicket(vm);
+
+            return View("ConfirmationAchatViewModel", confirmationAchatViewModel);
         }
     }
 }

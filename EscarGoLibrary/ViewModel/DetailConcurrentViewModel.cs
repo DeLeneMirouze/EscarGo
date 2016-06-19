@@ -1,7 +1,8 @@
 ﻿
+using EscarGoLibrary.Models;
 using System.Collections.Generic;
 
-namespace EscarGoLibrary.Models
+namespace EscarGoLibrary.ViewModel
 {
     public class DetailConcurrentViewModel
     {

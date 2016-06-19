@@ -30,7 +30,7 @@ namespace EscarGoLibrary.Repositories
         #endregion
 
         #region AddTicket
-        public bool AddTicket(int courseId, int visiteurId, int nbPlaces)
+        public Ticket AddTicket(int courseId, int visiteurId, int nbPlaces)
         {
             // enregistre la demande d'achat
             Ticket ticket = new Ticket();
@@ -46,16 +46,16 @@ namespace EscarGoLibrary.Repositories
             Course course = Context.Courses.First(c => c.CourseId == courseId);
             if (course == null || course.NbTickets < nbPlaces)
             {
-                return false;
+                return null;
             }
 
             course.NbTickets -= nbPlaces;
             Context.SaveChanges();
 
-            return true;
+            return ticket;
         }
 
-        public async Task<bool> AddTicketAsync(int courseId, int visiteurId, int nbPlaces)
+        public async Task<Ticket> AddTicketAsync(int courseId, int visiteurId, int nbPlaces)
         {
             // enregistre la demande d'achat
             Ticket ticket = new Ticket();
@@ -71,13 +71,13 @@ namespace EscarGoLibrary.Repositories
             Course course = await Context.Courses.FirstAsync(c => c.CourseId == courseId);
             if (course == null || course.NbTickets < nbPlaces)
             {
-                return false;
+                return null;
             }
 
             course.NbTickets -= nbPlaces;
             await Context.SaveChangesAsync();
 
-            return true;
+            return ticket;
         }
         #endregion
     }

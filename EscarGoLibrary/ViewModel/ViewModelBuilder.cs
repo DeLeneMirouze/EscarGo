@@ -1,9 +1,10 @@
-﻿using EscarGoLibrary.Repositories;
+﻿using EscarGoLibrary.Models;
+using EscarGoLibrary.Repositories;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EscarGoLibrary.Models
+namespace EscarGoLibrary.ViewModel
 {
     public class ViewModelBuilder
     {
