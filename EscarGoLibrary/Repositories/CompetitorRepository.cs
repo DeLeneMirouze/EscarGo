@@ -41,7 +41,7 @@ namespace EscarGoLibrary.Repositories
         {
             var concurrent = Context.Concurrents
                     .Include("Entraineur")
-          .FirstOrDefault(c => c.IdConcurrent == id);
+          .FirstOrDefault(c => c.ConcurrentId == id);
 
             return concurrent;
         }
@@ -50,7 +50,7 @@ namespace EscarGoLibrary.Repositories
         {
             var concurrent = await Context.Concurrents
                     .Include("Entraineur")
-                            .FirstOrDefaultAsync(c => c.IdConcurrent == id);
+                            .FirstOrDefaultAsync(c => c.ConcurrentId == id);
 
             return concurrent;
         }
@@ -61,7 +61,7 @@ namespace EscarGoLibrary.Repositories
         {
             var paris = Context.Paris
                 .Include("Course")
-                .Where(p => p.IdConcurrent == id).ToList();
+                .Where(p => p.ConcurrentId == id).ToList();
             var courses = paris.OrderBy(p => p.Course.Date).Select(p => p.Course).ToList();
             return courses;
         }
@@ -70,7 +70,7 @@ namespace EscarGoLibrary.Repositories
         {
             List<Pari> paris = await Context.Paris
                 .Include("Course")
-                .Where(p => p.IdConcurrent == id).ToListAsync();
+                .Where(p => p.ConcurrentId == id).ToListAsync();
             var courses = paris.OrderBy(p => p.Course.Date).Select(p => p.Course).ToList();
 
             return courses;
@@ -82,7 +82,7 @@ namespace EscarGoLibrary.Repositories
         {
             var paris = Context.Paris
                 .Include("Course")
-                .Where(p => p.IdConcurrent == id).ToList();
+                .Where(p => p.ConcurrentId == id).ToList();
             return paris;
         }
 
@@ -90,7 +90,7 @@ namespace EscarGoLibrary.Repositories
         {
             var paris = await Context.Paris
                 .Include("Course")
-                .Where(p => p.IdConcurrent == id).ToListAsync();
+                .Where(p => p.ConcurrentId == id).ToListAsync();
             return paris;
         }
         #endregion
@@ -100,7 +100,7 @@ namespace EscarGoLibrary.Repositories
         {
             var paris = Context.Paris
                 .Include("Course")
-                .Where(p => p.IdCourse == idCourse).ToList();
+                .Where(p => p.CourseId == idCourse).ToList();
             return paris;
         }
 
@@ -108,17 +108,17 @@ namespace EscarGoLibrary.Repositories
         {
             var paris = await Context.Paris
                 .Include("Course")
-                .Where(p => p.IdCourse == idCourse).ToListAsync();
+                .Where(p => p.CourseId == idCourse).ToListAsync();
             return paris;
         }
         #endregion
 
         #region SetBet
-        public void SetBet(int idCourse, int idConcurrent)
+        public void SetBet(int idCourse, int concurrentId)
         {
             // pari sur lequel on parie
             var pari = Context.Paris
-                .Where(p => p.IdCourse == idCourse && p.IdConcurrent == idConcurrent)
+                .Where(p => p.CourseId == idCourse && p.ConcurrentId == concurrentId)
                 .FirstOrDefault();
             if (pari == null)
             {
@@ -127,7 +127,7 @@ namespace EscarGoLibrary.Repositories
             pari.NbParis++; // enregistre le pari
 
             // les paris de la course
-            var paris = Context.Paris.Where(c => c.IdCourse == idCourse).ToList();
+            var paris = Context.Paris.Where(c => c.CourseId == idCourse).ToList();
             // somme de tous les paris de la course
             int total = paris.Sum(c => c.NbParis);
             // recalcul de la cote pour chaque pari de la course
@@ -140,11 +140,11 @@ namespace EscarGoLibrary.Repositories
             Context.SaveChanges();
         }
 
-        public async Task SetBetAsync(int idCourse, int idConcurrent)
+        public async Task SetBetAsync(int idCourse, int concurrentId)
         {
             // pari sur lequel on parie
             var pari = await Context.Paris
-                .Where(p => p.IdCourse == idCourse && p.IdConcurrent == idConcurrent)
+                .Where(p => p.CourseId == idCourse && p.ConcurrentId == concurrentId)
                 .FirstOrDefaultAsync();
             if (pari == null)
             {
@@ -153,7 +153,7 @@ namespace EscarGoLibrary.Repositories
             pari.NbParis++; // enregistre le pari
 
             // les paris de la course
-            var paris = await Context.Paris.Where(c => c.IdCourse == idCourse).ToListAsync();
+            var paris = await Context.Paris.Where(c => c.CourseId == idCourse).ToListAsync();
             // somme de tous les paris de la course
             int total = paris.Sum(c => c.NbParis);
             // recalcul de la cote pour chaque pari de la course

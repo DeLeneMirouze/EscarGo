@@ -5,7 +5,7 @@ namespace EscarGoLibrary.Models
     public class Entraineur
     {
         [Key]
-        public int IdEntraineur { get; set; }
+        public int EntraineurId { get; set; }
         public string Nom { get; set; }
     }
 }

@@ -211,7 +211,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ConcurrentsController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
-    <Compile Include="Controllers\TicketController.cs" />
+    <Compile Include="Controllers\TicketsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -273,7 +273,7 @@
     <Content Include="Views\Concurrents\Details.cshtml" />
     <Content Include="Views\Concurrents\Edit.cshtml" />
     <Content Include="Views\Concurrents\Index.cshtml" />
-    <Content Include="Views\Ticket\Buy.cshtml" />
+    <Content Include="Views\Tickets\Buy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

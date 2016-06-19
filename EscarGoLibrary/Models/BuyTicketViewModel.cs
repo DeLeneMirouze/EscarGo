@@ -8,6 +8,7 @@ namespace EscarGoLibrary.Models
     {
         public IEnumerable<SelectListItem> Acheteurs { get; set; }
         public Course Course { get; set; }
+        public int AcheteurSelectionne { get; set; }
         public int NbPlaces { get; set; }
     }
 }

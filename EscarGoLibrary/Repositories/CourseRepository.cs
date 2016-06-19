@@ -47,7 +47,7 @@ namespace EscarGoLibrary.Repositories
         public Course GetCourseById(int id)
         {
             var course = Context.Courses
-          .FirstOrDefault(c => c.IdCourse == id);
+          .FirstOrDefault(c => c.CourseId == id);
 
             return course;
         }
@@ -55,7 +55,7 @@ namespace EscarGoLibrary.Repositories
         public async Task<Course> GetCourseByIdAsync(int id)
         {
             var course = await Context.Courses
-          .FirstOrDefaultAsync(c => c.IdCourse == id);
+          .FirstOrDefaultAsync(c => c.CourseId == id);
 
             return course;
         }
@@ -65,7 +65,7 @@ namespace EscarGoLibrary.Repositories
         public List<Concurrent> GetConcurrentsByCourse(int idCourse)
         {
             var courses = Context.Courses
-                .Where(c => c.IdCourse == idCourse)
+                .Where(c => c.CourseId == idCourse)
                 .SelectMany(c => c.Concurrents)
                 .OrderBy(c => c.Nom)
                 .ToList();
@@ -75,7 +75,7 @@ namespace EscarGoLibrary.Repositories
         public async Task<List<Concurrent>> GetConcurrentsByCourseAsync(int idCourse)
         {
             var courses = await Context.Courses
-                .Where(c => c.IdCourse == idCourse)
+                .Where(c => c.CourseId == idCourse)
                 .SelectMany(c => c.Concurrents)
                 .OrderBy(c => c.Nom)
                 .ToListAsync();
@@ -100,7 +100,7 @@ namespace EscarGoLibrary.Repositories
         #region Like
         public void Like(int idCourse)
         {
-            Course course = Context.Courses.FirstOrDefault(c => c.IdCourse == idCourse);
+            Course course = Context.Courses.FirstOrDefault(c => c.CourseId == idCourse);
             course.Likes++;
 
             Context.SaveChanges();
@@ -108,7 +108,7 @@ namespace EscarGoLibrary.Repositories
 
         public async Task LikeAsync(int idCourse)
         {
-            Course course = await Context.Courses.FirstOrDefaultAsync(c => c.IdCourse == idCourse);
+            Course course = await Context.Courses.FirstOrDefaultAsync(c => c.CourseId == idCourse);
             course.Likes++;
 
             await Context.SaveChangesAsync();

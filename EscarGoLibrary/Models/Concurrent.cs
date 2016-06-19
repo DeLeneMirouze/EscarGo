@@ -14,7 +14,7 @@ namespace EscarGoLibrary.Models
         }
         public string Nom { get; set; }
         [Key]
-        public int IdConcurrent { get; set; }
+        public int ConcurrentId { get; set; }
         public int Victoires { get; set; }
         public int Defaites { get; set; }
         public Entraineur Entraineur { get; set; }

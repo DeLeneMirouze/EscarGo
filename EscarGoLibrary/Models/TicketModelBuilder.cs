@@ -17,17 +17,24 @@ namespace EscarGoLibrary.Models
         }
         #endregion
 
-        #region Buy
-        public BuyTicketViewModel Buy(int idCourse)
+        #region GetTicket
+        public BuyTicketViewModel GetTicket(int courseId)
         {
             BuyTicketViewModel vm = new BuyTicketViewModel();
 
             List<Visiteur> visiteurs = _ticketRepository.GetVisiteurs();
             vm.Acheteurs = new SelectList(visiteurs, "Id", "Nom");
-            vm.Course = _courseRepository.GetCourseById(idCourse);
+            vm.Course = _courseRepository.GetCourseById(courseId);
             vm.NbPlaces = 1;
 
             return vm;
+        }
+        #endregion
+
+        #region PostTicket
+        public void PostTicket(BuyTicketViewModel vm)
+        {
+            _ticketRepository.AddTicket(vm.Course.CourseId, vm.AcheteurSelectionne, vm.NbPlaces);
         } 
         #endregion
     }

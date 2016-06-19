@@ -8,13 +8,13 @@ namespace EscarGoLibrary.Models
     public class Pari
     {
         [Key]
-        public int IdPari { get; set; }
+        public int PariId { get; set; }
         public DateTime DateDernierPari { get; set; }
         public int NbParis { get; set; }
 
-        public int IdCourse { get; set; }
+        public int CourseId { get; set; }
         public Course Course { get; set; }
-        public int IdConcurrent { get; set; }
+        public int ConcurrentId { get; set; }
         public Concurrent Concurrent { get; set; }
         /// <summary>
         /// Côte simple gagnant

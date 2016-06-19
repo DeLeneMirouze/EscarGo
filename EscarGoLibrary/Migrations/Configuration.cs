@@ -20,10 +20,10 @@ namespace EscarGoLibrary.Migrations
             //  This method will be called after migrating to the latest version.
             BuildData();
 
-            context.Courses.AddOrUpdate(p => p.IdCourse, listeCourses.ToArray());
-            context.Concurrents.AddOrUpdate(p => p.IdConcurrent, concurrents);
-            context.Paris.AddOrUpdate(p => p.IdPari, paris.ToArray());
-            context.Entraineurs.AddOrUpdate(p => p.IdEntraineur, entraineurs.ToArray());
+            context.Courses.AddOrUpdate(p => p.CourseId, listeCourses.ToArray());
+            context.Concurrents.AddOrUpdate(p => p.ConcurrentId, concurrents);
+            context.Paris.AddOrUpdate(p => p.PariId, paris.ToArray());
+            context.Entraineurs.AddOrUpdate(p => p.EntraineurId, entraineurs.ToArray());
             context.Visiteurs.AddOrUpdate(p => p.Id, visiteurs.ToArray());
         }
 
@@ -40,34 +40,34 @@ namespace EscarGoLibrary.Migrations
 
             // liste des entraineurs
             entraineurs = new List<Entraineur>();
-            Entraineur entraineur = new Entraineur() { IdEntraineur = 1, Nom = "Dr YaCommeUneMagouille" };
+            Entraineur entraineur = new Entraineur() { EntraineurId = 1, Nom = "Dr YaCommeUneMagouille" };
             entraineurs.Add(entraineur);
-            entraineur = new Entraineur() { IdEntraineur = 2, Nom = "Papy Emile" };
+            entraineur = new Entraineur() { EntraineurId = 2, Nom = "Papy Emile" };
             entraineurs.Add(entraineur);
-            entraineur = new Entraineur() { IdEntraineur = 3, Nom = "Moumoune" };
+            entraineur = new Entraineur() { EntraineurId = 3, Nom = "Moumoune" };
             entraineurs.Add(entraineur);
-            entraineur = new Entraineur() { IdEntraineur = 4, Nom = "Paprika" };
+            entraineur = new Entraineur() { EntraineurId = 4, Nom = "Paprika" };
             entraineurs.Add(entraineur);
-            entraineur = new Entraineur() { IdEntraineur =5, Nom = "La Carotte" };
+            entraineur = new Entraineur() { EntraineurId =5, Nom = "La Carotte" };
             entraineurs.Add(entraineur);
-            entraineur = new Entraineur() { IdEntraineur = 6, Nom = "Patchouli" };
+            entraineur = new Entraineur() { EntraineurId = 6, Nom = "Patchouli" };
             entraineurs.Add(entraineur);
   
 
             // liste des valeureux candidats
             concurrents = new Concurrent[]
             {
-                       new Concurrent { Nom = "Speedy Jet Trophy", Victoires = 100, Defaites = 0, IdEntraineur = 1,IdConcurrent=1 },
-                   new Concurrent { Nom = "Spidi Gonzales", Victoires = 0, Defaites = 100, IdEntraineur = 2,IdConcurrent=2 },
-                      new Concurrent { Nom = "La Foudre du Nord", Victoires = 2, Defaites = 8, IdEntraineur = 3,IdConcurrent=3 },
-                           new Concurrent { Nom = "Cool Man", Victoires = 50, Defaites = 2, IdEntraineur = 4 ,IdConcurrent=4},
-                                new Concurrent { Nom = "Salade", Victoires = 5, Defaites = 6, IdEntraineur = 5,IdConcurrent=5 },
-                                     new Concurrent { Nom = "Super Gascon", Victoires = 3, Defaites = 3, IdEntraineur = 6 ,IdConcurrent=6},
-        new Concurrent { Nom = "Gros Baveux", Victoires = 45, Defaites = 5, IdEntraineur = 4,IdConcurrent=7 },
-             new Concurrent { Nom = "Petit Baveux", Victoires = 160, Defaites = 55, IdEntraineur = 5 ,IdConcurrent=8},
-                  new Concurrent { Nom = "Persillade", Victoires = 2, Defaites = 5, IdEntraineur = 4,IdConcurrent=9 },
-                       new Concurrent { Nom = "Doudou", Victoires = 2, Defaites = 3, IdEntraineur = 4 ,IdConcurrent=10},
-                            new Concurrent { Nom = "Pilou Pilou", Victoires = 3, Defaites = 8, IdEntraineur = 6 ,IdConcurrent=11}
+                       new Concurrent { Nom = "Speedy Jet Trophy", Victoires = 100, Defaites = 0, IdEntraineur = 1,ConcurrentId=1 },
+                   new Concurrent { Nom = "Spidi Gonzales", Victoires = 0, Defaites = 100, IdEntraineur = 2,ConcurrentId=2 },
+                      new Concurrent { Nom = "La Foudre du Nord", Victoires = 2, Defaites = 8, IdEntraineur = 3,ConcurrentId=3 },
+                           new Concurrent { Nom = "Cool Man", Victoires = 50, Defaites = 2, IdEntraineur = 4 ,ConcurrentId=4},
+                                new Concurrent { Nom = "Salade", Victoires = 5, Defaites = 6, IdEntraineur = 5,ConcurrentId=5 },
+                                     new Concurrent { Nom = "Super Gascon", Victoires = 3, Defaites = 3, IdEntraineur = 6 ,ConcurrentId=6},
+        new Concurrent { Nom = "Gros Baveux", Victoires = 45, Defaites = 5, IdEntraineur = 4,ConcurrentId=7 },
+             new Concurrent { Nom = "Petit Baveux", Victoires = 160, Defaites = 55, IdEntraineur = 5 ,ConcurrentId=8},
+                  new Concurrent { Nom = "Persillade", Victoires = 2, Defaites = 5, IdEntraineur = 4,ConcurrentId=9 },
+                       new Concurrent { Nom = "Doudou", Victoires = 2, Defaites = 3, IdEntraineur = 4 ,ConcurrentId=10},
+                            new Concurrent { Nom = "Pilou Pilou", Victoires = 3, Defaites = 8, IdEntraineur = 6 ,ConcurrentId=11}
             };
 
             // liste des courses sur 2 ans
@@ -102,7 +102,7 @@ namespace EscarGoLibrary.Migrations
                     currentCourse.Label = course.Label;
                     currentCourse.Pays = course.Pays;
                     currentCourse.Ville = course.Ville;
-                    currentCourse.IdCourse = idCourse;
+                    currentCourse.CourseId = idCourse;
                     currentCourse.Likes = rnd.Next(500);
                     currentCourse.NbTickets = rnd.Next(500, 2000);
                     idCourse++;
@@ -131,8 +131,8 @@ namespace EscarGoLibrary.Migrations
                     {
                         Pari pari = new Pari();
                         pari.Concurrent = concurrent;
-                        pari.IdConcurrent = concurrent.IdConcurrent;
-                        pari.IdCourse = course.IdCourse;
+                        pari.ConcurrentId = concurrent.ConcurrentId;
+                        pari.CourseId = course.CourseId;
                         pari.Course = course;
                         pari.DateDernierPari = DateTime.Now;
                         pari.NbParis = 1 + rnd.Next(10);
@@ -144,7 +144,7 @@ namespace EscarGoLibrary.Migrations
                 // calcul de la cote
                 foreach (Course course in listeCourses)
                 {
-                    var pariCourses = paris.Where(p => p.IdCourse == course.IdCourse).ToList();
+                    var pariCourses = paris.Where(p => p.CourseId == course.CourseId).ToList();
                     int total = pariCourses.Sum(p => p.NbParis);
                     pariCourses.ForEach(p =>
                     {

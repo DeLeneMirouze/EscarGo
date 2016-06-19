@@ -4,13 +4,13 @@
 <hr />
 
 
-@using (Html.BeginForm("Buy", "Ticket"))
+@using (Html.BeginForm("Buy", "Tickets"))
 {
     @Html.AntiForgeryToken()
     <h4>@Model.Course.Label</h4>
     <hr />
     <div class="form-horizontal">
-        @Html.HiddenFor(n => n.Course.IdCourse)
+        @Html.HiddenFor(n => n.Course.CourseId)
         @Html.HiddenFor(n => n.Course.Label)
         @Html.HiddenFor(n => n.Course.Date)
 
@@ -38,7 +38,7 @@
             <div class="control-label col-md-2 ">Vous êtes qui?</div>
 
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Acheteurs, Model.Acheteurs, new { @class = "form-control" });
+                @Html.DropDownListFor(m => m.AcheteurSelectionne, Model.Acheteurs, new { @class = "form-control" });
             </div>
         </div>
 

@@ -50,12 +50,12 @@
         </td>
         <td>
 
-            @Html.ActionLink("Détails", "Details", new { id = item.IdCourse }, new { role = "button", @class = "btn btn-primary" }) 
-            @Html.ActionLink("J'aime!", "Like", new { id = item.IdCourse }, new { role = "button", @class = "btn btn-primary" })
+            @Html.ActionLink("Détails", "Details", new { id = item.CourseId }, new { role = "button", @class = "btn btn-primary" }) 
+            @Html.ActionLink("J'aime!", "Like", new { id = item.CourseId }, new { role = "button", @class = "btn btn-primary" })
 
             @if(item.NbTickets>0)
             {
-                @Html.ActionLink(" Achetez vos billets!", "Buy", "Ticket", new { idCourse = item.IdCourse }, new {role="button", @class="btn btn-danger" });
+                @Html.ActionLink(" Achetez vos billets!", "Buy", "Tickets", new { courseid = item.CourseId }, new {role="button", @class="btn btn-danger" });
             }
 
         </td>

@@ -1,4 +1,6 @@
-﻿namespace EscarGoLibrary.Models
+﻿using System;
+
+namespace EscarGoLibrary.Models
 {
     public class Ticket
     {
@@ -6,6 +8,9 @@
         public Course Course { get; set; }
         public int CourseId { get; set; }
         public Visiteur Acheteur { get; set; }
+        public int AcheteurId { get; set; }
+        public DateTime DateAchat { get; set; }
         public int NbPlaces { get; set; }
+        public bool EstConfirme { get; set; }
     }
 }

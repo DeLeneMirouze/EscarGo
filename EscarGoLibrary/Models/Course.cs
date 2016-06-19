@@ -9,12 +9,15 @@ namespace EscarGoLibrary.Models
     [DebuggerDisplay("{Label}")]
     public class Course
     {
+        #region Constructeur
         public Course()
         {
             Concurrents = new List<Concurrent>();
-        }
+        } 
+        #endregion
+
         [Key]
-        public int IdCourse { get; set; }
+        public int CourseId { get; set; }
         public string Label { get; set; }
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
@@ -24,6 +27,7 @@ namespace EscarGoLibrary.Models
         public double SC { get; set; }
 
         public int Likes { get; set; }
+
         public int NbTickets { get; set; }
 
         public ICollection<Concurrent> Concurrents { get; set; }

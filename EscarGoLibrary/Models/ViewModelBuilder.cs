@@ -40,7 +40,7 @@ namespace EscarGoLibrary.Models
             vm.Courses = paris.OrderBy(p => p.Course.Date).Select(p => p.Course).ToList();
             foreach (var course in vm.Courses)
             {
-                Pari currentBet = paris.Where(p => p.IdCourse == course.IdCourse).First();
+                Pari currentBet = paris.Where(p => p.CourseId == course.CourseId).First();
                 course.SC = currentBet.SC;
             }
 
@@ -56,7 +56,7 @@ namespace EscarGoLibrary.Models
             vm.Courses = paris.OrderBy(p => p.Course.Date).Select(p => p.Course).ToList();
             foreach (var course in vm.Courses)
             {
-                Pari currentBet = paris.Where(p => p.IdCourse == course.IdCourse).First();
+                Pari currentBet = paris.Where(p => p.CourseId == course.CourseId).First();
                 course.SC = currentBet.SC;
             }
 
@@ -86,7 +86,7 @@ namespace EscarGoLibrary.Models
             var paris = _concurrentRepository.GetBetsByRace(idCourse);
             foreach (Concurrent concurrent in vm.Concurrents)
             {
-                Pari currentBet = paris.Where(p => p.IdConcurrent == concurrent.IdConcurrent).First();
+                Pari currentBet = paris.Where(p => p.ConcurrentId == concurrent.ConcurrentId).First();
                 concurrent.SC = currentBet.SC;
             }
 
@@ -102,7 +102,7 @@ namespace EscarGoLibrary.Models
             var paris = await _concurrentRepository.GetBetsByRaceAsync(idCourse);
             foreach (Concurrent concurrent in vm.Concurrents)
             {
-                Pari currentBet = paris.Where(p => p.IdConcurrent == concurrent.IdConcurrent).First();
+                Pari currentBet = paris.Where(p => p.ConcurrentId == concurrent.ConcurrentId).First();
                 concurrent.SC = currentBet.SC;
             }
 

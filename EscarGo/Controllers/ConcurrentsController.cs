@@ -29,15 +29,15 @@ namespace EscarGo.Controllers
             return View(vm);
         }
 
-        public ActionResult Bet(int idCourse, int idConcurrent)
+        public ActionResult Bet(int courseId, int concurrentId)
         {
-            if (idConcurrent == 0 || idConcurrent == 0)
+            if (concurrentId == 0 || concurrentId == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Builder.SetBet(idCourse, idConcurrent);
-            return Redirect("Details/" + idConcurrent.ToString());
+            Builder.SetBet(courseId, concurrentId);
+            return Redirect("Details/" + concurrentId.ToString());
         }
     }
 }

@@ -3,12 +3,12 @@ using System.Web.Mvc;
 
 namespace EscarGo.Controllers
 {
-    public class TicketController : CustomController
+    public class TicketsController : CustomController
     {
         // GET: Ticket
-        public ActionResult Buy(int idCourse)
+        public ActionResult Buy(int courseId)
         {
-            BuyTicketViewModel vm = TicketModelBuilder.Buy(idCourse);
+            BuyTicketViewModel vm = TicketModelBuilder.GetTicket(courseId);
             return View(vm);
         }
 
@@ -16,7 +16,7 @@ namespace EscarGo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Buy(BuyTicketViewModel vm)
         {
-            //var vm = TicketModelBuilder.Buy(idCourse);
+            TicketModelBuilder.PostTicket(vm);
             return RedirectToAction("Index", "Courses");
         }
     }

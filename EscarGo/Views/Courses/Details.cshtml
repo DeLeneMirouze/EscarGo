@@ -72,7 +72,7 @@
                 </td>
                 <td>
 
-                    @Html.ActionLink("Parier", "Bet", new { idCourse =Model.Course.IdCourse , idConcurrent = item.IdConcurrent }, new { role = "button", @class = "btn btn-danger" })
+                    @Html.ActionLink("Parier", "Bet", new { idCourse =Model.Course.CourseId, idConcurrent = item.ConcurrentId }, new { role = "button", @class = "btn btn-danger" })
                 </td>
             </tr>
         }
