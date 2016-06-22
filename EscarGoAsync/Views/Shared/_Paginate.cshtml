@@ -1,0 +1,14 @@
+﻿
+@if (ViewBag.CurrentPage > 0)
+{
+    <a href="@Url.Action("Index", new { currentPage = ViewBag.CurrentPage - 1 })"
+       class="btn btn-success">
+        &laquo; Précédent
+    </a>
+}
+
+<a href="@Url.Action("Index", new { currentPage = ViewBag.CurrentPage + 1 })"
+   class="btn btn-success">
+    Suivant &raquo;
+</a>
+
