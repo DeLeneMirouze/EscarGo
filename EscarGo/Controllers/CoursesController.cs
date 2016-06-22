@@ -8,9 +8,10 @@ namespace EscarGo.Controllers
     {
         #region Index
         // GET: Courses
-        public ActionResult Index()
+        public ActionResult Index(int? currentPage)
         {
-            var vm = CourseRepository.GetCourses();
+            var vm = CourseRepository.GetCourses(RecordsPerPage, currentPage.GetValueOrDefault());
+            ViewBag.CurrentPage = currentPage.GetValueOrDefault();
             return View(vm);
         } 
         #endregion
@@ -95,7 +96,7 @@ namespace EscarGo.Controllers
         public ActionResult Like(int id)
         {
             CourseRepository.Like(id);
-            return View("Index", CourseRepository.GetCourses());
+            return RedirectToAction("Index");
         }
         #endregion
     }

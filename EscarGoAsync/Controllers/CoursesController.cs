@@ -9,9 +9,9 @@ namespace EscarGoAsync.Controllers
     {
         #region Index
         // GET: Courses
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? currentPage)
         {
-            var vm = await CourseRepository.GetCoursesAsync();
+            var vm = await CourseRepository.GetCoursesAsync(RecordsPerPage, currentPage.GetValueOrDefault());
             return View(vm);
         }
         #endregion
@@ -94,7 +94,7 @@ namespace EscarGoAsync.Controllers
         public async Task<ActionResult> Like(int id)
         {
             await CourseRepository.LikeAsync(id);
-            return  View("Index", await CourseRepository.GetCoursesAsync());
+            return RedirectToAction("Index");
         }
         #endregion
     }

@@ -5,7 +5,7 @@ namespace EscarGoLibrary.Repositories
 {
     public interface ICourseRepository
     {
-        List<Course> GetCourses();
+        List<Course> GetCourses(int recordsPerPage, int currentPage);
         Course GetCourseById(int id);
         List<Concurrent> GetConcurrentsByCourse(int idCourse);
         void Create(Course course);

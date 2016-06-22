@@ -24,6 +24,8 @@ namespace EscarGoLibrary.Models
         protected TicketModelBuilder TicketModelBuilder {get;set;}
         protected ITicketRepository TicketRepository { get; set; }
 
+        protected const int RecordsPerPage = 6;
+
         #region Dispose
         protected override void Dispose(bool disposing)
         {

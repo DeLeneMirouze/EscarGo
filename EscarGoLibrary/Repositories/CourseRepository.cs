@@ -14,30 +14,47 @@ namespace EscarGoLibrary.Repositories
         public CourseRepository(EscarGoContext context) : base(context)
         {
 
-        } 
+        }
         #endregion
 
         #region GetCourses
-        public List<Course> GetCourses()
+        private IQueryable<Course> GetRequest(int recordsPerPage, int currentPage)
         {
-            var courses = Context.Courses
-                .Where(c => c.Date >= DateTime.Now)
-                .OrderByDescending(c => c.Date)
-                .ThenBy(c => c.Pays)
-                                .ThenBy(c => c.Label)
-                .ToList();
+            return Context.Courses
+               .Where(c => c.Date >= DateTime.Now)
+               .OrderByDescending(c => c.Date)
+               .ThenBy(c => c.Pays)
+               .ThenBy(c => c.Label)
+               .Skip(currentPage * recordsPerPage)
+               .Take(recordsPerPage);
+        }
+
+        public List<Course> GetCourses(int recordsPerPage, int currentPage)
+        {
+            var req = GetRequest(recordsPerPage, currentPage);
+            List<Course> courses = req.ToList();
+
+            if (courses.Count == 0 && currentPage > 0)
+            {
+                currentPage--;
+                req = GetRequest(recordsPerPage, currentPage);
+                courses = req.ToList();
+            }
 
             return courses;
         }
 
-        public async Task<List<Course>> GetCoursesAsync()
+        public async Task<List<Course>> GetCoursesAsync(int recordsPerPage, int currentPage)
         {
-            var courses = await Context.Courses
-                .Where(c => c.Date >= DateTime.Now)
-                .OrderByDescending(c => c.Date)
-                .ThenBy(c => c.Pays)
-                                .ThenBy(c => c.Label)
-                .ToListAsync();
+            var req = GetRequest(recordsPerPage, currentPage);
+            List<Course> courses = await req.ToListAsync();
+
+            if (courses.Count == 0 && currentPage > 0)
+            {
+                currentPage--;
+                req = GetRequest(recordsPerPage, currentPage);
+                courses = await req.ToListAsync();
+            }
 
             return courses;
         }

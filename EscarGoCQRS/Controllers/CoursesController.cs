@@ -10,9 +10,9 @@ namespace EscarGoCQRS.Controllers
         private EscarGoContext db = new EscarGoContext();
 
         // GET: Courses
-        public ActionResult Index()
+        public ActionResult Index(int? currentPage)
         {
-            return View(CourseRepository.GetCourses());
+            return View(CourseRepository.GetCourses(RecordsPerPage, currentPage.GetValueOrDefault()));
         }
 
         // GET: Courses/Details/5
