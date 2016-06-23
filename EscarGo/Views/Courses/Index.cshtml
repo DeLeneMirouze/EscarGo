@@ -7,8 +7,8 @@
 <h2>Courses</h2>
 
 <p>
-    @Html.ActionLink("Nouvelle course", "Create",null, new { role = "button", @class = "btn btn-success" })
-    
+    @Html.ActionLink("Nouvelle course", "Create", null, new { role = "button", @class = "btn btn-success" })
+
 </p>
 
 <table class="table table-bordered table-striped">
@@ -31,36 +31,45 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Label)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pays)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ville)
-        </td>
-        <td>
-            <span class="badge"> @Html.DisplayFor(modelItem => item.Likes)</span>
-        </td>
-        <td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Label)
+            </td>
 
-            @Html.ActionLink("Détails", "Details", new { id = item.CourseId }, new { role = "button", @class = "btn btn-primary" }) 
-            @Html.ActionLink("J'aime!", "Like", new { id = item.CourseId }, new { role = "button", @class = "btn btn-primary" })
+            <td class="dateTD">
+                <div class="badge-date">
+                    <div class="part1">
+                        <div>@item.Date.ToString("dd")</div>
+                        <div class="month">@item.Date.ToString("MMM")</div>
+                    </div>
+                    <div class="year">@item.Date.ToString("yyyy")</div>
+                </div>
+            </td>
 
-            @if(item.NbTickets>0)
-            {
-                @Html.ActionLink(" Achetez vos billets!", "Buy", "Tickets", new { courseid = item.CourseId }, new {role="button", @class="btn btn-danger" });
-            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Pays)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ville)
+            </td>
+            <td>
+                <span class="badge"> @Html.DisplayFor(modelItem => item.Likes)</span>
+            </td>
+            <td>
 
-        </td>
-    </tr>
-}
+                @Html.ActionLink("Détails", "Details", new { id = item.CourseId }, new { role = "button", @class = "btn btn-primary" })
+                @Html.ActionLink("J'aime!", "Like", new { id = item.CourseId }, new { role = "button", @class = "btn btn-primary" })
+
+                @if (item.NbTickets > 0)
+                {
+                    @Html.ActionLink(" Achetez vos billets!", "Buy", "Tickets", new { courseid = item.CourseId }, new { role = "button", @class = "btn btn-danger" });
+                }
+
+            </td>
+        </tr>
+    }
 
 </table>
 
