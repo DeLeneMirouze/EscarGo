@@ -18,7 +18,7 @@ namespace EscarGoLibrary.Models
         public int Victoires { get; set; }
         public int Defaites { get; set; }
         public Entraineur Entraineur { get; set; }
-        public int IdEntraineur { get; set; }
+        public int EntraineurId { get; set; }
         [NotMapped]
         public double SC { get; set; }
 

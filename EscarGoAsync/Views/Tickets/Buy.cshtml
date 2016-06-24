@@ -20,7 +20,13 @@
             </div>
 
             <div class="col-md-10">
-                @Model.Course.Date.ToShortDateString();
+                <div class="badge-date">
+                    <div class="part1">
+                        <div>@Model.Course.Date.ToString("dd")</div>
+                        <div class="month">@Model.Course.Date.ToString("MMM")</div>
+                    </div>
+                    <div class="year">@Model.Course.Date.ToString("yyyy")</div>
+                </div>
             </div>
         </div>
         <div class="form-group">

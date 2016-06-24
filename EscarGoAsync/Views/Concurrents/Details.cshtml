@@ -70,7 +70,14 @@
                 </td>
          
                 <td>
-                    @Html.DisplayFor(modelItem => item.Date)
+           
+                    <div class="badge-date">
+                        <div class="part1">
+                            <div>@item.Date.ToString("dd")</div>
+                            <div class="month">@item.Date.ToString("MMM")</div>
+                        </div>
+                        <div class="year">@item.Date.ToString("yyyy")</div>
+                    </div>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.SC)/1

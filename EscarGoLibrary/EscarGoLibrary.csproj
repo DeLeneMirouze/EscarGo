@@ -114,9 +114,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201606191519219_Initialiser.cs" />
-    <Compile Include="Migrations\201606191519219_Initialiser.Designer.cs">
-      <DependentUpon>201606191519219_Initialiser.cs</DependentUpon>
+    <Compile Include="Migrations\201606240650551_Init.cs" />
+    <Compile Include="Migrations\201606240650551_Init.Designer.cs">
+      <DependentUpon>201606240650551_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AzureModel\Concurrent.cs" />
@@ -160,8 +160,8 @@
     <Content Include="TextFile1.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606191519219_Initialiser.resx">
-      <DependentUpon>201606191519219_Initialiser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606240650551_Init.resx">
+      <DependentUpon>201606240650551_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

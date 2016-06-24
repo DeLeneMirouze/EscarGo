@@ -1,4 +1,4 @@
-﻿@model EscarGoLibrary.Models.DetailConcurrentViewModel
+﻿@model EscarGoLibrary.ViewModel.DetailConcurrentViewModel
 
 @{
     ViewBag.Title = "Détails";
@@ -47,7 +47,7 @@
 <p>
 
     <h2>Courses du concurrent valeureux</h2>
-    <table class="table">
+    <table class="table table-bordered table-striped">
         <tr>
             <th>
                 Course
@@ -70,19 +70,26 @@
                 </td>
          
                 <td>
-                    @Html.DisplayFor(modelItem => item.Date)
+           
+                    <div class="badge-date">
+                        <div class="part1">
+                            <div>@item.Date.ToString("dd")</div>
+                            <div class="month">@item.Date.ToString("MMM")</div>
+                        </div>
+                        <div class="year">@item.Date.ToString("yyyy")</div>
+                    </div>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.SC)/1
                 </td>
                 <td>
 
-                    @Html.ActionLink("Parier", "Bet", new { idCourse = item.IdCourse, idConcurrent=Model.Concurrent.IdConcurrent })
+                    @Html.ActionLink("Parier", "Bet", new { courseid = item.CourseId, concurrentid = Model.Concurrent.ConcurrentId }, new { role = "button", @class = "btn btn-danger" })
                 </td>
             </tr>
         }
 
     </table>
 
-    @Html.ActionLink("Retour", "Index")
+    @Html.ActionLink("Retour", "Index",null, new { role = "button", @class = "btn btn-primary" })
 </p>

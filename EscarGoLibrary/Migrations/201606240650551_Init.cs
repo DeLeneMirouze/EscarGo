@@ -3,7 +3,7 @@ namespace EscarGoLibrary.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initialiser : DbMigration
+    public partial class Init : DbMigration
     {
         public override void Up()
         {
@@ -15,12 +15,11 @@ namespace EscarGoLibrary.Migrations
                         Nom = c.String(),
                         Victoires = c.Int(nullable: false),
                         Defaites = c.Int(nullable: false),
-                        IdEntraineur = c.Int(nullable: false),
-                        Entraineur_EntraineurId = c.Int(),
+                        EntraineurId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ConcurrentId)
-                .ForeignKey("dbo.Entraineurs", t => t.Entraineur_EntraineurId)
-                .Index(t => t.Entraineur_EntraineurId);
+                .ForeignKey("dbo.Entraineurs", t => t.EntraineurId, cascadeDelete: true)
+                .Index(t => t.EntraineurId);
             
             CreateTable(
                 "dbo.Courses",
@@ -109,7 +108,7 @@ namespace EscarGoLibrary.Migrations
             DropForeignKey("dbo.Tickets", "AcheteurId", "dbo.Visiteurs");
             DropForeignKey("dbo.Paris", "CourseId", "dbo.Courses");
             DropForeignKey("dbo.Paris", "ConcurrentId", "dbo.Concurrents");
-            DropForeignKey("dbo.Concurrents", "Entraineur_EntraineurId", "dbo.Entraineurs");
+            DropForeignKey("dbo.Concurrents", "EntraineurId", "dbo.Entraineurs");
             DropForeignKey("dbo.ConcurrentCourses", "Course_CourseId", "dbo.Courses");
             DropForeignKey("dbo.ConcurrentCourses", "Concurrent_ConcurrentId", "dbo.Concurrents");
             DropIndex("dbo.ConcurrentCourses", new[] { "Course_CourseId" });
@@ -118,7 +117,7 @@ namespace EscarGoLibrary.Migrations
             DropIndex("dbo.Tickets", new[] { "CourseId" });
             DropIndex("dbo.Paris", new[] { "ConcurrentId" });
             DropIndex("dbo.Paris", new[] { "CourseId" });
-            DropIndex("dbo.Concurrents", new[] { "Entraineur_EntraineurId" });
+            DropIndex("dbo.Concurrents", new[] { "EntraineurId" });
             DropTable("dbo.ConcurrentCourses");
             DropTable("dbo.Visiteurs");
             DropTable("dbo.Tickets");

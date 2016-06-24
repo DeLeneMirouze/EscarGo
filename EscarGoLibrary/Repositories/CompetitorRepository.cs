@@ -9,10 +9,12 @@ namespace EscarGoLibrary.Repositories
 {
     public class CompetitorRepository : BaseDataRepository, ICompetitorRepository, ICompetitorRepositoryAsync
     {
+        #region Constructeur
         public CompetitorRepository(EscarGoContext context) : base(context)
         {
 
-        }
+        } 
+        #endregion
 
         #region GetCompetitors
         public List<Concurrent> GetCompetitors()
