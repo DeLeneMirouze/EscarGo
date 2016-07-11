@@ -8,20 +8,18 @@ namespace EscarGoLibrary.ViewModel
     public class ViewModelBuilder
     {
         #region Constructeur
-        readonly ICompetitorRepository _concurrentRepository;
-        readonly ICourseRepository _courseRepository;
+        readonly IUnitOfWork _unitOfWork;
 
-        public ViewModelBuilder(ICompetitorRepository repository, ICourseRepository courseRepository)
+        public ViewModelBuilder(IUnitOfWork unitOfWork)
         {
-            _concurrentRepository = repository;
-            _courseRepository = courseRepository;
+            _unitOfWork = unitOfWork;
         }
         #endregion
 
         #region GetCompetitors
         public List<Concurrent> GetCompetitors()
         {
-            return _concurrentRepository.GetCompetitors();
+            return _unitOfWork.CompetitorRepository.GetCompetitors();
         }
         #endregion
 
@@ -29,9 +27,9 @@ namespace EscarGoLibrary.ViewModel
         public DetailConcurrentViewModel GetDetailConcurrentViewModel(int idConcurrent)
         {
             DetailConcurrentViewModel vm = new DetailConcurrentViewModel();
-            vm.Concurrent = _concurrentRepository.GetCompetitorById(idConcurrent);
+            vm.Concurrent = _unitOfWork.CompetitorRepository.GetCompetitorById(idConcurrent);
 
-            var paris = _concurrentRepository.GetBetsByCompetitor(idConcurrent);
+            var paris = _unitOfWork.CompetitorRepository.GetBetsByCompetitor(idConcurrent);
             vm.Courses = paris.OrderBy(p => p.Course.Date).Select(p => p.Course).ToList();
             foreach (var course in vm.Courses)
             {
@@ -46,7 +44,7 @@ namespace EscarGoLibrary.ViewModel
         #region SetBet
         public void SetBet(int idCourse, int idConcurrent)
         {
-            _concurrentRepository.SetBet(idCourse, idConcurrent);
+            _unitOfWork.CompetitorRepository.SetBet(idCourse, idConcurrent);
         }
         #endregion
 
@@ -55,9 +53,9 @@ namespace EscarGoLibrary.ViewModel
         {
             DetailCourseViewModel vm = new DetailCourseViewModel();
 
-            vm.Course = _courseRepository.GetCourseById(idCourse);
-            vm.Concurrents = _courseRepository.GetConcurrentsByCourse(idCourse);
-            var paris = _concurrentRepository.GetBetsByRace(idCourse);
+            vm.Course = _unitOfWork.CourseRepository.GetCourseById(idCourse);
+            vm.Concurrents = _unitOfWork.CourseRepository.GetConcurrentsByCourse(idCourse);
+            var paris = _unitOfWork.CompetitorRepository.GetBetsByRace(idCourse);
             foreach (Concurrent concurrent in vm.Concurrents)
             {
                 Pari currentBet = paris.Where(p => p.ConcurrentId == concurrent.ConcurrentId).First();
@@ -71,7 +69,7 @@ namespace EscarGoLibrary.ViewModel
         #region Create
         public void Create(Course course)
         {
-            _courseRepository.Create(course);
+            _unitOfWork.CourseRepository.Create(course);
         }
         #endregion
     }

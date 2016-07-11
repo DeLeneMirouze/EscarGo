@@ -1,5 +1,4 @@
 ﻿using EscarGoLibrary.Models;
-using EscarGoLibrary.Repositories;
 using System.Net;
 using System.Web.Mvc;
 
@@ -7,12 +6,10 @@ namespace EscarGoCQRS.Controllers
 {
     public class CoursesController : CustomController
     {
-        private EscarGoContext db = new EscarGoContext();
-
         // GET: Courses
         public ActionResult Index(int? currentPage)
         {
-            return View(CourseRepository.GetCourses(RecordsPerPage, currentPage.GetValueOrDefault()));
+            return View(UnitOfWork.CourseRepository.GetCourses(RecordsPerPage, currentPage.GetValueOrDefault()));
         }
 
         // GET: Courses/Details/5

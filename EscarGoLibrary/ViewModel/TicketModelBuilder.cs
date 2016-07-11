@@ -9,13 +9,11 @@ namespace EscarGoLibrary.ViewModel
     public class TicketModelBuilder
     {
         #region Constructeur
-        readonly ITicketRepository _ticketRepository;
-        readonly ICourseRepository _courseRepository;
+        readonly IUnitOfWork _unitOfWork;
 
-        public TicketModelBuilder(ITicketRepository ticketRepository, ICourseRepository courseRepository)
+        public TicketModelBuilder(IUnitOfWork unitOfWork)
         {
-            _ticketRepository = ticketRepository;
-            _courseRepository = courseRepository;
+            _unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -24,9 +22,9 @@ namespace EscarGoLibrary.ViewModel
         {
             BuyTicketViewModel vm = new BuyTicketViewModel();
 
-            List<Visiteur> visiteurs = _ticketRepository.GetVisiteurs();
+            List<Visiteur> visiteurs = _unitOfWork.TicketRepository.GetVisiteurs();
             vm.Acheteurs = new SelectList(visiteurs, "Id", "Nom");
-            vm.Course = _courseRepository.GetCourseById(courseId);
+            vm.Course = _unitOfWork.CourseRepository.GetCourseById(courseId);
             vm.NbPlaces = 1;
 
             return vm;
@@ -41,7 +39,7 @@ namespace EscarGoLibrary.ViewModel
 
             try
             {
-                ticket = _ticketRepository.AddTicket(buyTicketViewModel.Course.CourseId, buyTicketViewModel.AcheteurSelectionne, buyTicketViewModel.NbPlaces);
+                ticket = _unitOfWork.TicketRepository.AddTicket(buyTicketViewModel.Course.CourseId, buyTicketViewModel.AcheteurSelectionne, buyTicketViewModel.NbPlaces);
 
                 vm.EstEnregistre = ticket != null;
 
