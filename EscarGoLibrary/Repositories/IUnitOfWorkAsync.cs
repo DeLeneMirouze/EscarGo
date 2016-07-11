@@ -6,7 +6,7 @@ namespace EscarGoLibrary.Repositories
     public interface IUnitOfWorkAsync: IDisposable
     {
         ICompetitorRepositoryAsync CompetitorRepositoryAsync { get; }
-        ICourseRepositoryAsync CourseRepositoryAsync { get; }
+        IRaceRepositoryAsync CourseRepositoryAsync { get; }
         ITicketRepositoryAsync TicketRepositoryAsync { get; }
 
         Task SaveAsync();

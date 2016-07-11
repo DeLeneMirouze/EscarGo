@@ -11,7 +11,7 @@ namespace EscarGoLibrary.ViewModel
     {
         #region Constructeur
         readonly IUnitOfWorkAsync _unitOfWorkAsync;
-        readonly ICourseRepositoryAsync _courseRepository;
+        readonly IRaceRepositoryAsync _courseRepository;
 
         public TicketModelBuilderAsync(IUnitOfWorkAsync unitOfWorkAsync)
         {

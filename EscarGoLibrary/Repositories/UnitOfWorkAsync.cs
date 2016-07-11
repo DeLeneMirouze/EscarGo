@@ -35,14 +35,14 @@ namespace EscarGoLibrary.Repositories
         #endregion
 
         #region ICourseRepositoryAsync
-        ICourseRepositoryAsync _courseRepository;
-        public ICourseRepositoryAsync CourseRepositoryAsync
+        IRaceRepositoryAsync _courseRepository;
+        public IRaceRepositoryAsync CourseRepositoryAsync
         {
             get
             {
                 if (_courseRepository == null)
                 {
-                    _courseRepository = new CourseRepository(_context);
+                    _courseRepository = new RaceRepository(_context);
                 }
                 return _courseRepository;
             }

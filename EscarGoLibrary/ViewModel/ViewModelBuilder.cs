@@ -53,8 +53,8 @@ namespace EscarGoLibrary.ViewModel
         {
             DetailCourseViewModel vm = new DetailCourseViewModel();
 
-            vm.Course = _unitOfWork.CourseRepository.GetCourseById(idCourse);
-            vm.Concurrents = _unitOfWork.CourseRepository.GetConcurrentsByCourse(idCourse);
+            vm.Course = _unitOfWork.CourseRepository.GetRaceById(idCourse);
+            vm.Concurrents = _unitOfWork.CourseRepository.GetConcurrentsByRace(idCourse);
             var paris = _unitOfWork.CompetitorRepository.GetBetsByRace(idCourse);
             foreach (Concurrent concurrent in vm.Concurrents)
             {

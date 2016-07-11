@@ -10,7 +10,7 @@ namespace EscarGo.Controllers
         // GET: Courses
         public ActionResult Index(int? currentPage)
         {
-            var vm = UnitOfWork.CourseRepository.GetCourses(RecordsPerPage, currentPage.GetValueOrDefault());
+            var vm = UnitOfWork.CourseRepository.GetRaces(RecordsPerPage, currentPage.GetValueOrDefault());
             ViewBag.CurrentPage = currentPage.GetValueOrDefault();
             return View(vm);
         } 

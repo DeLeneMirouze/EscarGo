@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace EscarGoLibrary.Repositories
 {
-    public class CourseRepository : BaseDataRepository, ICourseRepository, ICourseRepositoryAsync
+    public class RaceRepository : BaseDataRepository, IRaceRepository, IRaceRepositoryAsync
     {
         #region Constructeur
-        public CourseRepository(EscarGoContext context) : base(context)
+        public RaceRepository(EscarGoContext context) : base(context)
         {
 
         }
         #endregion
 
-        #region GetCourses
+        #region GetRaces
         private IQueryable<Course> GetRequest(int recordsPerPage, int currentPage)
         {
             return Context.Courses
@@ -29,39 +29,39 @@ namespace EscarGoLibrary.Repositories
                .Take(recordsPerPage);
         }
 
-        public List<Course> GetCourses(int recordsPerPage, int currentPage)
+        public List<Course> GetRaces(int recordsPerPage, int currentPage)
         {
             var req = GetRequest(recordsPerPage, currentPage);
-            List<Course> courses = req.ToList();
+            List<Course> races = req.ToList();
 
-            if (courses.Count == 0 && currentPage > 0)
+            if (races.Count == 0 && currentPage > 0)
             {
                 currentPage--;
                 req = GetRequest(recordsPerPage, currentPage);
-                courses = req.ToList();
+                races = req.ToList();
             }
 
-            return courses;
+            return races;
         }
 
-        public async Task<List<Course>> GetCoursesAsync(int recordsPerPage, int currentPage)
+        public async Task<List<Course>> GetRacesAsync(int recordsPerPage, int currentPage)
         {
             var req = GetRequest(recordsPerPage, currentPage);
-            List<Course> courses = await req.ToListAsync();
+            List<Course> races = await req.ToListAsync();
 
-            if (courses.Count == 0 && currentPage > 0)
+            if (races.Count == 0 && currentPage > 0)
             {
                 currentPage--;
                 req = GetRequest(recordsPerPage, currentPage);
-                courses = await req.ToListAsync();
+                races = await req.ToListAsync();
             }
 
-            return courses;
+            return races;
         }
         #endregion
 
-        #region GetCourseById
-        public Course GetCourseById(int id)
+        #region GetRaceById
+        public Course GetRaceById(int id)
         {
             var course = Context.Courses
           .FirstOrDefault(c => c.CourseId == id);
@@ -78,8 +78,8 @@ namespace EscarGoLibrary.Repositories
         }
         #endregion
 
-        #region GetConcurrentsByCourse
-        public List<Concurrent> GetConcurrentsByCourse(int idCourse)
+        #region GetConcurrentsByRace
+        public List<Concurrent> GetConcurrentsByRace(int idCourse)
         {
             var courses = Context.Courses
                 .Where(c => c.CourseId == idCourse)
@@ -89,7 +89,7 @@ namespace EscarGoLibrary.Repositories
             return courses;
         }
 
-        public async Task<List<Concurrent>> GetConcurrentsByCourseAsync(int idCourse)
+        public async Task<List<Concurrent>> GetConcurrentsByRaceAsync(int idCourse)
         {
             var courses = await Context.Courses
                 .Where(c => c.CourseId == idCourse)

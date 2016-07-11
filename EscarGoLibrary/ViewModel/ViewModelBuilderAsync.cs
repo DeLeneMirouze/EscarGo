@@ -56,7 +56,7 @@ namespace EscarGoLibrary.ViewModel
             DetailCourseViewModel vm = new DetailCourseViewModel();
 
             vm.Course = await _unitOfWorkAsync.CourseRepositoryAsync.GetCourseByIdAsync(idCourse);
-            vm.Concurrents = await _unitOfWorkAsync.CourseRepositoryAsync.GetConcurrentsByCourseAsync(idCourse);
+            vm.Concurrents = await _unitOfWorkAsync.CourseRepositoryAsync.GetConcurrentsByRaceAsync(idCourse);
             var paris = await _unitOfWorkAsync.CompetitorRepositoryAsync.GetBetsByRaceAsync(idCourse);
             foreach (Concurrent concurrent in vm.Concurrents)
             {

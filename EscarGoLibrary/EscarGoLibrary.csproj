@@ -122,7 +122,7 @@
     <Compile Include="Models\AzureModel\Concurrent.cs" />
     <Compile Include="Models\CustomControllerAsync.cs" />
     <Compile Include="Repositories\ICompetitorRepositoryAsync.cs" />
-    <Compile Include="Repositories\ICourseRepositoryAsync.cs" />
+    <Compile Include="Repositories\IRaceRepositoryAsync.cs" />
     <Compile Include="Repositories\ITicketRepositoryAsync.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />
     <Compile Include="Repositories\IUnitOfWorkAsync.cs" />
@@ -145,11 +145,11 @@
     <Compile Include="Repositories\AzureTableRepository.cs" />
     <Compile Include="Repositories\BaseDataRepository.cs" />
     <Compile Include="Repositories\CompetitorRepository.cs" />
-    <Compile Include="Repositories\CourseRepository.cs" />
+    <Compile Include="Repositories\RaceRepository.cs" />
     <Compile Include="Repositories\EscarGoContext.cs" />
     <Compile Include="Repositories\IAzureTableRepository.cs" />
     <Compile Include="Repositories\ICompetitorRepository.cs" />
-    <Compile Include="Repositories\ICourseRepository.cs" />
+    <Compile Include="Repositories\IRaceRepository.cs" />
     <Compile Include="Repositories\ITicketRepository.cs" />
     <Compile Include="Repositories\TicketRepository.cs" />
     <Compile Include="ViewModel\ConfirmationAchatViewModel.cs" />

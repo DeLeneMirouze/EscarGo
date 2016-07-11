@@ -9,7 +9,7 @@ namespace EscarGoCQRS.Controllers
         // GET: Courses
         public ActionResult Index(int? currentPage)
         {
-            return View(UnitOfWork.CourseRepository.GetCourses(RecordsPerPage, currentPage.GetValueOrDefault()));
+            return View(UnitOfWork.CourseRepository.GetRaces(RecordsPerPage, currentPage.GetValueOrDefault()));
         }
 
         // GET: Courses/Details/5

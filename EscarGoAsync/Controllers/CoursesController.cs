@@ -11,7 +11,7 @@ namespace EscarGoAsync.Controllers
         // GET: Courses
         public async Task<ActionResult> Index(int? currentPage)
         {
-            var vm = await UnitOfWorkAsync.CourseRepositoryAsync.GetCoursesAsync(RecordsPerPage, currentPage.GetValueOrDefault());
+            var vm = await UnitOfWorkAsync.CourseRepositoryAsync.GetRacesAsync(RecordsPerPage, currentPage.GetValueOrDefault());
             return View(vm);
         }
         #endregion
