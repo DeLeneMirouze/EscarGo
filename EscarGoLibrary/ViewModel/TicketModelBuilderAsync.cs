@@ -10,13 +10,12 @@ namespace EscarGoLibrary.ViewModel
     public sealed class TicketModelBuilderAsync
     {
         #region Constructeur
-        readonly ITicketRepositoryAsync _ticketRepository;
+        readonly IUnitOfWorkAsync _unitOfWorkAsync;
         readonly ICourseRepositoryAsync _courseRepository;
 
-        public TicketModelBuilderAsync(ITicketRepositoryAsync ticketRepository, ICourseRepositoryAsync courseRepository)
+        public TicketModelBuilderAsync(IUnitOfWorkAsync unitOfWorkAsync)
         {
-            _ticketRepository = ticketRepository;
-            _courseRepository = courseRepository;
+            _unitOfWorkAsync = unitOfWorkAsync;
         }
         #endregion
 
@@ -25,7 +24,7 @@ namespace EscarGoLibrary.ViewModel
         {
             BuyTicketViewModel vm = new BuyTicketViewModel();
 
-            List<Visiteur> visiteurs = await _ticketRepository.GetVisiteursAsync();
+            List<Visiteur> visiteurs = await _unitOfWorkAsync.TicketRepositoryAsync.GetVisiteursAsync();
             vm.Acheteurs = new SelectList(visiteurs, "Id", "Nom");
             vm.Course =await  _courseRepository.GetCourseByIdAsync(courseId);
             vm.NbPlaces = 1;
@@ -42,7 +41,7 @@ namespace EscarGoLibrary.ViewModel
 
             try
             {
-                ticket = await _ticketRepository.AddTicketAsync(buyTicketViewModel.Course.CourseId, buyTicketViewModel.AcheteurSelectionne, buyTicketViewModel.NbPlaces);
+                ticket = await _unitOfWorkAsync.TicketRepositoryAsync.AddTicketAsync(buyTicketViewModel.Course.CourseId, buyTicketViewModel.AcheteurSelectionne, buyTicketViewModel.NbPlaces);
 
                 vm.EstEnregistre = ticket != null;
 

@@ -9,20 +9,19 @@ namespace EscarGoLibrary.ViewModel
     public sealed class ViewModelBuilderAsync
     {
         #region Constructeur
-        readonly ICompetitorRepositoryAsync _concurrentRepository;
-        readonly ICourseRepositoryAsync _courseRepository;
+        readonly IUnitOfWorkAsync _unitOfWorkAsync;
 
-        public ViewModelBuilderAsync(ICompetitorRepositoryAsync repository, ICourseRepositoryAsync courseRepository)
+
+        public ViewModelBuilderAsync(IUnitOfWorkAsync unitOfWorkAsync)
         {
-            _concurrentRepository = repository;
-            _courseRepository = courseRepository;
+            _unitOfWorkAsync = unitOfWorkAsync;
         }
         #endregion
 
         #region GetCompetitorsAsync
         public async Task<List<Concurrent>> GetCompetitorsAsync()
         {
-            return await _concurrentRepository.GetCompetitorsAsync();
+            return await _unitOfWorkAsync.CompetitorRepositoryAsync.GetCompetitorsAsync();
         }
         #endregion
 
@@ -30,9 +29,9 @@ namespace EscarGoLibrary.ViewModel
         public async Task<DetailConcurrentViewModel> GetDetailConcurrentViewModelAsync(int idConcurrent)
         {
             DetailConcurrentViewModel vm = new DetailConcurrentViewModel();
-            vm.Concurrent = await _concurrentRepository.GetCompetitorByIdAsync(idConcurrent);
+            vm.Concurrent = await _unitOfWorkAsync.CompetitorRepositoryAsync.GetCompetitorByIdAsync(idConcurrent);
 
-            var paris = await _concurrentRepository.GetBetsByCompetitorAsync(idConcurrent);
+            var paris = await _unitOfWorkAsync.CompetitorRepositoryAsync.GetBetsByCompetitorAsync(idConcurrent);
             vm.Courses = paris.OrderBy(p => p.Course.Date).Select(p => p.Course).ToList();
             foreach (var course in vm.Courses)
             {
@@ -47,7 +46,7 @@ namespace EscarGoLibrary.ViewModel
         #region SetBetAsync
         public async Task SetBetAsync(int idCourse, int idConcurrent)
         {
-            await _concurrentRepository.SetBetAsync(idCourse, idConcurrent);
+            await _unitOfWorkAsync.CompetitorRepositoryAsync.SetBetAsync(idCourse, idConcurrent);
         }
         #endregion
 
@@ -56,9 +55,9 @@ namespace EscarGoLibrary.ViewModel
         {
             DetailCourseViewModel vm = new DetailCourseViewModel();
 
-            vm.Course = await _courseRepository.GetCourseByIdAsync(idCourse);
-            vm.Concurrents = await _courseRepository.GetConcurrentsByCourseAsync(idCourse);
-            var paris = await _concurrentRepository.GetBetsByRaceAsync(idCourse);
+            vm.Course = await _unitOfWorkAsync.CourseRepositoryAsync.GetCourseByIdAsync(idCourse);
+            vm.Concurrents = await _unitOfWorkAsync.CourseRepositoryAsync.GetConcurrentsByCourseAsync(idCourse);
+            var paris = await _unitOfWorkAsync.CompetitorRepositoryAsync.GetBetsByRaceAsync(idCourse);
             foreach (Concurrent concurrent in vm.Concurrents)
             {
                 Pari currentBet = paris.Where(p => p.ConcurrentId == concurrent.ConcurrentId).First();
@@ -72,7 +71,7 @@ namespace EscarGoLibrary.ViewModel
         #region CreateAsync
         public async Task CreateAsync(Course course)
         {
-           await  _courseRepository.CreateAsync(course);
+           await _unitOfWorkAsync.CourseRepositoryAsync.CreateAsync(course);
         }
         #endregion
     }

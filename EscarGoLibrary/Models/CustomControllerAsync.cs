@@ -9,20 +9,15 @@ namespace EscarGoLibrary.Models
         #region Constructeur
         protected CustomControllerAsync()
         {
-            var context = new EscarGoContext();
-            ConcurrentRepository = new CompetitorRepository(context);
-            CourseRepository = new CourseRepository(context);
-            Builder = new ViewModelBuilderAsync(ConcurrentRepository, CourseRepository);
-            TicketRepository = new TicketRepository(context);
-            TicketModelBuilder = new TicketModelBuilderAsync(TicketRepository, CourseRepository);
+            UnitOfWorkAsync = new UnitOfWorkAsync();
+            Builder = new ViewModelBuilderAsync(UnitOfWorkAsync);
+            TicketModelBuilder = new TicketModelBuilderAsync(UnitOfWorkAsync);
         }
         #endregion
 
-        protected ICompetitorRepositoryAsync ConcurrentRepository { get; set; }
+        protected IUnitOfWorkAsync UnitOfWorkAsync { get; set; }
         protected ViewModelBuilderAsync Builder { get; set; }
-        protected ICourseRepositoryAsync CourseRepository { get; set; }
         protected TicketModelBuilderAsync TicketModelBuilder { get; set; }
-        protected ITicketRepositoryAsync TicketRepository { get; set; }
 
         protected const int RecordsPerPage = 6;
 
@@ -31,7 +26,7 @@ namespace EscarGoLibrary.Models
         {
             if (disposing)
             {
-                ConcurrentRepository.Dispose();
+                UnitOfWorkAsync.Dispose();
             }
             base.Dispose(disposing);
         }

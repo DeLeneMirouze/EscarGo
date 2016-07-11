@@ -125,7 +125,9 @@
     <Compile Include="Repositories\ICourseRepositoryAsync.cs" />
     <Compile Include="Repositories\ITicketRepositoryAsync.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />
+    <Compile Include="Repositories\IUnitOfWorkAsync.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
+    <Compile Include="Repositories\UnitOfWorkAsync.cs" />
     <Compile Include="ViewModel\BuyTicketViewModel.cs" />
     <Compile Include="Models\Concurrent.cs" />
     <Compile Include="Models\Course.cs" />
