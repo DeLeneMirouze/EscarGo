@@ -40,8 +40,9 @@ namespace EscarGoLibrary.ViewModel
             try
             {
                 ticket = _unitOfWork.TicketRepository.AddTicket(buyTicketViewModel.Course.CourseId, buyTicketViewModel.AcheteurSelectionne, buyTicketViewModel.NbPlaces);
+                _unitOfWork.Save();
 
-                vm.EstEnregistre = ticket != null;
+                vm.EstEnregistre = (ticket != null);
 
                 vm.Course = buyTicketViewModel.Course;
             }

@@ -45,6 +45,7 @@ namespace EscarGoLibrary.ViewModel
         public void SetBet(int idCourse, int idConcurrent)
         {
             _unitOfWork.CompetitorRepository.SetBet(idCourse, idConcurrent);
+            _unitOfWork.Save();
         }
         #endregion
 
@@ -70,6 +71,7 @@ namespace EscarGoLibrary.ViewModel
         public void Create(Course course)
         {
             _unitOfWork.CourseRepository.Create(course);
+            _unitOfWork.Save();
         }
         #endregion
     }

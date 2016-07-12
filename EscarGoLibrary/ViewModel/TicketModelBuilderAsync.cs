@@ -42,8 +42,9 @@ namespace EscarGoLibrary.ViewModel
             try
             {
                 ticket = await _unitOfWorkAsync.TicketRepositoryAsync.AddTicketAsync(buyTicketViewModel.Course.CourseId, buyTicketViewModel.AcheteurSelectionne, buyTicketViewModel.NbPlaces);
+                await _unitOfWorkAsync.SaveAsync();
 
-                vm.EstEnregistre = ticket != null;
+                vm.EstEnregistre = (ticket != null);
 
                 vm.Course = buyTicketViewModel.Course;
             }

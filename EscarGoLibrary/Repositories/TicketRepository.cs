@@ -40,7 +40,6 @@ namespace EscarGoLibrary.Repositories
             ticket.DateAchat = DateTime.Now;
 
             Context.Tickets.Add(ticket);
-            Context.SaveChanges();
 
             // confirme la demande
             Course course = Context.Courses.First(c => c.CourseId == courseId);
@@ -50,7 +49,6 @@ namespace EscarGoLibrary.Repositories
             }
 
             course.NbTickets -= nbPlaces;
-            Context.SaveChanges();
 
             return ticket;
         }
@@ -65,7 +63,6 @@ namespace EscarGoLibrary.Repositories
             ticket.DateAchat = DateTime.Now;
 
             Context.Tickets.Add(ticket);
-            await Context.SaveChangesAsync();
 
             // confirme la demande
             Course course = await Context.Courses.FirstAsync(c => c.CourseId == courseId);
@@ -75,7 +72,6 @@ namespace EscarGoLibrary.Repositories
             }
 
             course.NbTickets -= nbPlaces;
-            await Context.SaveChangesAsync();
 
             return ticket;
         }

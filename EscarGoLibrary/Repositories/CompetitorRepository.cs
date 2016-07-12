@@ -138,8 +138,6 @@ namespace EscarGoLibrary.Repositories
                 p.SC = (double)total / p.NbParis;
                 p.SC = Math.Round(10 * p.SC) / 10;
             });
-
-            Context.SaveChanges();
         }
 
         public async Task SetBetAsync(int idCourse, int concurrentId)
@@ -164,8 +162,6 @@ namespace EscarGoLibrary.Repositories
                 p.SC = (double)total / p.NbParis;
                 p.SC = Math.Round(10 * p.SC) / 10;
             });
-
-            await Context.SaveChangesAsync();
         }
         #endregion
     }

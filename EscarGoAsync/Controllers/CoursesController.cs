@@ -94,6 +94,8 @@ namespace EscarGoAsync.Controllers
         public async Task<ActionResult> Like(int id)
         {
             await UnitOfWorkAsync.CourseRepositoryAsync.LikeAsync(id);
+            await UnitOfWorkAsync.SaveAsync();
+
             return RedirectToAction("Index");
         }
         #endregion

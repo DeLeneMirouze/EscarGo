@@ -47,6 +47,7 @@ namespace EscarGoLibrary.ViewModel
         public async Task SetBetAsync(int idCourse, int idConcurrent)
         {
             await _unitOfWorkAsync.CompetitorRepositoryAsync.SetBetAsync(idCourse, idConcurrent);
+            await _unitOfWorkAsync.SaveAsync();
         }
         #endregion
 
@@ -71,7 +72,8 @@ namespace EscarGoLibrary.ViewModel
         #region CreateAsync
         public async Task CreateAsync(Course course)
         {
-           await _unitOfWorkAsync.CourseRepositoryAsync.CreateAsync(course);
+           _unitOfWorkAsync.CourseRepositoryAsync.Create(course);
+            await _unitOfWorkAsync.SaveAsync();
         }
         #endregion
     }

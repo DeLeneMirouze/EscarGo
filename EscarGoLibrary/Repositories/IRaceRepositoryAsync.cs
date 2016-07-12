@@ -9,7 +9,7 @@ namespace EscarGoLibrary.Repositories
         Task<List<Course>> GetRacesAsync(int recordsPerPage, int currentPage);
         Task<Course> GetCourseByIdAsync(int id);
         Task<List<Concurrent>> GetConcurrentsByRaceAsync(int idCourse);
-        Task CreateAsync(Course course);
+        void Create(Course course);
         Task LikeAsync(int idCourse);
     }
 }

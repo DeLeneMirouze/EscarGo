@@ -96,6 +96,8 @@ namespace EscarGo.Controllers
         public ActionResult Like(int id)
         {
             UnitOfWork.CourseRepository.Like(id);
+            UnitOfWork.Save();
+
             return RedirectToAction("Index");
         }
         #endregion

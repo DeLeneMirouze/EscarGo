@@ -1,10 +1,12 @@
-﻿
+﻿#region using
+
 using EscarGoLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+#endregion
 
 namespace EscarGoLibrary.Repositories
 {
@@ -104,13 +106,6 @@ namespace EscarGoLibrary.Repositories
         public void Create(Course course)
         {
             Context.Courses.Add(course);
-            Context.SaveChanges();
-        }
-
-        public async Task CreateAsync(Course course)
-        {
-            Context.Courses.Add(course);
-            await Context.SaveChangesAsync();
         }
         #endregion
 
@@ -119,16 +114,12 @@ namespace EscarGoLibrary.Repositories
         {
             Course course = Context.Courses.FirstOrDefault(c => c.CourseId == idCourse);
             course.Likes++;
-
-            Context.SaveChanges();
         }
 
         public async Task LikeAsync(int idCourse)
         {
             Course course = await Context.Courses.FirstOrDefaultAsync(c => c.CourseId == idCourse);
             course.Likes++;
-
-            await Context.SaveChangesAsync();
         } 
         #endregion
     }
