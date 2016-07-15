@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscarGo", "EscarGo\EscarGo.csproj", "{9B76BBFC-9E56-48F1-8B94-1C1A6AF00C2F}"
 EndProject
@@ -12,6 +12,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscarGoAsync", "EscarGoAsync\EscarGoAsync.csproj", "{3724A004-4AD4-4718-BF59-12681EE97D49}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscarGoCQRS", "EscarGoCQRS\EscarGoCQRS.csproj", "{BC0BD193-4F4A-469F-A7E0-CA64C0363BAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscargoTest", "EscargoTest\EscargoTest.csproj", "{05C045FC-97D6-4FF7-A57F-30CDDF0FB99A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3A4D1E5A-49ED-4C84-B689-B9DCE25C7F65}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +46,10 @@ Global
 		{BC0BD193-4F4A-469F-A7E0-CA64C0363BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC0BD193-4F4A-469F-A7E0-CA64C0363BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC0BD193-4F4A-469F-A7E0-CA64C0363BAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05C045FC-97D6-4FF7-A57F-30CDDF0FB99A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05C045FC-97D6-4FF7-A57F-30CDDF0FB99A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05C045FC-97D6-4FF7-A57F-30CDDF0FB99A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05C045FC-97D6-4FF7-A57F-30CDDF0FB99A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
