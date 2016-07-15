@@ -1,10 +1,10 @@
 ﻿@model EscarGoLibrary.Models.Course
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Nouvelle course";
 }
 
-<h2>Create</h2>
+<h2>Nouvelle course</h2>
 
 
 @using (Html.BeginForm()) 
@@ -16,7 +16,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Label, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Label,"Nom", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Label, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Label, "", new { @class = "text-danger" })
@@ -48,15 +48,23 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.NbTickets, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NbTickets, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NbTickets, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Valider" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour", "Index", null, new { role = "button", @class = "btn btn-primary" })
 </div>
 
 @section Scripts {
