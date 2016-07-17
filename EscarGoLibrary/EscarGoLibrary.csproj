@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.0.2\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -77,6 +81,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Spatial, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Spatial.5.6.4\lib\net40\System.Spatial.dll</HintPath>
@@ -119,13 +124,18 @@
       <DependentUpon>201606240650551_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AzureModel\Concurrent.cs" />
+    <Compile Include="Models\AzureModel\CompetitorEntity.cs" />
+    <Compile Include="Models\AzureModel\InitMapping.cs" />
+    <Compile Include="Models\AzureModel\ModelExtension.cs" />
+    <Compile Include="Models\AzureModel\RaceEntity.cs" />
     <Compile Include="Models\CustomControllerAsync.cs" />
     <Compile Include="Repositories\ICompetitorRepositoryAsync.cs" />
     <Compile Include="Repositories\IRaceRepositoryAsync.cs" />
+    <Compile Include="Repositories\IStorageRepository.cs" />
     <Compile Include="Repositories\ITicketRepositoryAsync.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />
     <Compile Include="Repositories\IUnitOfWorkAsync.cs" />
+    <Compile Include="Repositories\StorageRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
     <Compile Include="Repositories\UnitOfWorkAsync.cs" />
     <Compile Include="ViewModel\BuyTicketViewModel.cs" />
@@ -142,7 +152,6 @@
     <Compile Include="ViewModel\ViewModelBuilder.cs" />
     <Compile Include="Models\Visiteur.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\AzureTableRepository.cs" />
     <Compile Include="Repositories\BaseDataRepository.cs" />
     <Compile Include="Repositories\CompetitorRepository.cs" />
     <Compile Include="Repositories\RaceRepository.cs" />
