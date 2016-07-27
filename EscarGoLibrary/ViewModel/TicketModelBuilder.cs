@@ -24,7 +24,7 @@ namespace EscarGoLibrary.ViewModel
 
             List<Visiteur> visiteurs = _unitOfWork.TicketRepository.GetVisiteurs();
             vm.Acheteurs = new SelectList(visiteurs, "Id", "Nom");
-            vm.Course = _unitOfWork.CourseRepository.GetRaceById(courseId);
+            vm.Course = _unitOfWork.RaceRepository.GetRaceById(courseId);
             vm.NbPlaces = 1;
 
             return vm;

@@ -10,7 +10,7 @@ namespace EscarGo.Controllers
         // GET: Courses
         public ActionResult Index(int? currentPage)
         {
-            var vm = UnitOfWork.CourseRepository.GetRaces(RecordsPerPage, currentPage.GetValueOrDefault());
+            var vm = UnitOfWork.RaceRepository.GetRaces(RecordsPerPage, currentPage.GetValueOrDefault());
             ViewBag.CurrentPage = currentPage.GetValueOrDefault();
             return View(vm);
         } 
@@ -95,7 +95,7 @@ namespace EscarGo.Controllers
         // GET: Default/Like/5
         public ActionResult Like(int id)
         {
-            UnitOfWork.CourseRepository.Like(id);
+            UnitOfWork.RaceRepository.Like(id);
             UnitOfWork.Save();
 
             return RedirectToAction("Index");

@@ -14,7 +14,7 @@ namespace EscarGoLibrary.Repositories
         }
         #endregion
 
-        #region ICompetitorRepositoryAsync
+        #region CompetitorRepositoryAsync
         ICompetitorRepositoryAsync _competitorRepository;
         public ICompetitorRepositoryAsync CompetitorRepositoryAsync
         {
@@ -34,9 +34,9 @@ namespace EscarGoLibrary.Repositories
         }
         #endregion
 
-        #region ICourseRepositoryAsync
+        #region RaceRepositoryAsync
         IRaceRepositoryAsync _courseRepository;
-        public IRaceRepositoryAsync CourseRepositoryAsync
+        public IRaceRepositoryAsync RaceRepositoryAsync
         {
             get
             {
@@ -54,7 +54,7 @@ namespace EscarGoLibrary.Repositories
         }
         #endregion
 
-        #region ITicketRepositoryAsync
+        #region TicketRepositoryAsync
         ITicketRepositoryAsync _ticketRepository;
         public ITicketRepositoryAsync TicketRepositoryAsync
         {

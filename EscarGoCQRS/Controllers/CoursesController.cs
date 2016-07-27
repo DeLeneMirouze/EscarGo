@@ -5,13 +5,13 @@ using System.Web.Mvc;
 
 namespace EscarGoCQRS.Controllers
 {
-    public class CoursesController : CustomControllerAsync
+    public class CoursesController : CustomControllerCQRS
     {
         #region Index
         // GET: Courses
-        public async Task<ActionResult> Index(int? currentPage)
+        public ActionResult Index(int? currentPage)
         {
-            var vm = await UnitOfWorkAsync.CourseRepositoryAsync.GetRacesAsync(RecordsPerPage, currentPage.GetValueOrDefault());
+            var vm = UnitOfWork.RaceRepository.GetRaces();
             return View(vm);
         }
         #endregion
@@ -93,8 +93,8 @@ namespace EscarGoCQRS.Controllers
         // GET: Default/Like/5
         public async Task<ActionResult> Like(int id)
         {
-            await UnitOfWorkAsync.CourseRepositoryAsync.LikeAsync(id);
-            await UnitOfWorkAsync.SaveAsync();
+            await UnitOfWork.RaceRepository.LikeAsync(id);
+            await UnitOfWork.SaveAsync();
 
             return RedirectToAction("Index");
         }

@@ -54,8 +54,8 @@ namespace EscarGoLibrary.ViewModel
         {
             DetailCourseViewModel vm = new DetailCourseViewModel();
 
-            vm.Course = _unitOfWork.CourseRepository.GetRaceById(idCourse);
-            vm.Concurrents = _unitOfWork.CourseRepository.GetConcurrentsByRace(idCourse);
+            vm.Course = _unitOfWork.RaceRepository.GetRaceById(idCourse);
+            vm.Concurrents = _unitOfWork.RaceRepository.GetConcurrentsByRace(idCourse);
             var paris = _unitOfWork.CompetitorRepository.GetBetsByRace(idCourse);
             foreach (Concurrent concurrent in vm.Concurrents)
             {
@@ -70,7 +70,7 @@ namespace EscarGoLibrary.ViewModel
         #region Create
         public void Create(Course course)
         {
-            _unitOfWork.CourseRepository.Create(course);
+            _unitOfWork.RaceRepository.Create(course);
             _unitOfWork.Save();
         }
         #endregion

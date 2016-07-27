@@ -1,5 +1,4 @@
 ﻿#region using
-using EscarGoLibrary.Models.AzureModel;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -15,8 +14,6 @@ namespace EscarGoAsync
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            InitMapping.Init();
         }
     }
 }

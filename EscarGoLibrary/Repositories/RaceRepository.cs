@@ -22,13 +22,19 @@ namespace EscarGoLibrary.Repositories
         #region GetRaces
         private IQueryable<Course> GetRequest(int recordsPerPage, int currentPage)
         {
-            return Context.Courses
-               .Where(c => c.Date >= DateTime.Now)
+            var query = Context.Courses
+               .Where(c => c.Date >= DateTime.UtcNow)
                .OrderByDescending(c => c.Date)
                .ThenBy(c => c.Pays)
                .ThenBy(c => c.Label)
-               .Skip(currentPage * recordsPerPage)
-               .Take(recordsPerPage);
+               .Skip(currentPage * recordsPerPage);
+
+            if (recordsPerPage > 0)
+            {
+                query = query.Take(recordsPerPage);
+            }
+
+            return query;
         }
 
         public List<Course> GetRaces(int recordsPerPage, int currentPage)

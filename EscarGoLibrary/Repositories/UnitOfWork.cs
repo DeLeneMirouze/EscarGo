@@ -13,7 +13,7 @@ namespace EscarGoLibrary.Repositories
         }
         #endregion
 
-        #region ICompetitorRepository
+        #region CompetitorRepository
         ICompetitorRepository _competitorRepository;
         public ICompetitorRepository CompetitorRepository
         {
@@ -33,9 +33,9 @@ namespace EscarGoLibrary.Repositories
         }
         #endregion
 
-        #region ICourseRepository
+        #region CourseRepository
         IRaceRepository _courseRepository;
-        public IRaceRepository CourseRepository
+        public IRaceRepository RaceRepository
         {
             get
             {

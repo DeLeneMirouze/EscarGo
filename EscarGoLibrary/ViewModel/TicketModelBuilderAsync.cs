@@ -11,7 +11,7 @@ namespace EscarGoLibrary.ViewModel
     {
         #region Constructeur
         readonly IUnitOfWorkAsync _unitOfWorkAsync;
-        readonly IRaceRepositoryAsync _courseRepository;
+
 
         public TicketModelBuilderAsync(IUnitOfWorkAsync unitOfWorkAsync)
         {
@@ -26,7 +26,7 @@ namespace EscarGoLibrary.ViewModel
 
             List<Visiteur> visiteurs = await _unitOfWorkAsync.TicketRepositoryAsync.GetVisiteursAsync();
             vm.Acheteurs = new SelectList(visiteurs, "Id", "Nom");
-            vm.Course =await  _courseRepository.GetCourseByIdAsync(courseId);
+            vm.Course =await _unitOfWorkAsync.RaceRepositoryAsync.GetCourseByIdAsync(courseId);
             vm.NbPlaces = 1;
 
             return vm;

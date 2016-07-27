@@ -56,8 +56,8 @@ namespace EscarGoLibrary.ViewModel
         {
             DetailCourseViewModel vm = new DetailCourseViewModel();
 
-            vm.Course = await _unitOfWorkAsync.CourseRepositoryAsync.GetCourseByIdAsync(idCourse);
-            vm.Concurrents = await _unitOfWorkAsync.CourseRepositoryAsync.GetConcurrentsByRaceAsync(idCourse);
+            vm.Course = await _unitOfWorkAsync.RaceRepositoryAsync.GetCourseByIdAsync(idCourse);
+            vm.Concurrents = await _unitOfWorkAsync.RaceRepositoryAsync.GetConcurrentsByRaceAsync(idCourse);
             var paris = await _unitOfWorkAsync.CompetitorRepositoryAsync.GetBetsByRaceAsync(idCourse);
             foreach (Concurrent concurrent in vm.Concurrents)
             {
@@ -72,7 +72,7 @@ namespace EscarGoLibrary.ViewModel
         #region CreateAsync
         public async Task CreateAsync(Course course)
         {
-           _unitOfWorkAsync.CourseRepositoryAsync.Create(course);
+           _unitOfWorkAsync.RaceRepositoryAsync.Create(course);
             await _unitOfWorkAsync.SaveAsync();
         }
         #endregion

@@ -9,6 +9,7 @@ namespace EscarGoLibrary.Models
         #region Constructeur
         protected CustomController()
         {
+            UnitOfWork = new UnitOfWork();
             Builder = new ViewModelBuilder(UnitOfWork);
             TicketModelBuilder = new TicketModelBuilder(UnitOfWork);
         }

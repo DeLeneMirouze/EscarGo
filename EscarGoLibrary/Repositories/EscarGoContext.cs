@@ -5,7 +5,7 @@ namespace EscarGoLibrary.Repositories
 {
     public sealed class EscarGoContext : DbContext
     {
-        public EscarGoContext()
+        public EscarGoContext() :base("name=DefaultConnection") 
         {
 
         }

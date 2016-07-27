@@ -31,10 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=5.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.5.0.2\lib\net45\AutoMapper.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -124,20 +120,25 @@
       <DependentUpon>201606240650551_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AzureModel\CompetitorEntity.cs" />
-    <Compile Include="Models\AzureModel\InitMapping.cs" />
-    <Compile Include="Models\AzureModel\ModelExtension.cs" />
-    <Compile Include="Models\AzureModel\RaceEntity.cs" />
     <Compile Include="Models\CustomControllerAsync.cs" />
+    <Compile Include="Models\CustomControllerCQRS.cs" />
+    <Compile Include="Repositories\CQRS\IRaceRepositoryCQRS.cs" />
+    <Compile Include="Repositories\CQRS\IUnitOfWorkCQRS.cs" />
+    <Compile Include="Repositories\CQRS\RaceComparer.cs" />
+    <Compile Include="Repositories\CQRS\RaceRepositoryCQRS.cs" />
+    <Compile Include="Repositories\CQRS\UnitOfWorkCQRS.cs" />
     <Compile Include="Repositories\ICompetitorRepositoryAsync.cs" />
     <Compile Include="Repositories\IRaceRepositoryAsync.cs" />
-    <Compile Include="Repositories\IStorageRepository.cs" />
     <Compile Include="Repositories\ITicketRepositoryAsync.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />
     <Compile Include="Repositories\IUnitOfWorkAsync.cs" />
-    <Compile Include="Repositories\StorageRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
     <Compile Include="Repositories\UnitOfWorkAsync.cs" />
+    <Compile Include="Storage\Model\CompetitorEntity.cs" />
+    <Compile Include="Storage\Model\ModelExtension.cs" />
+    <Compile Include="Storage\Model\RaceEntity.cs" />
+    <Compile Include="Storage\Repository\ITableStorageRepository.cs" />
+    <Compile Include="Storage\Repository\TableStorageRepository.cs" />
     <Compile Include="ViewModel\BuyTicketViewModel.cs" />
     <Compile Include="Models\Concurrent.cs" />
     <Compile Include="Models\Course.cs" />
@@ -168,9 +169,6 @@
     <None Include="App.config" />
     <None Include="Models\ClassDiagram1.cd" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="TextFile1.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201606240650551_Init.resx">

@@ -5,7 +5,7 @@ namespace EscarGoLibrary.Repositories
     public interface IUnitOfWork: IDisposable
     {
         ICompetitorRepository CompetitorRepository { get; }
-        IRaceRepository CourseRepository { get; }
+        IRaceRepository RaceRepository { get; }
         ITicketRepository TicketRepository { get; }
 
         void Save();
