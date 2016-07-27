@@ -6,7 +6,7 @@ namespace EscarGoLibrary.Storage.Repository
 {
     public interface ITableStorageRepository
     {
-        List<Concurrent> GetCompetitors(string competitorId);
+        List<Concurrent> GetCompetitors();
         List<Course> GetRaces();
         void SetCompetitors(List<CompetitorEntity> competitors);
         void SetRaces(List<RaceEntity> races);

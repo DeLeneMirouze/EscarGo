@@ -30,7 +30,7 @@ namespace EscarGoLibrary.Storage.Repository
         #endregion
 
         #region GetCompetitors
-        public List<Concurrent> GetCompetitors(string competitorId)
+        public List<Concurrent> GetCompetitors()
         {
             List<Concurrent> concurrents = new List<Concurrent>();
 

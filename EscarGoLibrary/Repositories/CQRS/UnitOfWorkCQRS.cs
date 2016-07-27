@@ -13,6 +13,26 @@ namespace EscarGoLibrary.Repositories.CQRS
         }
         #endregion
 
+        #region CompetitorRepository
+        ICompetitorRepositoryCQRS _competitorRepository;
+        public ICompetitorRepositoryCQRS CompetitorRepository
+        {
+            get
+            {
+                if (_competitorRepository == null)
+                {
+                    _competitorRepository = new CompetitorRepositoryCQRS(_context);
+                }
+                return _competitorRepository;
+            }
+            private set
+            {
+
+                _competitorRepository = value;
+            }
+        }
+        #endregion
+
         #region RaceRepository
         IRaceRepositoryCQRS _courseRepository;
         public IRaceRepositoryCQRS RaceRepository

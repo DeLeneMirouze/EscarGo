@@ -10,13 +10,13 @@ namespace EscarGoLibrary.Models
         protected CustomControllerCQRS()
         {
             UnitOfWork = new UnitOfWorkCQRS();
-            //Builder = new ViewModelBuilderAsync(UnitOfWork);
+            Builder = new ViewModelBuilderCQRS(UnitOfWork);
             //TicketModelBuilder = new TicketModelBuilderAsync(UnitOfWork);
         }
         #endregion
 
         protected IUnitOfWorkCQRS UnitOfWork { get; set; }
-        protected ViewModelBuilderAsync Builder { get; set; }
+        protected ViewModelBuilderCQRS Builder { get; set; }
         protected TicketModelBuilderAsync TicketModelBuilder { get; set; }
 
         protected const int RecordsPerPage = 6;

@@ -6,12 +6,12 @@ using System.Web.Mvc;
 
 namespace EscarGoCQRS.Controllers
 {
-    public class ConcurrentsController : CustomControllerAsync
+    public class ConcurrentsController : CustomControllerCQRS
     {
         // GET: Concurrents
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var concurrents = await Builder.GetCompetitorsAsync();
+            var concurrents = Builder.GetCompetitors();
 
             return View(concurrents);
         }
@@ -31,15 +31,15 @@ namespace EscarGoCQRS.Controllers
             return View(vm);
         }
 
-        public async Task<ActionResult> Bet(int courseId, int concurrentId)
-        {
-            if (concurrentId == 0 || concurrentId == 0)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+        //public async Task<ActionResult> Bet(int courseId, int concurrentId)
+        //{
+        //    if (concurrentId == 0 || concurrentId == 0)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
 
-            await Builder.SetBetAsync(courseId, concurrentId);
-            return Redirect("Details/" + concurrentId.ToString());
-        }
+        //    await Builder.SetBetAsync(courseId, concurrentId);
+        //    return Redirect("Details/" + concurrentId.ToString());
+        //}
     }
 }

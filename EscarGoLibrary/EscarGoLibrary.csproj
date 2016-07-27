@@ -122,6 +122,9 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CustomControllerAsync.cs" />
     <Compile Include="Models\CustomControllerCQRS.cs" />
+    <Compile Include="Repositories\CQRS\CompetitorComparer.cs" />
+    <Compile Include="Repositories\CQRS\CompetitorRepositoryCQRS.cs" />
+    <Compile Include="Repositories\CQRS\ICompetitorRepositoryCQRS.cs" />
     <Compile Include="Repositories\CQRS\IRaceRepositoryCQRS.cs" />
     <Compile Include="Repositories\CQRS\IUnitOfWorkCQRS.cs" />
     <Compile Include="Repositories\CQRS\RaceComparer.cs" />
@@ -164,6 +167,7 @@
     <Compile Include="Repositories\TicketRepository.cs" />
     <Compile Include="ViewModel\ConfirmationAchatViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBuilderAsync.cs" />
+    <Compile Include="ViewModel\ViewModelBuilderCQRS.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
