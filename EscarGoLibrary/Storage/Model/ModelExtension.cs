@@ -50,10 +50,20 @@ namespace EscarGoLibrary.Storage.Model
             course.CourseId = Convert.ToInt32(entity.PartitionKey);
             course.Label = entity.Label;
             course.Likes = entity.Likes;
-            //course.NbTickets=entity.Nb
             course.Pays = entity.Pays;
             course.SC = entity.SC;
             course.Ville = entity.Ville;
+
+            return course;
+        }
+
+        public static Course ToCourse(this CompetitorEntity entity)
+        {
+            Course course = new Course();
+            course.Date = entity.Date;
+            course.CourseId = Convert.ToInt32(entity.RowKey);
+            course.SC = entity.SC;
+            course.Label = entity.Course;
 
             return course;
         }

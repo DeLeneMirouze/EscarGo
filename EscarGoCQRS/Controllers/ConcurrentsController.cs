@@ -1,7 +1,6 @@
 ﻿using EscarGoLibrary.Models;
 using EscarGoLibrary.ViewModel;
 using System.Net;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace EscarGoCQRS.Controllers
@@ -17,13 +16,13 @@ namespace EscarGoCQRS.Controllers
         }
 
         // GET: Concurrents/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null || id.Value == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DetailConcurrentViewModel vm =await  Builder.GetDetailConcurrentViewModelAsync(id.Value);
+            DetailConcurrentViewModel vm = Builder.GetDetailConcurrentViewModelAsync(id.Value);
             if (vm.Concurrent == null)
             {
                 return HttpNotFound();

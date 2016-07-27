@@ -3,6 +3,7 @@ using EscarGoLibrary.Repositories.CQRS;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EscarGoLibrary.Storage.Model;
 
 namespace EscarGoLibrary.ViewModel
 {
@@ -26,18 +27,18 @@ namespace EscarGoLibrary.ViewModel
         #endregion
 
         #region GetDetailConcurrentViewModelAsync
-        public async Task<DetailConcurrentViewModel> GetDetailConcurrentViewModelAsync(int idConcurrent)
+        public DetailConcurrentViewModel GetDetailConcurrentViewModelAsync(int idConcurrent)
         {
             DetailConcurrentViewModel vm = new DetailConcurrentViewModel();
-            //vm.Concurrent = await _unitOfWorkAsync.CompetitorRepository.GetCompetitorByIdAsync(idConcurrent);
 
-            //var paris = await _unitOfWorkAsync.CompetitorRepository.GetBetsByCompetitorAsync(idConcurrent);
-            //vm.Courses = paris.OrderBy(p => p.Course.Date).Select(p => p.Course).ToList();
-            //foreach (var course in vm.Courses)
-            //{
-            //    Pari currentBet = paris.Where(p => p.CourseId == course.CourseId).First();
-            //    course.SC = currentBet.SC;
-            //}
+            var entities = _unitOfWorkAsync.CompetitorRepository.GetCompetitorDetail(idConcurrent);
+            vm.Concurrent = entities.FirstOrDefault().ToConcurrent();
+            foreach (var entity in entities)
+            {
+                Course course = entity.ToCourse();
+                vm.Courses.Add(course);
+            }
+            vm.Courses = vm.Courses.OrderBy(c => c.Date).ToList();
 
             return vm;
         }
