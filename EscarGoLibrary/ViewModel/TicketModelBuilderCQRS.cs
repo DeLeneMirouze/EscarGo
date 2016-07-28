@@ -1,8 +1,10 @@
 ﻿#region using
 using EscarGoLibrary.Models;
 using EscarGoLibrary.Repositories.CQRS;
+using EscarGoLibrary.Storage.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 #endregion
@@ -21,24 +23,28 @@ namespace EscarGoLibrary.ViewModel
         }
         #endregion
 
-        //#region GetTicketAsync
-        //public async Task<BuyTicketViewModel> GetTicketAsync(int courseId)
-        //{
-        //    BuyTicketViewModel vm = new BuyTicketViewModel();
+        #region GetTicketAsync
+        public async Task<BuyTicketViewModel> GetTicketAsync(int courseId)
+        {
+            BuyTicketViewModel vm = new BuyTicketViewModel();
 
-        //    List<Visiteur> visiteurs = await _unitOfWork.TicketRepositoryAsync.GetVisiteursAsync();
-        //    vm.Acheteurs = new SelectList(visiteurs, "Id", "Nom");
-        //    vm.Course = await _unitOfWork.RaceRepository.GetCourseByIdAsync(courseId);
-        //    vm.NbPlaces = 1;
+            List<Visiteur> visiteurs = await _unitOfWork.TicketRepositoryAsync.GetVisiteursAsync();
+            vm.Acheteurs = new SelectList(visiteurs, "Id", "Nom");
 
-        //    return vm;
-        //}
-        //#endregion
+            var entities = _unitOfWork.RaceRepository.GetRaceDetail(courseId);
+            vm.Course = entities.First().ToCourse();
+
+            vm.NbPlaces = 1;
+
+            return vm;
+        }
+        #endregion
 
         #region PostTicketAsync
         public async Task<ConfirmationAchatViewModel> PostTicketAsync(BuyTicketViewModel buyTicketViewModel)
         {
             ConfirmationAchatViewModel vm = new ConfirmationAchatViewModel();
+            vm.DateAchat = DateTime.Now;
             Ticket ticket = null;
 
             try

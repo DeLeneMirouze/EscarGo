@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace EscarGoCQRS.Controllers
 {
-    public class TicketsController: CustomControllerAsync
+    public class TicketsController: CustomControllerCQRS
     {
         // GET: Ticket
         public async Task<ActionResult> Buy(int courseId)

@@ -37,6 +37,7 @@ namespace EscarGoLibrary.ViewModel
         public async Task<ConfirmationAchatViewModel> PostTicketAsync(BuyTicketViewModel buyTicketViewModel)
         {
             ConfirmationAchatViewModel vm = new ConfirmationAchatViewModel();
+            vm.DateAchat = DateTime.Now;
             Ticket ticket = null;
 
             try
