@@ -12,5 +12,6 @@ namespace EscarGoLibrary.Storage.Model
         public int Likes { get; set; }
         public String Concurrent { get; set; }
         public double SC { get; set; }
+        public int NbTickets { get; set; }
     }
 }

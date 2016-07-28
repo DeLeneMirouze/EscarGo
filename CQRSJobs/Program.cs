@@ -1,4 +1,6 @@
 ﻿using Microsoft.Azure.WebJobs;
+using System;
+using System.Threading.Tasks;
 
 //http://blog.amitapple.com/post/2015/06/scheduling-azure-webjobs/#.V5TxvriLShc
 // http://stackoverflow.com/questions/36610952/azure-webjobs-vs-azure-functions-how-to-choose
@@ -18,11 +20,11 @@ namespace CQRSJobs
 
 
 
-            //Task callTask = host.CallAsync(typeof(Functions).GetMethod("ProcessCompetitors"));
-            //Console.WriteLine("Waiting for ReturnBonusReminder async Task");
+            Task callTask = host.CallAsync(typeof(Functions).GetMethod("ProcessRaces"));
+            Console.WriteLine("Waiting for ReturnBonusReminder async Task");
 
-            //callTask.Wait();
-            //Console.WriteLine("ReturnBonusReminder Task complete with status : {0}", callTask.Status);
+            callTask.Wait();
+            Console.WriteLine("ReturnBonusReminder Task complete with status : {0}", callTask.Status);
 
 
 

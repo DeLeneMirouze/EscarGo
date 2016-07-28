@@ -53,6 +53,7 @@ namespace EscarGoLibrary.Storage.Model
             raceEntity.Likes = course.Likes;
             raceEntity.SC = course.SC;
             raceEntity.Ville = course.Ville;
+            raceEntity.NbTickets = course.NbTickets;
 
             return raceEntity;
         }
@@ -67,6 +68,7 @@ namespace EscarGoLibrary.Storage.Model
             course.Pays = entity.Pays;
             course.SC = entity.SC;
             course.Ville = entity.Ville;
+            course.NbTickets = entity.NbTickets;
 
             return course;
         }
