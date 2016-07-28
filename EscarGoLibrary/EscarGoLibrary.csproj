@@ -153,6 +153,7 @@
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="ViewModel\TicketModelBuilder.cs" />
     <Compile Include="ViewModel\TicketModelBuilderAsync.cs" />
+    <Compile Include="ViewModel\TicketModelBuilderCQRS.cs" />
     <Compile Include="ViewModel\ViewModelBuilder.cs" />
     <Compile Include="Models\Visiteur.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

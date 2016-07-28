@@ -43,28 +43,6 @@ namespace EscarGoLibrary.Repositories.CQRS
         }
         #endregion
 
-        #region GetRacesByCompetitor
-        public async Task<List<Course>> GetRacesByCompetitor(int id)
-        {
-            List<Pari> paris = await Context.Paris
-                .Include("Course")
-                .Where(p => p.ConcurrentId == id).ToListAsync();
-            var courses = paris.OrderBy(p => p.Course.Date).Select(p => p.Course).ToList();
-
-            return courses;
-        }
-        #endregion
-
-        #region GetBetsByCompetitor
-        public async Task<List<Pari>> GetBetsByCompetitorAsync(int id)
-        {
-            var paris = await Context.Paris
-                .Include("Course")
-                .Where(p => p.ConcurrentId == id).ToListAsync();
-            return paris;
-        }
-        #endregion
-
         #region GetBetsByRace
 
         public async Task<List<Pari>> GetBetsByRace(int idCourse)

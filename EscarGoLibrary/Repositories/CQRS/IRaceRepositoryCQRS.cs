@@ -1,4 +1,5 @@
 ﻿using EscarGoLibrary.Models;
+using EscarGoLibrary.Storage.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,8 +9,7 @@ namespace EscarGoLibrary.Repositories.CQRS
     {
         Task LikeAsync(int idCourse);
         void Create(Course course);
-        Task<List<Concurrent>> GetConcurrentsByRaceAsync(int idCourse);
-        Task<Course> GetCourseByIdAsync(int id);
+        List<RaceEntity> GetRaceDetail(int idRace);
         List<Course> GetRaces();
     }
 }

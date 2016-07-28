@@ -5,6 +5,7 @@ namespace EscarGoLibrary.Storage.Model
 {
     public static class ModelExtension
     {
+        #region Concurrent
         public static Concurrent ToConcurrent(this CompetitorEntity entity)
         {
             Concurrent concurrent = new Concurrent();
@@ -18,6 +19,16 @@ namespace EscarGoLibrary.Storage.Model
             return concurrent;
         }
 
+        public static Concurrent ToConcurrent(this RaceEntity entity)
+        {
+            Concurrent concurrent = new Concurrent();
+            concurrent.Nom = entity.Concurrent;
+            concurrent.ConcurrentId = Convert.ToInt32(entity.PartitionKey);
+            concurrent.SC = entity.SC;
+
+            return concurrent;
+        }
+
         public static CompetitorEntity ToCompetitorEntity(this Concurrent concurrent)
         {
             CompetitorEntity competitorEntity = new CompetitorEntity();
@@ -26,9 +37,12 @@ namespace EscarGoLibrary.Storage.Model
             competitorEntity.Nom = concurrent.Nom;
             competitorEntity.Entraineur = concurrent.Entraineur.Nom;
             competitorEntity.Defaites = concurrent.Defaites;
-     
+
             return competitorEntity;
-        }
+        } 
+        #endregion
+
+        #region Course
 
         public static RaceEntity ToRaceEntity(this Course course)
         {
@@ -66,6 +80,7 @@ namespace EscarGoLibrary.Storage.Model
             course.Label = entity.Course;
 
             return course;
-        }
+        } 
+        #endregion
     }
 }

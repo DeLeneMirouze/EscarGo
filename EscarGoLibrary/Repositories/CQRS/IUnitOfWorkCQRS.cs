@@ -8,5 +8,6 @@ namespace EscarGoLibrary.Repositories.CQRS
         Task SaveAsync();
         IRaceRepositoryCQRS RaceRepository { get;  }
         ICompetitorRepositoryCQRS CompetitorRepository { get; }
+        ITicketRepositoryAsync TicketRepositoryAsync { get; }
     }
 }

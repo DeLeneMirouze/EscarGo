@@ -1,6 +1,7 @@
 ﻿using EscarGoLibrary.Models;
 using EscarGoLibrary.ViewModel;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace EscarGoCQRS.Controllers
@@ -30,15 +31,15 @@ namespace EscarGoCQRS.Controllers
             return View(vm);
         }
 
-        //public async Task<ActionResult> Bet(int courseId, int concurrentId)
-        //{
-        //    if (concurrentId == 0 || concurrentId == 0)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
+        public async Task<ActionResult> Bet(int courseId, int concurrentId)
+        {
+            if (concurrentId == 0 || concurrentId == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
-        //    await Builder.SetBetAsync(courseId, concurrentId);
-        //    return Redirect("Details/" + concurrentId.ToString());
-        //}
+            await Builder.SetBetAsync(courseId, concurrentId);
+            return Redirect("Details/" + concurrentId.ToString());
+        }
     }
 }

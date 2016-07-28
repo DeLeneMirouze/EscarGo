@@ -111,6 +111,24 @@ namespace EscarGoLibrary.Storage.Repository
         }
         #endregion
 
+        #region GetRaceById
+        public List<RaceEntity> GetRaceById(int idRace)
+        {
+            String partitionFilter = TableQuery.GenerateFilterCondition("PartitionKey",
+                QueryComparisons.Equal,
+                idRace.ToString());
+            TableQuery<RaceEntity> partitionQuery = new TableQuery<RaceEntity>().Where(partitionFilter);
+
+            var entities = _raceTable.ExecuteQuery(partitionQuery);
+            if (entities == null)
+            {
+                return null;
+            }
+
+            return entities.ToList();
+        }
+        #endregion
+
         #region GetTable (private)
         private CloudTable GetTable(string name)
         {

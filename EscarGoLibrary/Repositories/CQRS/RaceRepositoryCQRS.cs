@@ -1,5 +1,6 @@
 ﻿#region using
 using EscarGoLibrary.Models;
+using EscarGoLibrary.Storage.Model;
 using EscarGoLibrary.Storage.Repository;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -34,25 +35,12 @@ namespace EscarGoLibrary.Repositories.CQRS
         }
         #endregion
 
-        #region GetRaceById
-        public async Task<Course> GetCourseByIdAsync(int id)
+        #region GetRaceDetail
+        public List<RaceEntity> GetRaceDetail(int idRace)
         {
-            var course = await Context.Courses
-          .FirstOrDefaultAsync(c => c.CourseId == id);
+            List<RaceEntity>  entities = _storageRepository.GetRaceById(idRace);
 
-            return course;
-        }
-        #endregion
-
-        #region GetConcurrentsByRace
-        public async Task<List<Concurrent>> GetConcurrentsByRaceAsync(int idCourse)
-        {
-            var courses = await Context.Courses
-                .Where(c => c.CourseId == idCourse)
-                .SelectMany(c => c.Concurrents)
-                .OrderBy(c => c.Nom)
-                .ToListAsync();
-            return courses;
+            return entities;
         }
         #endregion
 

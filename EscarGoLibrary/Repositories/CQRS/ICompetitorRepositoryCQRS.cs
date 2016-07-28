@@ -9,6 +9,7 @@ namespace EscarGoLibrary.Repositories.CQRS
     {
         List<Concurrent> GetCompetitors();
         List<CompetitorEntity> GetCompetitorDetail(int id);
-        Task<List<Pari>> GetBetsByCompetitorAsync(int id);
+        Task SetBetAsync(int idCourse, int concurrentId);
+        Task<List<Pari>> GetBetsByRace(int idCourse);
     }
 }

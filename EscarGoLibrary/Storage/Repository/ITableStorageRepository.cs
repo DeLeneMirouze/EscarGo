@@ -11,5 +11,6 @@ namespace EscarGoLibrary.Storage.Repository
         void SetCompetitors(List<CompetitorEntity> competitors);
         void SetRaces(List<RaceEntity> races);
         List<CompetitorEntity> GetCompetitorInfo(int idCompetitor);
+        List<RaceEntity> GetRaceById(int idRace);
     }
 }

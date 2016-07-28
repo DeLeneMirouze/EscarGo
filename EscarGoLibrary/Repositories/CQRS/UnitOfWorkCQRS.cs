@@ -60,6 +60,26 @@ namespace EscarGoLibrary.Repositories.CQRS
         }
         #endregion
 
+        #region TicketRepositoryAsync
+        ITicketRepositoryAsync _ticketRepository;
+        public ITicketRepositoryAsync TicketRepositoryAsync
+        {
+            get
+            {
+                if (_ticketRepository == null)
+                {
+                    _ticketRepository = new TicketRepository(_context);
+                }
+                return _ticketRepository;
+            }
+            private set
+            {
+
+                _ticketRepository = value;
+            }
+        }
+        #endregion
+
         #region Dispose
         private bool disposed = false;
 
