@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace EscarGoLibrary.Repositories
+namespace EscarGoLibrary.Repositories.Async
 {
     public class UnitOfWorkAsync : IDisposable, IUnitOfWorkAsync
     {
@@ -22,7 +22,7 @@ namespace EscarGoLibrary.Repositories
             {
                 if (_competitorRepository == null)
                 {
-                    _competitorRepository = new CompetitorRepository(_context);
+                    _competitorRepository = new CompetitorRepositoryAsync(_context);
                 }
                 return _competitorRepository;
             }
@@ -42,7 +42,7 @@ namespace EscarGoLibrary.Repositories
             {
                 if (_courseRepository == null)
                 {
-                    _courseRepository = new RaceRepository(_context);
+                    _courseRepository = new RaceRepositoryAsync(_context);
                 }
                 return _courseRepository;
             }

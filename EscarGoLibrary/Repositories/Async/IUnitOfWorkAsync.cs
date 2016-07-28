@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace EscarGoLibrary.Repositories
+namespace EscarGoLibrary.Repositories.Async
 {
-    public interface IUnitOfWorkAsync: IDisposable
+    public interface IUnitOfWorkAsync : IDisposable
     {
         ICompetitorRepositoryAsync CompetitorRepositoryAsync { get; }
         IRaceRepositoryAsync RaceRepositoryAsync { get; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EscarGoLibrary.Repositories.Async;
+using System;
 using System.Threading.Tasks;
 
 namespace EscarGoLibrary.Repositories.CQRS

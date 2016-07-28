@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace EscarGoLibrary.Repositories
+namespace EscarGoLibrary.Repositories.Async
 {
-    public interface ICompetitorRepositoryAsync: IDisposable
+    public interface ICompetitorRepositoryAsync : IDisposable
     {
         Task<List<Pari>> GetBetsByRaceAsync(int idCourse);
         Task<List<Concurrent>> GetCompetitorsAsync();

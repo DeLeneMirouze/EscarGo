@@ -5,14 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 #endregion
 
-namespace EscarGoLibrary.Repositories
+namespace EscarGoLibrary.Repositories.Async
 {
-    public class RaceRepository : BaseDataRepository, IRaceRepository
+    public class RaceRepositoryAsync : BaseDataRepository, IRaceRepositoryAsync
     {
         #region Constructeur
-        public RaceRepository(EscarGoContext context) : base(context)
+        public RaceRepositoryAsync(EscarGoContext context) : base(context)
         {
 
         }
@@ -36,45 +37,42 @@ namespace EscarGoLibrary.Repositories
             return query;
         }
 
-        public List<Course> GetRaces(int recordsPerPage, int currentPage)
+        public async Task<List<Course>> GetRacesAsync(int recordsPerPage, int currentPage)
         {
             var req = GetRequest(recordsPerPage, currentPage);
-            List<Course> races = req.ToList();
+            List<Course> races = await req.ToListAsync();
 
             if (races.Count == 0 && currentPage > 0)
             {
                 currentPage--;
                 req = GetRequest(recordsPerPage, currentPage);
-                races = req.ToList();
+                races = await req.ToListAsync();
             }
 
             return races;
         }
-
         #endregion
 
         #region GetRaceById
-        public Course GetRaceById(int id)
+        public async Task<Course> GetCourseByIdAsync(int id)
         {
-            var course = Context.Courses
-          .FirstOrDefault(c => c.CourseId == id);
+            var course = await Context.Courses
+          .FirstOrDefaultAsync(c => c.CourseId == id);
 
             return course;
         }
-
         #endregion
 
         #region GetConcurrentsByRace
-        public List<Concurrent> GetConcurrentsByRace(int idCourse)
+        public async Task<List<Concurrent>> GetConcurrentsByRaceAsync(int idCourse)
         {
-            var courses = Context.Courses
+            var courses = await Context.Courses
                 .Where(c => c.CourseId == idCourse)
                 .SelectMany(c => c.Concurrents)
                 .OrderBy(c => c.Nom)
-                .ToList();
+                .ToListAsync();
             return courses;
         }
-
         #endregion
 
         #region Create
@@ -85,12 +83,11 @@ namespace EscarGoLibrary.Repositories
         #endregion
 
         #region Like
-        public void Like(int idCourse)
+        public async Task LikeAsync(int idCourse)
         {
-            Course course = Context.Courses.FirstOrDefault(c => c.CourseId == idCourse);
+            Course course = await Context.Courses.FirstOrDefaultAsync(c => c.CourseId == idCourse);
             course.Likes++;
         }
- 
         #endregion
     }
 }

@@ -122,6 +122,13 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CustomControllerAsync.cs" />
     <Compile Include="Models\CustomControllerCQRS.cs" />
+    <Compile Include="Repositories\Async\CompetitorRepositoryAsync.cs" />
+    <Compile Include="Repositories\Async\ICompetitorRepositoryAsync.cs" />
+    <Compile Include="Repositories\Async\IRaceRepositoryAsync.cs" />
+    <Compile Include="Repositories\Async\ITicketRepositoryAsync.cs" />
+    <Compile Include="Repositories\Async\IUnitOfWorkAsync.cs" />
+    <Compile Include="Repositories\Async\RaceRepositoryAsync.cs" />
+    <Compile Include="Repositories\Async\UnitOfWorkAsync.cs" />
     <Compile Include="Repositories\CQRS\CompetitorComparer.cs" />
     <Compile Include="Repositories\CQRS\CompetitorRepositoryCQRS.cs" />
     <Compile Include="Repositories\CQRS\ICompetitorRepositoryCQRS.cs" />
@@ -130,13 +137,8 @@
     <Compile Include="Repositories\CQRS\RaceComparer.cs" />
     <Compile Include="Repositories\CQRS\RaceRepositoryCQRS.cs" />
     <Compile Include="Repositories\CQRS\UnitOfWorkCQRS.cs" />
-    <Compile Include="Repositories\ICompetitorRepositoryAsync.cs" />
-    <Compile Include="Repositories\IRaceRepositoryAsync.cs" />
-    <Compile Include="Repositories\ITicketRepositoryAsync.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />
-    <Compile Include="Repositories\IUnitOfWorkAsync.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
-    <Compile Include="Repositories\UnitOfWorkAsync.cs" />
     <Compile Include="Storage\Model\CompetitorEntity.cs" />
     <Compile Include="Storage\Model\ModelExtension.cs" />
     <Compile Include="Storage\Model\RaceEntity.cs" />

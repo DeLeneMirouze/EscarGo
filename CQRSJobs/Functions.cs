@@ -1,6 +1,7 @@
 ﻿#region using
 using EscarGoLibrary.Models;
 using EscarGoLibrary.Repositories;
+using EscarGoLibrary.Repositories.Async;
 using EscarGoLibrary.Storage.Model;
 using EscarGoLibrary.Storage.Repository;
 using Microsoft.Azure.WebJobs;
@@ -24,9 +25,9 @@ namespace CQRSJobs
         static Functions()
         {
             context = new EscarGoContext();
-            _competitorRepository = new CompetitorRepository(context);
+            _competitorRepository = new CompetitorRepositoryAsync(context);
             _storage = new TableStorageRepository();
-            _raceRepository = new RaceRepository(context);
+            _raceRepository = new RaceRepositoryAsync(context);
         } 
         #endregion
 
