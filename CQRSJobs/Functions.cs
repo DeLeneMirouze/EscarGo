@@ -12,6 +12,8 @@ using System.Linq;
 using System.Threading.Tasks;
 #endregion
 
+//https://escargo.scm.azurewebsites.net/api/triggeredwebjobs/CQRSJobs/run
+
 namespace CQRSJobs
 {
     public sealed class Functions
@@ -28,13 +30,14 @@ namespace CQRSJobs
             _competitorRepository = new CompetitorRepositoryAsync(context);
             _storage = new TableStorageRepository();
             _raceRepository = new RaceRepositoryAsync(context);
-        } 
+        }
         #endregion
 
         #region ProcessCompetitors
         [NoAutomaticTrigger]
         public static async Task ProcessCompetitors(TextWriter log)
         {
+            
             try
             {
                 List<Concurrent> concurrents = await _competitorRepository.GetCompetitorsAsync();
@@ -72,6 +75,7 @@ namespace CQRSJobs
 
         #region ProcessRaces
         [NoAutomaticTrigger]
+        //[Disable("ProcessRaces")]
         public static async Task ProcessRaces(TextWriter log)
         {
             try

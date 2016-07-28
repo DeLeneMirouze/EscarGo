@@ -3,12 +3,6 @@
   "WebJobs": [
     {
       "filePath": "../CQRSJobs/CQRSJobs.csproj"
-    },
-    {
-      "filePath": "../CQRSJobs/CQRSJobs.csproj"
-    },
-    {
-      "filePath": "../CQRSJobs/CQRSJobs.csproj"
     }
   ]
 }
