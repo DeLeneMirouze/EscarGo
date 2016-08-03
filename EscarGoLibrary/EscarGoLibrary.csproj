@@ -120,8 +120,6 @@
       <DependentUpon>201606240650551_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\CustomControllerAsync.cs" />
-    <Compile Include="Models\CustomControllerCQRS.cs" />
     <Compile Include="Repositories\Async\CompetitorRepositoryAsync.cs" />
     <Compile Include="Repositories\Async\ICompetitorRepositoryAsync.cs" />
     <Compile Include="Repositories\Async\IRaceRepositoryAsync.cs" />
@@ -147,7 +145,6 @@
     <Compile Include="ViewModel\BuyTicketViewModel.cs" />
     <Compile Include="Models\Concurrent.cs" />
     <Compile Include="Models\Course.cs" />
-    <Compile Include="Models\CustomController.cs" />
     <Compile Include="ViewModel\DetailConcurrentViewModel.cs" />
     <Compile Include="ViewModel\DetailCourseViewModel.cs" />
     <Compile Include="Models\Entraineur.cs" />

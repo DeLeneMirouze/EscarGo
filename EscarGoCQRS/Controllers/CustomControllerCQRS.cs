@@ -2,9 +2,9 @@
 using EscarGoLibrary.ViewModel;
 using System.Web.Mvc;
 
-namespace EscarGoLibrary.Models
+namespace EscarGoCQRS.Controllers
 {
-    public abstract class CustomControllerCQRS: Controller
+    public abstract class CustomControllerCQRS : Controller
     {
         #region Constructeur
         protected CustomControllerCQRS()
@@ -18,8 +18,6 @@ namespace EscarGoLibrary.Models
         protected IUnitOfWorkCQRS UnitOfWork { get; set; }
         protected ViewModelBuilderCQRS Builder { get; set; }
         protected TicketModelBuilderCQRS TicketModelBuilder { get; set; }
-
-        protected const int RecordsPerPage = 6;
 
         #region Dispose
         protected override void Dispose(bool disposing)

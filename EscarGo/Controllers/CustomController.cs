@@ -2,7 +2,7 @@
 using EscarGoLibrary.ViewModel;
 using System.Web.Mvc;
 
-namespace EscarGoLibrary.Models
+namespace EscarGo.Controllers
 {
     public abstract class CustomController : Controller
     {
@@ -17,7 +17,7 @@ namespace EscarGoLibrary.Models
 
         protected IUnitOfWork UnitOfWork { get; set; }
         protected ViewModelBuilder Builder { get; set; }
-        protected TicketModelBuilder TicketModelBuilder {get;set;}
+        protected TicketModelBuilder TicketModelBuilder { get; set; }
 
         protected const int RecordsPerPage = 6;
 
@@ -29,7 +29,7 @@ namespace EscarGoLibrary.Models
                 UnitOfWork.Dispose();
             }
             base.Dispose(disposing);
-        } 
+        }
         #endregion
     }
 }

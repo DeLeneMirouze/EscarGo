@@ -1,11 +1,10 @@
-﻿using EscarGoLibrary.Repositories;
-using EscarGoLibrary.Repositories.Async;
+﻿using EscarGoLibrary.Repositories.Async;
 using EscarGoLibrary.ViewModel;
 using System.Web.Mvc;
 
-namespace EscarGoLibrary.Models
+namespace EscarGoAsync.Controllers
 {
-    public abstract class CustomControllerAsync: Controller
+    public abstract class CustomControllerAsync : Controller
     {
         #region Constructeur
         protected CustomControllerAsync()

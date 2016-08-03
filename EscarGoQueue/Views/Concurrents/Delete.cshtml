@@ -1,0 +1,56 @@
+﻿@model EscarGoLibrary.Models.Concurrent
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Concurrent</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Victoires)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Victoires)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Defaites)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Defaites)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Entraineur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Entraineur)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

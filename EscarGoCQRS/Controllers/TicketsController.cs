@@ -1,5 +1,4 @@
-﻿using EscarGoLibrary.Models;
-using EscarGoLibrary.ViewModel;
+﻿using EscarGoLibrary.ViewModel;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
