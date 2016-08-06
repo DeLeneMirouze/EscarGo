@@ -1,9 +1,9 @@
 ﻿{
   "$schema": "http://schemastore.org/schemas/json/webjob-publish-settings.json",
   "webJobName": "CQRSJobs",
-  "startTime": null,
-  "endTime": null,
-  "jobRecurrenceFrequency": null,
-  "interval": null,
-  "runMode": "OnDemand"
+  "startTime": "2016-08-06T00:00:00+01:00",
+  "endTime": "2016-08-07T00:00:00+01:00",
+  "jobRecurrenceFrequency": "Minute",
+  "interval": 2,
+  "runMode": "Scheduled"
 }
