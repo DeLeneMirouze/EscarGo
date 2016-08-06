@@ -140,7 +140,9 @@
     <Compile Include="Storage\Model\CompetitorEntity.cs" />
     <Compile Include="Storage\Model\ModelExtension.cs" />
     <Compile Include="Storage\Model\RaceEntity.cs" />
+    <Compile Include="Storage\Repository\IQueueRepositoryAsync.cs" />
     <Compile Include="Storage\Repository\ITableStorageRepository.cs" />
+    <Compile Include="Storage\Repository\QueueRepository.cs" />
     <Compile Include="Storage\Repository\TableStorageRepository.cs" />
     <Compile Include="ViewModel\BuyTicketViewModel.cs" />
     <Compile Include="Models\Concurrent.cs" />
