@@ -127,15 +127,15 @@
     <Compile Include="Repositories\Async\IUnitOfWorkAsync.cs" />
     <Compile Include="Repositories\Async\RaceRepositoryAsync.cs" />
     <Compile Include="Repositories\Async\UnitOfWorkAsync.cs" />
-    <Compile Include="Repositories\CQRS\CompetitorComparer.cs" />
+    <Compile Include="Repositories\CompetitorComparer.cs" />
     <Compile Include="Repositories\CQRS\CompetitorRepositoryCQRS.cs" />
     <Compile Include="Repositories\CQRS\ICompetitorRepositoryCQRS.cs" />
     <Compile Include="Repositories\CQRS\IRaceRepositoryCQRS.cs" />
     <Compile Include="Repositories\CQRS\IUnitOfWorkCQRS.cs" />
-    <Compile Include="Repositories\CQRS\RaceComparer.cs" />
     <Compile Include="Repositories\CQRS\RaceRepositoryCQRS.cs" />
     <Compile Include="Repositories\CQRS\UnitOfWorkCQRS.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />
+    <Compile Include="Repositories\RaceComparer.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
     <Compile Include="Storage\Model\CompetitorEntity.cs" />
     <Compile Include="Storage\Model\ModelExtension.cs" />
@@ -160,7 +160,6 @@
     <Compile Include="Repositories\CompetitorRepository.cs" />
     <Compile Include="Repositories\RaceRepository.cs" />
     <Compile Include="Repositories\EscarGoContext.cs" />
-    <Compile Include="Repositories\IAzureTableRepository.cs" />
     <Compile Include="Repositories\ICompetitorRepository.cs" />
     <Compile Include="Repositories\IRaceRepository.cs" />
     <Compile Include="Repositories\ITicketRepository.cs" />

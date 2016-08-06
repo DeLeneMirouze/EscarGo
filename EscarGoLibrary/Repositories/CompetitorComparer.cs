@@ -1,9 +1,13 @@
 ﻿using EscarGoLibrary.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace EscarGoLibrary.Repositories.CQRS
+namespace EscarGoLibrary.Repositories
 {
-    public class CompetitorComparer: IEqualityComparer<Concurrent>
+    public class CompetitorComparer : IEqualityComparer<Concurrent>
     {
         public bool Equals(Concurrent x, Concurrent y)
         {

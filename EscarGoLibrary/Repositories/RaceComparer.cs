@@ -1,11 +1,11 @@
 ﻿using EscarGoLibrary.Models;
 using System.Collections.Generic;
 
-namespace EscarGoLibrary.Repositories.CQRS
+namespace EscarGoLibrary.Repositories
 {
     public class RaceComparer : IEqualityComparer<Course>
     {
- 
+
 
         public bool Equals(Course x, Course y)
         {
