@@ -69,7 +69,7 @@ namespace EscarGoLibrary.Repositories.CQRS
             {
                 if (_ticketRepository == null)
                 {
-                    _ticketRepository = new TicketRepository(_context);
+                    _ticketRepository = new TicketRepositoryAsync(_context);
                 }
                 return _ticketRepository;
             }

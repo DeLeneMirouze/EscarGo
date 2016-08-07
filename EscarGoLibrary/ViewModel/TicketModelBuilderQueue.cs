@@ -1,5 +1,4 @@
 ﻿#region using
-using EscarGoLibrary.Models;
 using EscarGoLibrary.Repositories.CQRS;
 using EscarGoLibrary.Storage.Repository;
 using System;
@@ -25,11 +24,10 @@ namespace EscarGoLibrary.ViewModel
         {
             ConfirmationAchatViewModel vm = new ConfirmationAchatViewModel();
             vm.DateAchat = DateTime.Now;
-            Ticket ticket = null;
 
             try
             {
-                string message = string.Format("{0},{2},{3}", buyTicketViewModel.Course.CourseId, buyTicketViewModel.AcheteurSelectionne, buyTicketViewModel.NbPlaces);
+                string message = string.Format("{0},{1},{2}", buyTicketViewModel.Course.CourseId, buyTicketViewModel.AcheteurSelectionne, buyTicketViewModel.NbPlaces);
                 await _queueRepositoryAsync.AddMessageAsync(message);
 
                 vm.EstEnregistre = true;
@@ -43,7 +41,7 @@ namespace EscarGoLibrary.ViewModel
             if (vm.EstEnregistre)
             {
                 vm.Message = "Nous avons pré-enregistré votre achat. Vous devez attendre sa confirmation par email pour qu'il soit définitif";
-                vm.NbTickets = ticket.NbPlaces;
+                vm.NbTickets = buyTicketViewModel.NbPlaces;
             }
             else
             {

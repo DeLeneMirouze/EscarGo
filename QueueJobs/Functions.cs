@@ -1,6 +1,6 @@
 ﻿#region using
 using EscarGoLibrary.Repositories;
-using EscarGoLibrary.Repositories.Async;
+using EscarGoLibrary.Repositories.CQRS;
 using EscarGoLibrary.Storage.Repository;
 using Microsoft.Azure.WebJobs;
 using System;
@@ -14,14 +14,14 @@ namespace QueueJobs
     {
         #region Constructeur
         static readonly IQueueRepositoryAsync _queueRepositoryAsync;
-        static readonly ITicketRepositoryAsync _ticketRepositoryAsync;
         static EscarGoContext context;
+        static readonly IUnitOfWorkCQRS _unitOfWork;
 
         static Functions()
         {
             context = new EscarGoContext();
             _queueRepositoryAsync = new QueueRepositoryAsync();
-            _ticketRepositoryAsync = new TicketRepository(context);
+            _unitOfWork = new UnitOfWorkCQRS();
         }
         #endregion
 
@@ -37,15 +37,16 @@ namespace QueueJobs
                     if (string.IsNullOrWhiteSpace(message))
                     {
                         await log.WriteLineAsync("Pas de message");
-                        break;
-                    }
+                    break;
+                }
 
                     string[] splitted = message.Split(',');
 
                     int courseId = Convert.ToInt32(splitted[0]);
                     int visiteurId = Convert.ToInt32(splitted[1]);
                     int nbPlaces = Convert.ToInt32(splitted[2]);
-                    await _ticketRepositoryAsync.AddTicketAsync(courseId, visiteurId, nbPlaces);
+                    await _unitOfWork.TicketRepositoryAsync.AddTicketAsync(courseId, visiteurId, nbPlaces);
+                    await _unitOfWork.SaveAsync();
 
                     await log.WriteLineAsync("Enregistrement de la vente réussie");
                 }

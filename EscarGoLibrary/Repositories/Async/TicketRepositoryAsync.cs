@@ -1,30 +1,32 @@
-﻿#region using
-using EscarGoLibrary.Models;
+﻿using EscarGoLibrary.Models;
 using System;
+#region using
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 #endregion
 
-namespace EscarGoLibrary.Repositories
+namespace EscarGoLibrary.Repositories.Async
 {
-    public sealed class TicketRepository: BaseDataRepository, ITicketRepository
+    public class TicketRepositoryAsync: BaseDataRepository,  ITicketRepositoryAsync
     {
         #region Constructeur
-        public TicketRepository(EscarGoContext context) : base(context)
+        public TicketRepositoryAsync(EscarGoContext context) : base(context)
         {
 
         }
         #endregion
 
         #region GetVisiteurs
-        public List<Visiteur> GetVisiteurs()
+        public async Task<List<Visiteur>> GetVisiteursAsync()
         {
-            return Context.Visiteurs.OrderBy(v => v.Nom).ToList();
+            return await Context.Visiteurs.OrderBy(v => v.Nom).ToListAsync();
         }
         #endregion
 
         #region AddTicket
-        public Ticket AddTicket(int courseId, int visiteurId, int nbPlaces)
+        public async Task<Ticket> AddTicketAsync(int courseId, int visiteurId, int nbPlaces)
         {
             // enregistre la demande d'achat
             Ticket ticket = new Ticket();
@@ -36,7 +38,7 @@ namespace EscarGoLibrary.Repositories
             Context.Tickets.Add(ticket);
 
             // confirme la demande
-            Course course = Context.Courses.First(c => c.CourseId == courseId);
+            Course course = await Context.Courses.FirstAsync(c => c.CourseId == courseId);
             if (course == null || course.NbTickets < nbPlaces)
             {
                 return null;

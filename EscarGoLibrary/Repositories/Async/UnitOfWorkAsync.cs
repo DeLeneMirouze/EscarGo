@@ -62,7 +62,7 @@ namespace EscarGoLibrary.Repositories.Async
             {
                 if (_ticketRepository == null)
                 {
-                    _ticketRepository = new TicketRepository(_context);
+                    _ticketRepository = new TicketRepositoryAsync(_context);
                 }
                 return _ticketRepository;
             }

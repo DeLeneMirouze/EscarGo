@@ -126,6 +126,7 @@
     <Compile Include="Repositories\Async\ITicketRepositoryAsync.cs" />
     <Compile Include="Repositories\Async\IUnitOfWorkAsync.cs" />
     <Compile Include="Repositories\Async\RaceRepositoryAsync.cs" />
+    <Compile Include="Repositories\Async\TicketRepositoryAsync.cs" />
     <Compile Include="Repositories\Async\UnitOfWorkAsync.cs" />
     <Compile Include="Repositories\CompetitorComparer.cs" />
     <Compile Include="Repositories\CQRS\CompetitorRepositoryCQRS.cs" />
