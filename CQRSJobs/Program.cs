@@ -23,6 +23,7 @@ namespace CQRSJobs
             config.UseTimers();
             var host = new JobHost(config);
 
+
             host.Call(typeof(Functions).GetMethod("ProcessRaces"));
             host.Call(typeof(Functions).GetMethod("ProcessCompetitors"));
 

@@ -37,7 +37,7 @@ namespace CQRSJobs
         [NoAutomaticTrigger]
         public static async Task ProcessCompetitors(TextWriter log)
         {
-            
+
             try
             {
                 List<Concurrent> concurrents = await _competitorRepository.GetCompetitorsAsync();

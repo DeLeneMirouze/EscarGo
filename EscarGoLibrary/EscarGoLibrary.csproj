@@ -142,7 +142,7 @@
     <Compile Include="Storage\Model\RaceEntity.cs" />
     <Compile Include="Storage\Repository\IQueueRepositoryAsync.cs" />
     <Compile Include="Storage\Repository\ITableStorageRepository.cs" />
-    <Compile Include="Storage\Repository\QueueRepository.cs" />
+    <Compile Include="Storage\Repository\QueueRepositoryAsync.cs" />
     <Compile Include="Storage\Repository\TableStorageRepository.cs" />
     <Compile Include="ViewModel\BuyTicketViewModel.cs" />
     <Compile Include="Models\Concurrent.cs" />
@@ -155,6 +155,7 @@
     <Compile Include="ViewModel\TicketModelBuilder.cs" />
     <Compile Include="ViewModel\TicketModelBuilderAsync.cs" />
     <Compile Include="ViewModel\TicketModelBuilderCQRS.cs" />
+    <Compile Include="ViewModel\TicketModelBuilderQueue.cs" />
     <Compile Include="ViewModel\ViewModelBuilder.cs" />
     <Compile Include="Models\Visiteur.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

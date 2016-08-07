@@ -14,12 +14,12 @@ namespace EscarGoLibrary.ViewModel
     public class TicketModelBuilderCQRS
     {
         #region Constructeur
-        readonly IUnitOfWorkCQRS _unitOfWork;
+        protected readonly IUnitOfWorkCQRS UnitOfWork;
 
 
         public TicketModelBuilderCQRS(IUnitOfWorkCQRS unitOfWork)
         {
-            _unitOfWork = unitOfWork;
+            UnitOfWork = unitOfWork;
         }
         #endregion
 
@@ -28,10 +28,10 @@ namespace EscarGoLibrary.ViewModel
         {
             BuyTicketViewModel vm = new BuyTicketViewModel();
 
-            List<Visiteur> visiteurs = await _unitOfWork.TicketRepositoryAsync.GetVisiteursAsync();
+            List<Visiteur> visiteurs = await UnitOfWork.TicketRepositoryAsync.GetVisiteursAsync();
             vm.Acheteurs = new SelectList(visiteurs, "Id", "Nom");
 
-            var entities = _unitOfWork.RaceRepository.GetRaceDetail(courseId);
+            var entities = UnitOfWork.RaceRepository.GetRaceDetail(courseId);
             vm.Course = entities.First().ToCourse();
 
             vm.NbPlaces = 1;
@@ -40,8 +40,8 @@ namespace EscarGoLibrary.ViewModel
         }
         #endregion
 
-        #region PostTicketAsync
-        public async Task<ConfirmationAchatViewModel> PostTicketAsync(BuyTicketViewModel buyTicketViewModel)
+        #region PostTicketAsync (virtual)
+        public virtual async Task<ConfirmationAchatViewModel> PostTicketAsync(BuyTicketViewModel buyTicketViewModel)
         {
             ConfirmationAchatViewModel vm = new ConfirmationAchatViewModel();
             vm.DateAchat = DateTime.Now;
@@ -49,8 +49,8 @@ namespace EscarGoLibrary.ViewModel
 
             try
             {
-                ticket = await _unitOfWork.TicketRepositoryAsync.AddTicketAsync(buyTicketViewModel.Course.CourseId, buyTicketViewModel.AcheteurSelectionne, buyTicketViewModel.NbPlaces);
-                await _unitOfWork.SaveAsync();
+                ticket = await UnitOfWork.TicketRepositoryAsync.AddTicketAsync(buyTicketViewModel.Course.CourseId, buyTicketViewModel.AcheteurSelectionne, buyTicketViewModel.NbPlaces);
+                await UnitOfWork.SaveAsync();
 
                 vm.EstEnregistre = (ticket != null);
 
