@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace EscarGoQueue
+namespace EscarGoCache
 {
     public class BundleConfig
     {

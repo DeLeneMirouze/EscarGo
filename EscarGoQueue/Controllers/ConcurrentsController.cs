@@ -3,7 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace EscarGoQueue.Controllers
+namespace EscarGoCache.Controllers
 {
     public class ConcurrentsController : CustomControllerQueue
     {

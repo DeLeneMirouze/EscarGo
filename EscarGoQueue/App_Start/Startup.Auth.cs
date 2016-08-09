@@ -5,9 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using EscarGoQueue.Models;
+using EscarGoCache.Models;
 
-namespace EscarGoQueue
+namespace EscarGoCache
 {
     public partial class Startup
     {

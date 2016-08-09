@@ -10,9 +10,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using EscarGoQueue.Models;
+using EscarGoCache.Models;
 
-namespace EscarGoQueue
+namespace EscarGoCache
 {
     public class EmailService : IIdentityMessageService
     {

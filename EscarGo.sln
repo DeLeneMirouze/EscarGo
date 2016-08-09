@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscarGoQueue", "EscarGoQueu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueueJobs", "QueueJobs\QueueJobs.csproj", "{C28ABE3F-A9E7-483F-9610-54D1675F2574}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscarGoCache", "EscarGoCache\EscarGoCache.csproj", "{4776E28E-2591-4D05-A5E5-B876E6FFF3FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{C28ABE3F-A9E7-483F-9610-54D1675F2574}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C28ABE3F-A9E7-483F-9610-54D1675F2574}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C28ABE3F-A9E7-483F-9610-54D1675F2574}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4776E28E-2591-4D05-A5E5-B876E6FFF3FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4776E28E-2591-4D05-A5E5-B876E6FFF3FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4776E28E-2591-4D05-A5E5-B876E6FFF3FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4776E28E-2591-4D05-A5E5-B876E6FFF3FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

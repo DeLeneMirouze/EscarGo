@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(EscarGoQueue.Startup))]
-namespace EscarGoQueue
+[assembly: OwinStartupAttribute(typeof(EscarGoCache.Startup))]
+namespace EscarGoCache
 {
     public partial class Startup
     {

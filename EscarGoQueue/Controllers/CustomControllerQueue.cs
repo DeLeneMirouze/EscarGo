@@ -3,7 +3,7 @@ using EscarGoLibrary.Storage.Repository;
 using EscarGoLibrary.ViewModel;
 using System.Web.Mvc;
 
-namespace EscarGoQueue.Controllers
+namespace EscarGoCache.Controllers
 {
     public abstract class CustomControllerQueue : Controller
     {

@@ -208,7 +208,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\CustomControllerCQRS\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
