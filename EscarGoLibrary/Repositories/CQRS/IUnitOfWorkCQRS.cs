@@ -10,5 +10,6 @@ namespace EscarGoLibrary.Repositories.CQRS
         IRaceRepositoryCQRS RaceRepository { get;  }
         ICompetitorRepositoryCQRS CompetitorRepository { get; }
         ITicketRepositoryAsync TicketRepositoryAsync { get; }
+        EscarGoContext Context { get; }
     }
 }

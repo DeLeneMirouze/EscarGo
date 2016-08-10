@@ -7,9 +7,9 @@ namespace EscarGoCache.Controllers
     public class TicketsController : CustomControllerCache
     {
         // GET: Ticket
-        public async Task<ActionResult> Buy(int courseId)
+        public ActionResult Buy(int courseId)
         {
-            BuyTicketViewModel vm = await TicketModelBuilder.GetTicketAsync(courseId);
+            BuyTicketViewModel vm = TicketModelBuilder.GetTicket(courseId);
             return View(vm);
         }
 

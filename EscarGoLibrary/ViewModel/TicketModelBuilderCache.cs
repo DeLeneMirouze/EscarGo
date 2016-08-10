@@ -1,7 +1,10 @@
 ﻿#region using
+using EscarGoLibrary.Caching;
 using EscarGoLibrary.Models;
+using EscarGoLibrary.Repositories;
 using EscarGoLibrary.Repositories.CQRS;
 using EscarGoLibrary.Storage.Model;
+using EscarGoLibrary.Storage.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,24 +14,27 @@ using System.Web.Mvc;
 
 namespace EscarGoLibrary.ViewModel
 {
-    public class TicketModelBuilderCQRS
+    public class TicketModelBuilderCache: TicketModelBuilderCQRS
     {
         #region Constructeur
         protected readonly IUnitOfWorkCQRS UnitOfWork;
+        private readonly ITicketRepository _ticketRepository;
+        readonly IQueueRepositoryAsync _queueRepositoryAsync;
 
-
-        public TicketModelBuilderCQRS(IUnitOfWorkCQRS unitOfWork)
+        public TicketModelBuilderCache(IUnitOfWorkCQRS unitOfWork, IQueueRepositoryAsync queueRepositoryAsync):base(unitOfWork)
         {
             UnitOfWork = unitOfWork;
+            _ticketRepository = new TicketRepository(unitOfWork.Context);
+            _queueRepositoryAsync = queueRepositoryAsync;
         }
         #endregion
 
-        #region GetTicketAsync (virtual)
-        public virtual async Task<BuyTicketViewModel> GetTicketAsync(int courseId)
+        #region GetTicket
+        public BuyTicketViewModel GetTicket(int courseId)
         {
             BuyTicketViewModel vm = new BuyTicketViewModel();
 
-            List<Visiteur> visiteurs = await UnitOfWork.TicketRepositoryAsync.GetVisiteursAsync();
+            List<Visiteur> visiteurs = LocalCache.Get<List<Visiteur>>("visiteurs", _ticketRepository.GetVisiteurs);
             vm.Acheteurs = new SelectList(visiteurs, "Id", "Nom");
 
             var entities = UnitOfWork.RaceRepository.GetRaceDetail(courseId);
@@ -40,20 +46,18 @@ namespace EscarGoLibrary.ViewModel
         }
         #endregion
 
-        #region PostTicketAsync (virtual)
-        public virtual async Task<ConfirmationAchatViewModel> PostTicketAsync(BuyTicketViewModel buyTicketViewModel)
+        #region PostTicketAsync
+        public override async Task<ConfirmationAchatViewModel> PostTicketAsync(BuyTicketViewModel buyTicketViewModel)
         {
             ConfirmationAchatViewModel vm = new ConfirmationAchatViewModel();
             vm.DateAchat = DateTime.Now;
-            Ticket ticket = null;
 
             try
             {
-                ticket = await UnitOfWork.TicketRepositoryAsync.AddTicketAsync(buyTicketViewModel.Course.CourseId, buyTicketViewModel.AcheteurSelectionne, buyTicketViewModel.NbPlaces);
-                await UnitOfWork.SaveAsync();
+                string message = string.Format("{0},{1},{2}", buyTicketViewModel.Course.CourseId, buyTicketViewModel.AcheteurSelectionne, buyTicketViewModel.NbPlaces);
+                await _queueRepositoryAsync.AddMessageAsync(message);
 
-                vm.EstEnregistre = (ticket != null);
-
+                vm.EstEnregistre = true;
                 vm.Course = buyTicketViewModel.Course;
             }
             catch (Exception)
@@ -64,7 +68,7 @@ namespace EscarGoLibrary.ViewModel
             if (vm.EstEnregistre)
             {
                 vm.Message = "Nous avons pré-enregistré votre achat. Vous devez attendre sa confirmation par email pour qu'il soit définitif";
-                vm.NbTickets = ticket.NbPlaces;
+                vm.NbTickets = buyTicketViewModel.NbPlaces;
             }
             else
             {

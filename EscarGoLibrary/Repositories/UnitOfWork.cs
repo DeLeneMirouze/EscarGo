@@ -5,11 +5,9 @@ namespace EscarGoLibrary.Repositories
     public class UnitOfWork : IDisposable, IUnitOfWork
     {
         #region Constructeur
-        private EscarGoContext _context;
-
         public UnitOfWork()
         {
-            _context = new EscarGoContext();
+            Context = new EscarGoContext();
         }
         #endregion
 
@@ -21,7 +19,7 @@ namespace EscarGoLibrary.Repositories
             {
                 if (_competitorRepository == null)
                 {
-                    _competitorRepository = new CompetitorRepository(_context);
+                    _competitorRepository = new CompetitorRepository(Context);
                 }
                 return _competitorRepository;
             }
@@ -41,7 +39,7 @@ namespace EscarGoLibrary.Repositories
             {
                 if (_courseRepository == null)
                 {
-                    _courseRepository = new RaceRepository(_context);
+                    _courseRepository = new RaceRepository(Context);
                 }
                 return _courseRepository;
             }
@@ -61,7 +59,7 @@ namespace EscarGoLibrary.Repositories
             {
                 if (_ticketRepository == null)
                 {
-                    _ticketRepository = new TicketRepository(_context);
+                    _ticketRepository = new TicketRepository(Context);
                 }
                 return _ticketRepository;
             }
@@ -76,7 +74,7 @@ namespace EscarGoLibrary.Repositories
         #region Save
         public void Save()
         {
-            _context.SaveChanges();
+            Context.SaveChanges();
         } 
         #endregion
 
@@ -89,7 +87,7 @@ namespace EscarGoLibrary.Repositories
             {
                 if (disposing)
                 {
-                    _context.Dispose();
+                    Context.Dispose();
                 }
             }
             disposed = true;
@@ -99,7 +97,9 @@ namespace EscarGoLibrary.Repositories
         {
             Dispose(true);
             GC.SuppressFinalize(this);
-        } 
+        }
         #endregion
+
+        public EscarGoContext Context { get; private set; }
     }
 }

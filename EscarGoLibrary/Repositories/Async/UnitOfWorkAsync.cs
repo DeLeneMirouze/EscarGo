@@ -6,11 +6,9 @@ namespace EscarGoLibrary.Repositories.Async
     public class UnitOfWorkAsync : IDisposable, IUnitOfWorkAsync
     {
         #region Constructeur
-        private EscarGoContext _context;
-
         public UnitOfWorkAsync()
         {
-            _context = new EscarGoContext();
+           Context = new EscarGoContext();
         }
         #endregion
 
@@ -22,7 +20,7 @@ namespace EscarGoLibrary.Repositories.Async
             {
                 if (_competitorRepository == null)
                 {
-                    _competitorRepository = new CompetitorRepositoryAsync(_context);
+                    _competitorRepository = new CompetitorRepositoryAsync(Context);
                 }
                 return _competitorRepository;
             }
@@ -42,7 +40,7 @@ namespace EscarGoLibrary.Repositories.Async
             {
                 if (_courseRepository == null)
                 {
-                    _courseRepository = new RaceRepositoryAsync(_context);
+                    _courseRepository = new RaceRepositoryAsync(Context);
                 }
                 return _courseRepository;
             }
@@ -62,7 +60,7 @@ namespace EscarGoLibrary.Repositories.Async
             {
                 if (_ticketRepository == null)
                 {
-                    _ticketRepository = new TicketRepositoryAsync(_context);
+                    _ticketRepository = new TicketRepositoryAsync(Context);
                 }
                 return _ticketRepository;
             }
@@ -77,7 +75,7 @@ namespace EscarGoLibrary.Repositories.Async
         #region SaveAsync
         public async Task SaveAsync()
         {
-            await _context.SaveChangesAsync();
+            await Context.SaveChangesAsync();
         }
         #endregion
 
@@ -90,7 +88,7 @@ namespace EscarGoLibrary.Repositories.Async
             {
                 if (disposing)
                 {
-                    _context.Dispose();
+                    Context.Dispose();
                 }
             }
             disposed = true;
@@ -102,5 +100,7 @@ namespace EscarGoLibrary.Repositories.Async
             GC.SuppressFinalize(this);
         }
         #endregion
+
+        public EscarGoContext Context { get; private set; }
     }
 }

@@ -79,6 +79,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Spatial, Version=5.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Spatial.5.7.0\lib\net40\System.Spatial.dll</HintPath>
       <Private>True</Private>
@@ -115,6 +116,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Caching\LocalCache.cs" />
     <Compile Include="Migrations\201606240650551_Init.cs" />
     <Compile Include="Migrations\201606240650551_Init.Designer.cs">
       <DependentUpon>201606240650551_Init.cs</DependentUpon>
@@ -155,6 +157,7 @@
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="ViewModel\TicketModelBuilder.cs" />
     <Compile Include="ViewModel\TicketModelBuilderAsync.cs" />
+    <Compile Include="ViewModel\TicketModelBuilderCache.cs" />
     <Compile Include="ViewModel\TicketModelBuilderCQRS.cs" />
     <Compile Include="ViewModel\TicketModelBuilderQueue.cs" />
     <Compile Include="ViewModel\ViewModelBuilder.cs" />

@@ -7,10 +7,9 @@ namespace EscarGoLibrary.Repositories.CQRS
     public class UnitOfWorkCQRS: IUnitOfWorkCQRS, IDisposable
     {
         #region Constructeur
-        private EscarGoContext _context;
         public UnitOfWorkCQRS()
         {
-            _context = new EscarGoContext();
+            Context = new EscarGoContext();
         }
         #endregion
 
@@ -22,7 +21,7 @@ namespace EscarGoLibrary.Repositories.CQRS
             {
                 if (_competitorRepository == null)
                 {
-                    _competitorRepository = new CompetitorRepositoryCQRS(_context);
+                    _competitorRepository = new CompetitorRepositoryCQRS(Context);
                 }
                 return _competitorRepository;
             }
@@ -42,7 +41,7 @@ namespace EscarGoLibrary.Repositories.CQRS
             {
                 if (_courseRepository == null)
                 {
-                    _courseRepository = new RaceRepositoryCQRS(_context);
+                    _courseRepository = new RaceRepositoryCQRS(Context);
                 }
                 return _courseRepository;
             }
@@ -57,7 +56,7 @@ namespace EscarGoLibrary.Repositories.CQRS
         #region SaveAsync
         public async Task SaveAsync()
         {
-            await _context.SaveChangesAsync();
+            await Context.SaveChangesAsync();
         }
         #endregion
 
@@ -69,7 +68,7 @@ namespace EscarGoLibrary.Repositories.CQRS
             {
                 if (_ticketRepository == null)
                 {
-                    _ticketRepository = new TicketRepositoryAsync(_context);
+                    _ticketRepository = new TicketRepositoryAsync(Context);
                 }
                 return _ticketRepository;
             }
@@ -90,7 +89,7 @@ namespace EscarGoLibrary.Repositories.CQRS
             {
                 if (disposing)
                 {
-                    _context.Dispose();
+                    Context.Dispose();
                 }
             }
             disposed = true;
@@ -102,5 +101,7 @@ namespace EscarGoLibrary.Repositories.CQRS
             GC.SuppressFinalize(this);
         }
         #endregion
+
+        public EscarGoContext Context { get; private set; }
     }
 }

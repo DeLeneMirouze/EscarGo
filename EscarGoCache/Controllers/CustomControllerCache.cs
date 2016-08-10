@@ -13,13 +13,13 @@ namespace EscarGoCache.Controllers
             UnitOfWork = new UnitOfWorkCQRS();
             QueueRepositoryAsync = new QueueRepositoryAsync();
             Builder = new ViewModelBuilderCQRS(UnitOfWork);
-            TicketModelBuilder = new TicketModelBuilderQueue(UnitOfWork, QueueRepositoryAsync);
+            TicketModelBuilder = new TicketModelBuilderCache(UnitOfWork, QueueRepositoryAsync);
         } 
         #endregion
 
         protected IUnitOfWorkCQRS UnitOfWork { get; set; }
         protected ViewModelBuilderCQRS Builder { get; set; }
-        protected TicketModelBuilderQueue TicketModelBuilder { get; set; }
+        protected TicketModelBuilderCache TicketModelBuilder { get; set; }
         protected IQueueRepositoryAsync QueueRepositoryAsync { get; set; }
 
         #region Dispose

@@ -9,5 +9,6 @@ namespace EscarGoLibrary.Repositories
         ITicketRepository TicketRepository { get; }
 
         void Save();
+        EscarGoContext Context { get;}
     }
 }
