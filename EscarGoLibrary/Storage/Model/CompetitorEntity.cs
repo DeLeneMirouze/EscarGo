@@ -5,6 +5,7 @@ using System.Diagnostics;
 namespace EscarGoLibrary.Storage.Model
 {
     [DebuggerDisplay("{PartitionKey}/{RowKey}")]
+    [Serializable]
     public class CompetitorEntity : TableEntity
     {
         public string Nom { get; set; }

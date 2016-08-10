@@ -68,6 +68,20 @@ namespace EscarGoLibrary.Caching
         }
         #endregion
 
+        #region CreateRaceKey
+        public static string CreateRaceKey(int key)
+        {
+            return string.Format("race-{0}", key);
+        }
+        #endregion
+
+        #region CreateCompetitorKey
+        public static string CreateCompetitorKey(int key)
+        {
+            return string.Format("competitor-{0}", key);
+        }
+        #endregion
+
         #region Serialize (private)
         static byte[] Serialize(object value)
         {
