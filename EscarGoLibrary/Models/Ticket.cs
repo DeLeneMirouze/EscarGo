@@ -2,6 +2,7 @@
 
 namespace EscarGoLibrary.Models
 {
+    [Serializable]
     public class Ticket
     {
         public int Id { get; set; }

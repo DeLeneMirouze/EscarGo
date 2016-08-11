@@ -1,17 +1,24 @@
-﻿using System.Collections.Generic;
+﻿#region using
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
+#endregion
 
 namespace EscarGoLibrary.Models
 {
     [DebuggerDisplay("{Nom}")]
+    [Serializable]
     public class Concurrent
     {
+        #region Constructeur
         public Concurrent()
         {
             Courses = new List<Course>();
-        }
+        } 
+        #endregion
+
         public string Nom { get; set; }
         [Key]
         public int ConcurrentId { get; set; }

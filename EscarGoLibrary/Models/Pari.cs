@@ -5,6 +5,7 @@ using System.Diagnostics;
 namespace EscarGoLibrary.Models
 {
     [DebuggerDisplay("{SC}")]
+    [Serializable]
     public class Pari
     {
         [Key]

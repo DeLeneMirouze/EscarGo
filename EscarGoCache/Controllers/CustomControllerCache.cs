@@ -1,7 +1,10 @@
-﻿using EscarGoLibrary.Repositories.CQRS;
+﻿#region using
+using EscarGoLibrary.Caching;
+using EscarGoLibrary.Repositories.CQRS;
 using EscarGoLibrary.Storage.Repository;
 using EscarGoLibrary.ViewModel;
 using System.Web.Mvc;
+#endregion
 
 namespace EscarGoCache.Controllers
 {
@@ -12,13 +15,15 @@ namespace EscarGoCache.Controllers
         {
             UnitOfWork = new UnitOfWorkCQRS();
             QueueRepositoryAsync = new QueueRepositoryAsync();
-            Builder = new ViewModelBuilderCQRS(UnitOfWork);
+            ITableStorageRepository tablestorageRepository = new TableStorageRepository();
+            IRedisRepository redisRepository = new RedisRepository(tablestorageRepository);
+            Builder = new ViewModelBuilderQueue(UnitOfWork, redisRepository);
             TicketModelBuilder = new TicketModelBuilderCache(UnitOfWork, QueueRepositoryAsync);
         } 
         #endregion
 
         protected IUnitOfWorkCQRS UnitOfWork { get; set; }
-        protected ViewModelBuilderCQRS Builder { get; set; }
+        protected ViewModelBuilderQueue Builder { get; set; }
         protected TicketModelBuilderCache TicketModelBuilder { get; set; }
         protected IQueueRepositoryAsync QueueRepositoryAsync { get; set; }
 

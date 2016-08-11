@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 
 namespace EscarGoLibrary.Models
 {
     [DebuggerDisplay("{Nom}")]
+    [Serializable]
     public class Entraineur
     {
         [Key]

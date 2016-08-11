@@ -37,7 +37,7 @@ namespace EscarGoLibrary.Repositories.CQRS
 
         public List<CompetitorEntity> GetCompetitorDetail(int id)
         {
-            List<CompetitorEntity> entities = _storageRepository.GetCompetitorInfo(id);
+            List<CompetitorEntity> entities = _storageRepository.GetCompetitorById(id);
 
             return entities;
         }

@@ -1,9 +1,8 @@
 ﻿#region using
-using EscarGoLibrary.Models;
+using EscarGoLibrary.Storage.Model;
 using EscarGoLibrary.Storage.Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 #endregion
 
 namespace EscarGoLibrary.Caching
@@ -15,40 +14,42 @@ namespace EscarGoLibrary.Caching
         public RedisRepository(ITableStorageRepository tableStorageRepository)
         {
             _tableStorageRepository = tableStorageRepository;
-        } 
+        }
         #endregion
 
-        #region GetRace
-        public Course GetRace(int raceId)
+        #region GetRaceDetail
+        public List<RaceEntity> GetRaceDetail(int raceId)
         {
             string key = RedisCache.CreateRaceKey(raceId);
 
-            Func<Course> loadingFunction = () =>
+            Func<List<RaceEntity>> loadingFunction = () =>
             {
-               List<Course> courses = _tableStorageRepository.GetRaces();
+                List<RaceEntity> races = _tableStorageRepository.GetRaceById(raceId);
 
-                return courses.Where(c => c.CourseId == raceId).FirstOrDefault();
+                return races;
             };
-            Course course = RedisCache.Get<Course>(key, loadingFunction);
+            TimeSpan sliding = new TimeSpan(0, 3, 0);
+            List<RaceEntity> entities = RedisCache.Get(key, loadingFunction, sliding);
 
-            return course;
+            return entities;
         }
         #endregion
 
         #region GetCompetitor
-        public Concurrent GetCompetitor(int competitorId)
+        public List<CompetitorEntity> GetCompetitorDetail(int competitorId)
         {
-            string key = RedisCache.CreateRaceKey(competitorId);
+            string key = RedisCache.CreateCompetitorKey(competitorId);
 
-            Func<Concurrent> loadingFunction = () =>
+            Func<List<CompetitorEntity>> loadingFunction = () =>
             {
-                List<Concurrent> competitors = _tableStorageRepository.GetCompetitors();
+                List<CompetitorEntity> competitors = _tableStorageRepository.GetCompetitorById(competitorId);
 
-                return competitors.Where(c => c.ConcurrentId == competitorId).FirstOrDefault();
+                return competitors;
             };
-            Concurrent course = RedisCache.Get<Concurrent>(key, loadingFunction);
+            TimeSpan sliding = new TimeSpan(0, 3, 0);
+            List<CompetitorEntity> entities = RedisCache.Get<List<CompetitorEntity>>(key, loadingFunction, sliding);
 
-            return course;
+            return entities;
         } 
         #endregion
     }

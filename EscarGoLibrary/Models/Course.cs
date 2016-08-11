@@ -7,6 +7,7 @@ using System.Diagnostics;
 namespace EscarGoLibrary.Models
 {
     [DebuggerDisplay("{Label}")]
+    [Serializable]
     public class Course
     {
         #region Constructeur

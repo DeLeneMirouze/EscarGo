@@ -1,10 +1,12 @@
 ﻿#region using
+using Newtonsoft.Json;
 using StackExchange.Redis;
 using System;
 using System.Configuration;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 #endregion
+
 
 namespace EscarGoLibrary.Caching
 {
@@ -13,7 +15,7 @@ namespace EscarGoLibrary.Caching
         static readonly object cacheLock = new object();
 
         #region Connection
-        private static Lazy<ConnectionMultiplexer> lazyConnection = 
+        private static Lazy<ConnectionMultiplexer> lazyConnection =
             new Lazy<ConnectionMultiplexer>(() =>
   {
       return ConnectionMultiplexer.Connect(ConfigurationManager.AppSettings["RedisCnx"]);
@@ -29,28 +31,28 @@ namespace EscarGoLibrary.Caching
         #endregion
 
         #region Get
-        public static T Get<T>(string key, Func<T> loadingFunction)
+        public static T Get<T>(string key, Func<T> loadingFunction, TimeSpan sliding)
         {
             IDatabase cache = Connection.GetDatabase();
             RedisValue fromCache = cache.StringGet(key);
 
             if (fromCache.HasValue)
             {
-                T retour = Deserialize<T>(fromCache);
+                T retour = JsonConvert.DeserializeObject<T>(fromCache);
                 return retour;
             }
 
-            lock(cacheLock)
+            lock (cacheLock)
             {
                 fromCache = cache.StringGet(key);
                 if (fromCache.HasValue)
                 {
-                    T retour = Deserialize<T>(fromCache);
+                    T retour = JsonConvert.DeserializeObject<T>(fromCache);
                     return retour;
                 }
 
                 T obj = loadingFunction();
-                Set(key, obj);
+                Set(key, obj, sliding);
 
                 return obj;
             }
@@ -58,13 +60,12 @@ namespace EscarGoLibrary.Caching
         #endregion
 
         #region Set
-        public static void Set<T>(string key, T value)
+        public static void Set<T>(string key, T value, TimeSpan sliding)
         {
             IDatabase cache = Connection.GetDatabase();
-            TimeSpan timeSpan = new TimeSpan(0, 3, 0);
 
-            byte[] bytes = Serialize(value);
-            cache.StringSet(key, bytes);
+            string json = JsonConvert.SerializeObject(value);
+            cache.StringSet(key, json, sliding);
         }
         #endregion
 
@@ -97,7 +98,7 @@ namespace EscarGoLibrary.Caching
                 byte[] objectDataAsStream = memoryStream.ToArray();
                 return objectDataAsStream;
             }
-        } 
+        }
         #endregion
 
         #region Deserialize (private)
@@ -114,7 +115,7 @@ namespace EscarGoLibrary.Caching
                 T result = (T)binaryFormatter.Deserialize(memoryStream);
                 return result;
             }
-        } 
+        }
         #endregion
     }
 }

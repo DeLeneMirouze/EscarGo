@@ -47,7 +47,7 @@ namespace EscarGoLibrary.Storage.Repository
         #endregion
 
         #region GetCompetitorById
-        public List<CompetitorEntity> GetCompetitorInfo(int idCompetitor)
+        public List<CompetitorEntity> GetCompetitorById(int idCompetitor)
         {
             String partitionFilter = TableQuery.GenerateFilterCondition("PartitionKey",
                 QueryComparisons.Equal,

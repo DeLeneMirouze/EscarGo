@@ -3,7 +3,6 @@ using System;
 
 namespace EscarGoLibrary.Storage.Model
 {
-    [Serializable]
     public class RaceEntity : TableEntity
     {
         public string Label { get; set; }
