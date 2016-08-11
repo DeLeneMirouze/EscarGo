@@ -1,6 +1,8 @@
 ﻿#region using
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Queue;
+using Microsoft.WindowsAzure.Storage.RetryPolicies;
+using System;
 using System.Configuration;
 using System.Threading.Tasks;
 #endregion
@@ -55,7 +57,8 @@ namespace EscarGoLibrary.Storage.Repository
         #region GetQueue (private)
         private CloudQueue GetQueue(string name)
         {
-            var queueClient = _storageAccount.CreateCloudQueueClient();
+            CloudQueueClient queueClient = _storageAccount.CreateCloudQueueClient();
+            queueClient.DefaultRequestOptions.RetryPolicy = new ExponentialRetry(TimeSpan.FromMilliseconds(500), 3);
 
             CloudQueue queue = queueClient.GetQueueReference(name);
             bool retour = queue.CreateIfNotExists();

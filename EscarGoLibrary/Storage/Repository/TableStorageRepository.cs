@@ -2,6 +2,7 @@
 using EscarGoLibrary.Models;
 using EscarGoLibrary.Storage.Model;
 using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.RetryPolicies;
 using Microsoft.WindowsAzure.Storage.Table;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,7 @@ namespace EscarGoLibrary.Storage.Repository
             List<Concurrent> concurrents = new List<Concurrent>();
 
             TableQuery<CompetitorEntity> query = new TableQuery<CompetitorEntity>();
+         
             // attention, il y a une limite à 1000 lignes par requêtes
             var result = _competitorTable.ExecuteQuery(query);
             foreach (CompetitorEntity nosql in result)
@@ -132,7 +134,8 @@ namespace EscarGoLibrary.Storage.Repository
         #region GetTable (private)
         private CloudTable GetTable(string name)
         {
-            var tableClient = _storageAccount.CreateCloudTableClient();
+            CloudTableClient tableClient = _storageAccount.CreateCloudTableClient();
+            tableClient.DefaultRequestOptions.RetryPolicy = new ExponentialRetry(TimeSpan.FromMilliseconds(500), 3);
 
             CloudTable table = tableClient.GetTableReference(name);
             table.CreateIfNotExistsAsync();
