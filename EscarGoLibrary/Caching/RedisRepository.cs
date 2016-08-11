@@ -28,7 +28,7 @@ namespace EscarGoLibrary.Caching
 
                 return races;
             };
-            TimeSpan sliding = new TimeSpan(0, 3, 0);
+            TimeSpan sliding = new TimeSpan(0, 2, 10);
             List<RaceEntity> entities = RedisCache.Get(key, loadingFunction, sliding);
 
             return entities;
@@ -46,7 +46,7 @@ namespace EscarGoLibrary.Caching
 
                 return competitors;
             };
-            TimeSpan sliding = new TimeSpan(0, 3, 0);
+            TimeSpan sliding = new TimeSpan(0, 2, 10);
             List<CompetitorEntity> entities = RedisCache.Get<List<CompetitorEntity>>(key, loadingFunction, sliding);
 
             return entities;
