@@ -1,0 +1,95 @@
+﻿@model EscarGoLibrary.ViewModel.DetailConcurrentViewModel
+
+@{
+    ViewBag.Title = "Détails";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Concurrent</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Concurrent.Nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Concurrent.Nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Concurrent.Victoires)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Concurrent.Victoires)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Concurrent.Defaites)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Concurrent.Defaites)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Concurrent.Entraineur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Concurrent.Entraineur.Nom)
+        </dd>
+
+    </dl>
+</div>
+<p>
+
+    <h2>Courses du concurrent valeureux</h2>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>
+                Course
+            </th>
+   
+            <th>
+                Date
+            </th>
+            <th>
+               Cote
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Courses)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Label)
+                </td>
+         
+                <td>
+           
+                    <div class="badge-date">
+                        <div class="part1">
+                            <div>@item.Date.ToString("dd")</div>
+                            <div class="month">@item.Date.ToString("MMM")</div>
+                        </div>
+                        <div class="year">@item.Date.ToString("yyyy")</div>
+                    </div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SC)/1
+                </td>
+                <td>
+
+                    @Html.ActionLink("Parier", "Bet", new { courseid = item.CourseId, concurrentid = Model.Concurrent.ConcurrentId }, new { role = "button", @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    @Html.ActionLink("Retour", "Index",null, new { role = "button", @class = "btn btn-primary" })
+</p>

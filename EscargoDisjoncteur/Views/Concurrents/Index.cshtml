@@ -1,0 +1,47 @@
+﻿@model IEnumerable<EscarGoLibrary.Models.Concurrent>
+
+@{
+    ViewBag.Title = "Concurrents";
+}
+
+<h2>Concurrents</h2>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Victoires)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Defaites)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Entraineur)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Victoires)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Defaites)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Entraineur.Nom)
+        </td>
+        <td>
+   
+            @Html.ActionLink("Détails", "Details", new { id=item.ConcurrentId }, new { role = "button", @class = "btn btn-primary" }) 
+        </td>
+    </tr>
+}
+
+</table>
