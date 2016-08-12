@@ -47,9 +47,9 @@ namespace EscarGoLibrary.Repositories.CQRS
 
         public async Task<List<Pari>> GetBetsByRace(int idCourse)
         {
-            var paris = await Context.Paris
+            var paris = await SqlAzureRetry.ExecuteAsync(async () => await Context.Paris
                 .Include("Course")
-                .Where(p => p.CourseId == idCourse).ToListAsync();
+                .Where(p => p.CourseId == idCourse).ToListAsync());
             return paris;
         }
         #endregion
@@ -58,9 +58,9 @@ namespace EscarGoLibrary.Repositories.CQRS
         public async Task SetBetAsync(int idCourse, int concurrentId)
         {
             // pari sur lequel on parie
-            var pari = await Context.Paris
+            var pari = await SqlAzureRetry.ExecuteAsync(async () => await Context.Paris
                 .Where(p => p.CourseId == idCourse && p.ConcurrentId == concurrentId)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync());
             if (pari == null)
             {
                 return;
@@ -68,7 +68,7 @@ namespace EscarGoLibrary.Repositories.CQRS
             pari.NbParis++; // enregistre le pari
 
             // les paris de la course
-            var paris = await Context.Paris.Where(c => c.CourseId == idCourse).ToListAsync();
+            var paris = await SqlAzureRetry.ExecuteAsync(async () => await Context.Paris.Where(c => c.CourseId == idCourse).ToListAsync());
             // somme de tous les paris de la course
             int total = paris.Sum(c => c.NbParis);
             // recalcul de la cote pour chaque pari de la course

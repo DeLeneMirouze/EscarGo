@@ -18,10 +18,11 @@ namespace EscarGoLibrary.Repositories
         }
         #endregion
 
-        #region GetRaces
-        private IQueryable<Course> GetRequest(int recordsPerPage, int currentPage)
+        #region CreateRequest (private)
+        private IQueryable<Course> CreateRequest(int recordsPerPage, int currentPage)
         {
-            var query = Context.Courses
+
+            IQueryable<Course> query = Context.Courses
                .Where(c => c.Date >= DateTime.UtcNow)
                .OrderByDescending(c => c.Date)
                .ThenBy(c => c.Pays)
@@ -34,17 +35,19 @@ namespace EscarGoLibrary.Repositories
             }
 
             return query;
-        }
+        } 
+        #endregion
 
+        #region GetRaces
         public List<Course> GetRaces(int recordsPerPage, int currentPage)
         {
-            var req = GetRequest(recordsPerPage, currentPage);
-            List<Course> races = req.ToList();
+            var req = CreateRequest(recordsPerPage, currentPage);
+            List<Course> races = SqlAzureRetry.ExecuteAction(() => req.ToList());
 
             if (races.Count == 0 && currentPage > 0)
             {
                 currentPage--;
-                req = GetRequest(recordsPerPage, currentPage);
+                req = CreateRequest(recordsPerPage, currentPage);
                 races = req.ToList();
             }
 
@@ -56,8 +59,7 @@ namespace EscarGoLibrary.Repositories
         #region GetRaceById
         public Course GetRaceById(int id)
         {
-            var course = Context.Courses
-          .FirstOrDefault(c => c.CourseId == id);
+            Course course = SqlAzureRetry.ExecuteAction(() => Context.Courses.FirstOrDefault(c => c.CourseId == id));
 
             return course;
         }
@@ -67,11 +69,11 @@ namespace EscarGoLibrary.Repositories
         #region GetConcurrentsByRace
         public List<Concurrent> GetConcurrentsByRace(int idCourse)
         {
-            var courses = Context.Courses
+            var courses = SqlAzureRetry.ExecuteAction(() => Context.Courses
                 .Where(c => c.CourseId == idCourse)
                 .SelectMany(c => c.Concurrents)
                 .OrderBy(c => c.Nom)
-                .ToList();
+                .ToList());
             return courses;
         }
 
@@ -87,7 +89,11 @@ namespace EscarGoLibrary.Repositories
         #region Like
         public void Like(int idCourse)
         {
-            Course course = Context.Courses.FirstOrDefault(c => c.CourseId == idCourse);
+            Course course = SqlAzureRetry.ExecuteAction(() =>
+            {
+                return Context.Courses.FirstOrDefault(c => c.CourseId == idCourse);
+            });
+
             course.Likes++;
         }
  

@@ -15,12 +15,11 @@ namespace EscarGoLibrary.Repositories.Async
         #region Constructeur
         public RaceRepositoryAsync(EscarGoContext context) : base(context)
         {
-
         }
         #endregion
 
-        #region GetRaces
-        private IQueryable<Course> GetRequest(int recordsPerPage, int currentPage)
+        #region CreateRequest (private)
+        private IQueryable<Course> CreateRequest(int recordsPerPage, int currentPage)
         {
             var query = Context.Courses
                .Where(c => c.Date >= DateTime.UtcNow)
@@ -35,17 +34,19 @@ namespace EscarGoLibrary.Repositories.Async
             }
 
             return query;
-        }
+        } 
+        #endregion
 
+        #region GetRaces
         public async Task<List<Course>> GetRacesAsync(int recordsPerPage, int currentPage)
         {
-            var req = GetRequest(recordsPerPage, currentPage);
-            List<Course> races = await req.ToListAsync();
+            var req = CreateRequest(recordsPerPage, currentPage);
+            List<Course> races = await SqlAzureRetry.ExecuteAsync(async () => await req.ToListAsync());
 
             if (races.Count == 0 && currentPage > 0)
             {
                 currentPage--;
-                req = GetRequest(recordsPerPage, currentPage);
+                req = CreateRequest(recordsPerPage, currentPage);
                 races = await req.ToListAsync();
             }
 
@@ -56,8 +57,8 @@ namespace EscarGoLibrary.Repositories.Async
         #region GetRaceById
         public async Task<Course> GetCourseByIdAsync(int id)
         {
-            var course = await Context.Courses
-          .FirstOrDefaultAsync(c => c.CourseId == id);
+            var course = await SqlAzureRetry.ExecuteAsync(async () => await Context.Courses
+          .FirstOrDefaultAsync(c => c.CourseId == id));
 
             return course;
         }
@@ -66,11 +67,11 @@ namespace EscarGoLibrary.Repositories.Async
         #region GetConcurrentsByRace
         public async Task<List<Concurrent>> GetConcurrentsByRaceAsync(int idCourse)
         {
-            var courses = await Context.Courses
+            var courses = await SqlAzureRetry.ExecuteAsync(async () => await Context.Courses
                 .Where(c => c.CourseId == idCourse)
                 .SelectMany(c => c.Concurrents)
                 .OrderBy(c => c.Nom)
-                .ToListAsync();
+                .ToListAsync());
             return courses;
         }
         #endregion
@@ -85,7 +86,7 @@ namespace EscarGoLibrary.Repositories.Async
         #region Like
         public async Task LikeAsync(int idCourse)
         {
-            Course course = await Context.Courses.FirstOrDefaultAsync(c => c.CourseId == idCourse);
+            Course course = await SqlAzureRetry.ExecuteAsync(async () => await Context.Courses.FirstOrDefaultAsync(c => c.CourseId == idCourse));
             course.Likes++;
         }
         #endregion

@@ -1,4 +1,5 @@
-﻿using EscarGoLibrary.Repositories.CQRS;
+﻿using EscarGoLibrary.Repositories;
+using EscarGoLibrary.Repositories.CQRS;
 using EscarGoLibrary.ViewModel;
 using System.Web.Mvc;
 
@@ -9,7 +10,7 @@ namespace EscarGoCQRS.Controllers
         #region Constructeur
         protected CustomControllerCQRS()
         {
-            UnitOfWork = new UnitOfWorkCQRS();
+            UnitOfWork = new UnitOfWorkCQRS(new EscarGoContext());
             Builder = new ViewModelBuilderCQRS(UnitOfWork);
             TicketModelBuilder = new TicketModelBuilderCQRS(UnitOfWork);
         }

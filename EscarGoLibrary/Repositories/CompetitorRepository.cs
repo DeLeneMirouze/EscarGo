@@ -18,10 +18,10 @@ namespace EscarGoLibrary.Repositories
         #region GetCompetitors
         public List<Concurrent> GetCompetitors()
         {
-            var concurrents = Context.Concurrents
+            var concurrents = SqlAzureRetry.ExecuteAction(() => Context.Concurrents
                 .Include("Entraineur")
           .OrderBy(c => c.Nom)
-          .ToList();
+          .ToList());
 
             return concurrents;
         }
@@ -31,9 +31,9 @@ namespace EscarGoLibrary.Repositories
         #region GetCompetitorById
         public Concurrent GetCompetitorById(int id)
         {
-            var concurrent = Context.Concurrents
+            var concurrent = SqlAzureRetry.ExecuteAction(() => Context.Concurrents
                     .Include("Entraineur")
-          .FirstOrDefault(c => c.ConcurrentId == id);
+          .FirstOrDefault(c => c.ConcurrentId == id));
 
             return concurrent;
         }
@@ -43,9 +43,10 @@ namespace EscarGoLibrary.Repositories
         #region GetRacesByCompetitor
         public List<Course> GetRacesByCompetitor(int id)
         {
-            var paris = Context.Paris
+            var paris = SqlAzureRetry.ExecuteAction(() => Context.Paris
                 .Include("Course")
-                .Where(p => p.ConcurrentId == id).ToList();
+                .Where(p => p.ConcurrentId == id).ToList());
+
             var courses = paris.OrderBy(p => p.Course.Date).Select(p => p.Course).ToList();
             return courses;
         }
@@ -55,9 +56,9 @@ namespace EscarGoLibrary.Repositories
         #region GetBetsByCompetitor
         public List<Pari> GetBetsByCompetitor(int id)
         {
-            var paris = Context.Paris
+            var paris = SqlAzureRetry.ExecuteAction(() => Context.Paris
                 .Include("Course")
-                .Where(p => p.ConcurrentId == id).ToList();
+                .Where(p => p.ConcurrentId == id).ToList());
             return paris;
         }
 
@@ -66,9 +67,9 @@ namespace EscarGoLibrary.Repositories
         #region GetBetsByRace
         public List<Pari> GetBetsByRace(int idCourse)
         {
-            var paris = Context.Paris
+            var paris = SqlAzureRetry.ExecuteAction(() => Context.Paris
                 .Include("Course")
-                .Where(p => p.CourseId == idCourse).ToList();
+                .Where(p => p.CourseId == idCourse).ToList());
             return paris;
         }
 

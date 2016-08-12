@@ -21,7 +21,7 @@ namespace QueueJobs
         {
             context = new EscarGoContext();
             _queueRepositoryAsync = new QueueRepositoryAsync();
-            _unitOfWork = new UnitOfWorkCQRS();
+            _unitOfWork = new UnitOfWorkCQRS(new EscarGoContext());
         }
         #endregion
 

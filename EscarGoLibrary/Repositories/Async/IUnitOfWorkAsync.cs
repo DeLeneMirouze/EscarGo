@@ -10,6 +10,5 @@ namespace EscarGoLibrary.Repositories.Async
         ITicketRepositoryAsync TicketRepositoryAsync { get; }
 
         Task SaveAsync();
-        EscarGoContext Context { get; }
     }
 }

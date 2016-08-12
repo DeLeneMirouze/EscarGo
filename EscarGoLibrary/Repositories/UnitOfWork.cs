@@ -2,12 +2,11 @@
 
 namespace EscarGoLibrary.Repositories
 {
-    public class UnitOfWork : IDisposable, IUnitOfWork
+    public class UnitOfWork : BaseDataRepository, IDisposable, IUnitOfWork
     {
         #region Constructeur
-        public UnitOfWork()
+        public UnitOfWork(EscarGoContext context):base(context)
         {
-            Context = new EscarGoContext();
         }
         #endregion
 
@@ -74,32 +73,9 @@ namespace EscarGoLibrary.Repositories
         #region Save
         public void Save()
         {
-            Context.SaveChanges();
+            SqlAzureRetry.ExecuteAction(() =>
+            Context.SaveChanges());
         } 
         #endregion
-
-        #region Dispose
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposed)
-            {
-                if (disposing)
-                {
-                    Context.Dispose();
-                }
-            }
-            disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        #endregion
-
-        public EscarGoContext Context { get; private set; }
     }
 }

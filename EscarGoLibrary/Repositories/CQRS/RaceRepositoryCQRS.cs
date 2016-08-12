@@ -55,7 +55,7 @@ namespace EscarGoLibrary.Repositories.CQRS
 
         public async Task LikeAsync(int idCourse)
         {
-            Course course = await Context.Courses.FirstOrDefaultAsync(c => c.CourseId == idCourse);
+            Course course = await SqlAzureRetry.ExecuteAsync(async () => await Context.Courses.FirstOrDefaultAsync(c => c.CourseId == idCourse));
             course.Likes++;
         }
         #endregion

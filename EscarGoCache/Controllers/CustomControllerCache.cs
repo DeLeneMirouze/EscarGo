@@ -1,5 +1,6 @@
 ﻿#region using
 using EscarGoLibrary.Caching;
+using EscarGoLibrary.Repositories;
 using EscarGoLibrary.Repositories.CQRS;
 using EscarGoLibrary.Storage.Repository;
 using EscarGoLibrary.ViewModel;
@@ -13,7 +14,7 @@ namespace EscarGoCache.Controllers
         #region Constructeur
         public CustomControllerCache()
         {
-            UnitOfWork = new UnitOfWorkCQRS();
+            UnitOfWork = new UnitOfWorkCQRS(new EscarGoContext());
             QueueRepositoryAsync = new QueueRepositoryAsync();
             ITableStorageRepository tablestorageRepository = new TableStorageRepository();
             IRedisRepository redisRepository = new RedisRepository(tablestorageRepository);

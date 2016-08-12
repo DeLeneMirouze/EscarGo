@@ -3,12 +3,11 @@ using System.Threading.Tasks;
 
 namespace EscarGoLibrary.Repositories.Async
 {
-    public class UnitOfWorkAsync : IDisposable, IUnitOfWorkAsync
+    public class UnitOfWorkAsync : BaseDataRepository, IDisposable, IUnitOfWorkAsync
     {
         #region Constructeur
-        public UnitOfWorkAsync()
+        public UnitOfWorkAsync(EscarGoContext context):base(context)
         {
-           Context = new EscarGoContext();
         }
         #endregion
 
@@ -75,32 +74,12 @@ namespace EscarGoLibrary.Repositories.Async
         #region SaveAsync
         public async Task SaveAsync()
         {
-            await Context.SaveChangesAsync();
+            await SqlAzureRetry.ExecuteAsync(async () =>
+                    {
+                        await Context.SaveChangesAsync();
+                    }
+                );
         }
         #endregion
-
-        #region Dispose
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposed)
-            {
-                if (disposing)
-                {
-                    Context.Dispose();
-                }
-            }
-            disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        #endregion
-
-        public EscarGoContext Context { get; private set; }
     }
 }

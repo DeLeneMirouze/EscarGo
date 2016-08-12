@@ -1,4 +1,5 @@
-﻿using EscarGoLibrary.Repositories.CQRS;
+﻿using EscarGoLibrary.Repositories;
+using EscarGoLibrary.Repositories.CQRS;
 using EscarGoLibrary.Storage.Repository;
 using EscarGoLibrary.ViewModel;
 using System.Web.Mvc;
@@ -10,7 +11,7 @@ namespace EscarGoCache.Controllers
         #region Constructeur
         public CustomControllerQueue()
         {
-            UnitOfWork = new UnitOfWorkCQRS();
+            UnitOfWork = new UnitOfWorkCQRS(new EscarGoContext());
             QueueRepositoryAsync = new QueueRepositoryAsync();
             Builder = new ViewModelBuilderCQRS(UnitOfWork);
             TicketModelBuilder = new TicketModelBuilderQueue(UnitOfWork, QueueRepositoryAsync);

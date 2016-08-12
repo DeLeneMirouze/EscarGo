@@ -1,6 +1,6 @@
-﻿using EscarGoLibrary.Models;
+﻿#region using
+using EscarGoLibrary.Models;
 using System;
-#region using
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -21,7 +21,7 @@ namespace EscarGoLibrary.Repositories.Async
         #region GetVisiteurs
         public async Task<List<Visiteur>> GetVisiteursAsync()
         {
-            return await Context.Visiteurs.OrderBy(v => v.Nom).ToListAsync();
+            return await SqlAzureRetry.ExecuteAsync(async () => await Context.Visiteurs.OrderBy(v => v.Nom).ToListAsync());
         }
         #endregion
 
@@ -38,7 +38,7 @@ namespace EscarGoLibrary.Repositories.Async
             Context.Tickets.Add(ticket);
 
             // confirme la demande
-            Course course = await Context.Courses.FirstAsync(c => c.CourseId == courseId);
+            Course course = await SqlAzureRetry.ExecuteAsync(async () => await Context.Courses.FirstAsync(c => c.CourseId == courseId));
             if (course == null || course.NbTickets < nbPlaces)
             {
                 return null;

@@ -19,10 +19,10 @@ namespace EscarGoLibrary.Repositories.Async
         #region GetCompetitors
         public async Task<List<Concurrent>> GetCompetitorsAsync()
         {
-            var concurrents = await Context.Concurrents
+            var concurrents = await SqlAzureRetry.ExecuteAsync(async () => await Context.Concurrents
                 .Include("Entraineur")
           .OrderBy(c => c.Nom)
-          .ToListAsync();
+          .ToListAsync());
 
             return concurrents;
         }
@@ -31,9 +31,9 @@ namespace EscarGoLibrary.Repositories.Async
         #region GetCompetitorById
         public async Task<Concurrent> GetCompetitorByIdAsync(int id)
         {
-            var concurrent = await Context.Concurrents
+            var concurrent = await SqlAzureRetry.ExecuteAsync(async () => await Context.Concurrents
                     .Include("Entraineur")
-                            .FirstOrDefaultAsync(c => c.ConcurrentId == id);
+                            .FirstOrDefaultAsync(c => c.ConcurrentId == id));
 
             return concurrent;
         }
@@ -42,9 +42,9 @@ namespace EscarGoLibrary.Repositories.Async
         #region GetRacesByCompetitor
         public async Task<List<Course>> GetRacesByCompetitorAsync(int id)
         {
-            List<Pari> paris = await Context.Paris
+            List<Pari> paris = await SqlAzureRetry.ExecuteAsync(async () => await Context.Paris
                 .Include("Course")
-                .Where(p => p.ConcurrentId == id).ToListAsync();
+                .Where(p => p.ConcurrentId == id).ToListAsync());
             var courses = paris.OrderBy(p => p.Course.Date).Select(p => p.Course).ToList();
 
             return courses;
@@ -54,20 +54,19 @@ namespace EscarGoLibrary.Repositories.Async
         #region GetBetsByCompetitor
         public async Task<List<Pari>> GetBetsByCompetitorAsync(int id)
         {
-            var paris = await Context.Paris
+            var paris = await SqlAzureRetry.ExecuteAsync(async () => await Context.Paris
                 .Include("Course")
-                .Where(p => p.ConcurrentId == id).ToListAsync();
+                .Where(p => p.ConcurrentId == id).ToListAsync());
             return paris;
         }
         #endregion
 
         #region GetBetsByRace
-
         public async Task<List<Pari>> GetBetsByRaceAsync(int idCourse)
         {
-            var paris = await Context.Paris
+            var paris = await SqlAzureRetry.ExecuteAsync(async () => await Context.Paris
                 .Include("Course")
-                .Where(p => p.CourseId == idCourse).ToListAsync();
+                .Where(p => p.CourseId == idCourse).ToListAsync());
             return paris;
         }
         #endregion
@@ -76,9 +75,10 @@ namespace EscarGoLibrary.Repositories.Async
         public async Task SetBetAsync(int idCourse, int concurrentId)
         {
             // pari sur lequel on parie
-            var pari = await Context.Paris
+            var pari = await SqlAzureRetry.ExecuteAsync(async () => await Context.Paris
                 .Where(p => p.CourseId == idCourse && p.ConcurrentId == concurrentId)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync());
+
             if (pari == null)
             {
                 return;
@@ -86,7 +86,7 @@ namespace EscarGoLibrary.Repositories.Async
             pari.NbParis++; // enregistre le pari
 
             // les paris de la course
-            var paris = await Context.Paris.Where(c => c.CourseId == idCourse).ToListAsync();
+            var paris = await SqlAzureRetry.ExecuteAsync(async () => await Context.Paris.Where(c => c.CourseId == idCourse).ToListAsync());
             // somme de tous les paris de la course
             int total = paris.Sum(c => c.NbParis);
             // recalcul de la cote pour chaque pari de la course

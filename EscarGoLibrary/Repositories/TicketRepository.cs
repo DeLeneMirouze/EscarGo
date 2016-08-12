@@ -19,7 +19,7 @@ namespace EscarGoLibrary.Repositories
         #region GetVisiteurs
         public List<Visiteur> GetVisiteurs()
         {
-            return Context.Visiteurs.OrderBy(v => v.Nom).ToList();
+            return SqlAzureRetry.ExecuteAction(() => Context.Visiteurs.OrderBy(v => v.Nom).ToList());
         }
         #endregion
 
@@ -36,7 +36,7 @@ namespace EscarGoLibrary.Repositories
             Context.Tickets.Add(ticket);
 
             // confirme la demande
-            Course course = Context.Courses.First(c => c.CourseId == courseId);
+            Course course = SqlAzureRetry.ExecuteAction(() => Context.Courses.First(c => c.CourseId == courseId));
             if (course == null || course.NbTickets < nbPlaces)
             {
                 return null;

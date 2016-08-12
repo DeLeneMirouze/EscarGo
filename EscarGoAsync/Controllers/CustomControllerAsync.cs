@@ -1,4 +1,5 @@
-﻿using EscarGoLibrary.Repositories.Async;
+﻿using EscarGoLibrary.Repositories;
+using EscarGoLibrary.Repositories.Async;
 using EscarGoLibrary.ViewModel;
 using System.Web.Mvc;
 
@@ -9,7 +10,7 @@ namespace EscarGoAsync.Controllers
         #region Constructeur
         protected CustomControllerAsync()
         {
-            UnitOfWorkAsync = new UnitOfWorkAsync();
+            UnitOfWorkAsync = new UnitOfWorkAsync(new EscarGoContext());
             Builder = new ViewModelBuilderAsync(UnitOfWorkAsync);
             TicketModelBuilder = new TicketModelBuilderAsync(UnitOfWorkAsync);
         }
