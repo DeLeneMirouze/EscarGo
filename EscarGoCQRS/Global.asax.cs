@@ -4,7 +4,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 #endregion
 
-namespace EscarGoAsync
+namespace EscarGoDisjoncteur
 {
     public class MvcApplication : System.Web.HttpApplication
     {

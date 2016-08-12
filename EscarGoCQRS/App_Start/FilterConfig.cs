@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace EscarGoAsync
+namespace EscarGoDisjoncteur
 {
     public class FilterConfig
     {
