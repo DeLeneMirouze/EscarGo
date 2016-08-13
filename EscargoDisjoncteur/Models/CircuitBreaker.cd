@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EscargoDisjoncteur.Models.CircuitBreaker">
+    <Position X="7" Y="0.5" Width="3" />
+    <Members>
+      <Field Name="_circuitBreakerStateStore" Hidden="true" />
+      <Method Name="CircuitBreaker" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAACAAAAAAAAAEA=</HashCode>
+      <FileName>Models\CircuitBreaker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EscargoDisjoncteur.Models.CircuitBreakerOpenException" Collapsed="true">
+    <Position X="1" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\CircuitBreakerOpenException.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EscargoDisjoncteur.Models.CircuitBreakerStateStore">
+    <Position X="4" Y="0.5" Width="2.5" />
+    <Members>
+      <Property Name="_currentTry" Hidden="true" />
+      <Property Name="_maxTry" Hidden="true" />
+      <Field Name="_openToHalfOpenWaitTime" Hidden="true" />
+      <Field Name="_padLock" Hidden="true" />
+      <Method Name="CircuitBreakerStateStore" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAkAAAAAIAIAAAAIQAAAAAAEAgAAAADgAAAAA=</HashCode>
+      <FileName>Models\CircuitBreakerStateStore.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="EscargoDisjoncteur.Models.ICircuitBreakerStateStore">
+    <Position X="1" Y="2.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAQAAAAAAEAgAAAACgAAAAA=</HashCode>
+      <FileName>Models\ICircuitBreakerStateStore.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="EscargoDisjoncteur.Models.CircuitBreakerStateEnum" Collapsed="true">
+    <Position X="1" Y="1.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAgCAAAA=</HashCode>
+      <FileName>Models\CircuitBreakerStateEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
