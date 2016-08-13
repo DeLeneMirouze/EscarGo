@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Threading;
 
 namespace EscargoTest.CircuitBreakerTests
 {
@@ -77,13 +78,176 @@ namespace EscargoTest.CircuitBreakerTests
         [TestMethod]
         public void CircuitBreaker_Execute_ActionIsRun()
         {
+            // on vérifie qu'Execute sait lancer une action avec disjoncteur fermé
+
             CircuitBreakerStateStore cbss = new CircuitBreakerStateStore(new TimeSpan(0, 0, 10), 2);
             CircuitBreaker cb = new CircuitBreaker(cbss);
             object testValue = null;
 
-            Action action = () => cb.Execute(() => { testValue = "2"; });
+            Action action = () =>
+            {
+                cb.Execute(() => { testValue = "2"; });
+            };
+            action();
 
             testValue.Should().Be("2");
+        }
+
+        [TestMethod]
+        public void CircuitBreaker_ExecuteActionThrowsException_ExceptionIsReceived()
+        {
+            // On lance Execute
+            // l'action lève InvalidCastException
+            // InvalidCastException est réceptionné
+
+            CircuitBreakerStateStore cbss = new CircuitBreakerStateStore(new TimeSpan(0, 0, 10), 2);
+            CircuitBreaker cb = new CircuitBreaker(cbss);
+
+            Action action = () =>
+            {
+                cb.Execute(() => { throw new InvalidCastException(); });
+            };
+
+            action.ShouldThrow<InvalidCastException>();
+        }
+
+        [TestMethod]
+        public void CircuitBreaker_ExecuteActionThrowsException_BreakerGoesOpen()
+        {
+            // On lance Execute
+            // l'action lève InvalidCastException
+            // Le disjoncteur s'ouvre
+
+            CircuitBreakerStateStore cbss = new CircuitBreakerStateStore(new TimeSpan(0, 0, 10), 2);
+            CircuitBreaker cb = new CircuitBreaker(cbss);
+
+            Action action = () =>
+            {
+                cb.Execute(() => { throw new InvalidCastException(); });
+            };
+
+            try
+            {
+                action();
+            }
+            catch (InvalidCastException)
+            {
+
+            }
+
+            cbss.IsClosed.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void CircuitBreaker_Execute_ThrowCircuitBreakerOpenExceptionIfOpenAndStillInTimeout()
+        {
+            // disjoncteur ouvert
+            // on passe au dessus du timeout
+            // on lance l'action 1 fois
+            // CircuitBreakerOpenException est levé
+
+            CircuitBreakerStateStore cbss = new CircuitBreakerStateStore(new TimeSpan(0, 0, 10), 2);
+ 
+            CircuitBreaker cb = new CircuitBreaker(cbss);
+            Action action = () =>
+            {
+                cb.Execute(() => { });
+            };
+
+            cbss.Trip(new InvalidOperationException()); // ouvre le disjoncteur et initialise le timeout
+            action.ShouldThrow<CircuitBreakerOpenException>();
+        }
+
+        [TestMethod]
+        public void CircuitBreaker_ExecuteWithStatusOpenAndNotInTimeout_ShouldNotThrowException()
+        {
+            // disjoncteur ouvert
+            // on passe au dessus du timeout
+            // on lance l'action 1 fois
+            // CircuitBreakerOpenException n'est pas levé
+
+            object testValue = null;
+            CircuitBreakerStateStore cbss = new CircuitBreakerStateStore(new TimeSpan(0, 0, 10), 2);
+
+            CircuitBreaker cb = new CircuitBreaker(cbss);
+            Action action = () =>
+            {
+                cb.Execute(() => { testValue = "2"; });
+            };
+
+            cbss.Trip(new InvalidOperationException()); // ouvre le disjoncteur et initialise le timeout
+            Thread.Sleep(25000);
+            action.ShouldNotThrow<CircuitBreakerOpenException>();
+        }
+
+        [TestMethod]
+        public void CircuitBreaker_ExecuteWithStatusOpenAndNotInTimeout_ActionShouldBeRun()
+        {
+            // disjoncteur ouvert
+            // on passe au dessus du timeout
+            // l'action doit être exécutée
+
+            object testValue = null;
+            CircuitBreakerStateStore cbss = new CircuitBreakerStateStore(new TimeSpan(0, 0, 10), 2);
+
+            CircuitBreaker cb = new CircuitBreaker(cbss);
+            Action action = () =>
+            {
+                cb.Execute(() => { testValue = "2"; });
+            };
+
+            cbss.Trip(new InvalidOperationException()); // ouvre le disjoncteur et initialise le timeout
+            Thread.Sleep(25000);
+            action();
+            testValue.Should().Be("2");
+        }
+
+        [TestMethod]
+        public void CircuitBreaker_ExecuteWithStatusOpenAndNotInTimeout_StayClosed()
+        {
+            // disjoncteur ouvert
+            // on passe au dessus du timeout
+            // on lance l'action UNE fois
+            // le disjoncteur reste ouvert
+
+            object testValue = null;
+            CircuitBreakerStateStore cbss = new CircuitBreakerStateStore(new TimeSpan(0, 0, 10), 2);
+
+            CircuitBreaker cb = new CircuitBreaker(cbss);
+            Action action = () =>
+            {
+                cb.Execute(() => { testValue = "2"; });
+            };
+
+            cbss.Trip(new InvalidOperationException()); // ouvre le disjoncteur et initialise le timeout
+            Thread.Sleep(25000);
+            action();
+            cbss.IsClosed.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void CircuitBreaker_ExecuteWithStatusOpenAndNotInTimeout_BecomesClosed()
+        {
+            // disjoncteur ouvert
+            // on passe au dessus du timeout
+            // on lance l'action 3 fois
+            // le disjoncteur passe à fermé
+
+            object testValue = null;
+            CircuitBreakerStateStore cbss = new CircuitBreakerStateStore(new TimeSpan(0, 0, 10), 2);
+
+            CircuitBreaker cb = new CircuitBreaker(cbss);
+            Action action = () =>
+            {
+                cb.Execute(() => { testValue = "2"; });
+            };
+
+            cbss.Trip(new InvalidOperationException()); // ouvre le disjoncteur et initialise le timeout
+            Thread.Sleep(25000);
+            action();
+            action();
+            action();
+            cbss.IsClosed.Should().BeTrue();
         }
     }
 }
