@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace EscargoDisjoncteur.Models
 {
@@ -13,11 +14,11 @@ namespace EscargoDisjoncteur.Models
             State = CircuitBreakerStateEnum.Closed;
             _openToHalfOpenWaitTime = openToHalfOpenWaitTime;
             _maxTry = maxTry;
-        } 
+        }
         #endregion
 
-        private int _maxTry { get; set; }
-        private int _currentTry { get; set; }
+        private int _maxTry;
+        private int _currentTry;
         /// <summary>
         /// Etat du disjoncteur
         /// </summary>
@@ -50,11 +51,11 @@ namespace EscargoDisjoncteur.Models
         public bool HasTimeoutCompleted()
         {
             return (DateTime.UtcNow >= LastStateChangedDateUtc.Add(_openToHalfOpenWaitTime));
-        } 
+        }
         #endregion
 
-        #region HalfOpen
-        public void HalfOpen()
+        #region SetHalfOpen
+        public void SetHalfOpen()
         {
             State = CircuitBreakerStateEnum.HalfOpen;
         }
@@ -66,12 +67,19 @@ namespace EscargoDisjoncteur.Models
         /// </summary>
         public virtual void CloseCircuitBreaker()
         {
-            _currentTry++;
-
-            if (_currentTry > _maxTry)
+            lock (_padLock)
             {
-                _currentTry = 0;
-                State = CircuitBreakerStateEnum.Closed;
+                Interlocked.Increment(ref _currentTry);
+
+                if (_currentTry > _maxTry)
+                {
+
+                    if (_currentTry > _maxTry)
+                    {
+                        _currentTry = 0;
+                        State = CircuitBreakerStateEnum.Closed;
+                    }
+                }
             }
         }
         #endregion
@@ -89,8 +97,6 @@ namespace EscargoDisjoncteur.Models
                 LastException = ex;
                 State = CircuitBreakerStateEnum.Open;
             }
-
-            //throw new Exception("Disjoncteur ouvert", lastException);
         }
         #endregion
     }

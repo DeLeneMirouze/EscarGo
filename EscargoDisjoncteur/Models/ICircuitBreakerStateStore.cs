@@ -6,7 +6,7 @@ namespace EscargoDisjoncteur.Models
     {
         bool IsClosed { get; }
         bool HasTimeoutCompleted();
-        void HalfOpen();
+        void SetHalfOpen();
         void Trip(Exception ex);
         Exception LastException { get; }
         void CloseCircuitBreaker();
