@@ -54,13 +54,19 @@ namespace EscargoDisjoncteur.Models
                             catch (Exception ex)
                             {
                                 // encore une exception, on attend encore un peu pour ouvrir
+
+                                // faire un log ici ...
+
                                 _circuitBreakerStateStore.Trip(ex);
-                                throw;
+                                throw new CircuitBreakerOpenException(_circuitBreakerStateStore.LastException);
                             }
                         }
 
                         // permet au code client de savoir que le disjoncteur est ouvert et ainsi savoir s'il doit lancer une logique
                         // spécifique
+
+                        // faire un log ici ...
+
                         throw new CircuitBreakerOpenException(_circuitBreakerStateStore.LastException);
                     }
                 }
@@ -77,8 +83,8 @@ namespace EscargoDisjoncteur.Models
                 // on a une exception, on ouvre immédiatement le disjoncteur
                 _circuitBreakerStateStore.Trip(ex);
 
-                // rejoue l'exception pour que l'appelant sache à quoi on a affaire
-                throw;
+                // Remplace l'exception par CircuitBreakerOpenException pour que le client sache que le disjoncteur est maintenant ouvert
+                throw new CircuitBreakerOpenException(ex);
             }
         }
         #endregion

@@ -108,7 +108,7 @@ namespace EscargoTest.CircuitBreakerTests
                 cb.Execute(() => { throw new InvalidCastException(); });
             };
 
-            action.ShouldThrow<InvalidCastException>();
+            action.ShouldThrow<CircuitBreakerOpenException>();
         }
 
         [TestMethod]
@@ -130,7 +130,7 @@ namespace EscargoTest.CircuitBreakerTests
             {
                 action();
             }
-            catch (InvalidCastException)
+            catch (CircuitBreakerOpenException)
             {
 
             }

@@ -4,7 +4,7 @@ using System.Threading;
 namespace EscargoDisjoncteur.Models
 {
     /// <summary>
-    /// Implémente la logique applicative du pattern
+    /// Implémente la gestion des états du disjocteur
     /// </summary>
     public class CircuitBreakerStateStore: ICircuitBreakerStateStore
     {
@@ -17,6 +17,10 @@ namespace EscargoDisjoncteur.Models
         }
         #endregion
 
+        #region Proprités
+        /// <summary>
+        /// Nombre max de passage avant de basculer de HalfOpen vers Closed
+        /// </summary>
         private int _maxTry;
         private int _currentTry;
         /// <summary>
@@ -27,6 +31,9 @@ namespace EscargoDisjoncteur.Models
         /// Date UTC de la dernière exception levée par le service
         /// </summary>
         protected DateTime LastStateChangedDateUtc { get; set; }
+        /// <summary>
+        /// Pour les locks
+        /// </summary>
         private readonly object _padLock = new object();
         /// <summary>
         /// Durée où l'on reste en halfOpen
@@ -35,7 +42,8 @@ namespace EscargoDisjoncteur.Models
         /// <summary>
         /// Dernière exception levée par le service
         /// </summary>
-        public Exception LastException { get; protected set; }
+        public Exception LastException { get; protected set; } 
+        #endregion
 
         #region IsClosed
         public bool IsClosed
@@ -96,6 +104,7 @@ namespace EscargoDisjoncteur.Models
                 LastStateChangedDateUtc = DateTime.UtcNow;
                 LastException = ex;
                 State = CircuitBreakerStateEnum.Open;
+                _currentTry = 0;
             }
         }
         #endregion
