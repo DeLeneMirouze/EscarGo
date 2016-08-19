@@ -35,7 +35,7 @@ namespace EscarGoLibrary.Caching
         }
         #endregion
 
-        #region GetCompetitor
+        #region GetCompetitorDetail
         public List<CompetitorEntity> GetCompetitorDetail(int competitorId)
         {
             string key = RedisCache.CreateCompetitorKey(competitorId);
