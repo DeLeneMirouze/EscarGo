@@ -1,12 +1,11 @@
-﻿using EscarGoLibrary.Models;
-using EscarGoLibrary.ViewModel;
+﻿using EscarGoLibrary.ViewModel;
 using System.Web.Mvc;
 
 namespace EscarGo.Controllers
 {
     public class TicketsController : CustomController
     {
-        // GET: Ticket 
+        // GET: Ticket by Id
         public ActionResult Buy(int courseId)
         {
             BuyTicketViewModel vm = TicketModelBuilder.GetTicket(courseId);
