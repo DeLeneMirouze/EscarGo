@@ -5,7 +5,7 @@ namespace EscarGo.Controllers
 {
     public class TicketsController : CustomController
     {
-        // GET: Ticket 
+        // GET: Ticket
         public ActionResult Buy(int courseId)
         {
             BuyTicketViewModel vm = TicketModelBuilder.GetTicket(courseId);
